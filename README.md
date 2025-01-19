@@ -1,3 +1,3 @@
-kyproのためのlibrary
+kyproのためのlibrary\n
 /-
 dsu
