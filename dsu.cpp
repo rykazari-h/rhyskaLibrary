@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include<algprithm>
+#include<algorithm>
 using namespace std;
 struct dsu{
 	public:
