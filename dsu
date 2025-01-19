@@ -1,0 +1,23 @@
+what have to include-> <algorithm> <vector>
+how to use/*
+	宣言(void)
+		: dsu d(n);
+	結合(int)
+		: merge(a,b)
+	親(int)
+		: root(i)
+	同一グループかどうか(bool)
+		: same(a,b)
+	グループの頂点数(int)
+		: size(i)
+	連結成分ごとの木(vec<vec<int>>)
+		: groups()
+*/
+amouont of calculate/*
+	dsu   : O(n)
+	merge : O(α(n))
+	root  : O(α(n))
+	same  : O(α(n))
+	size  : O(α(n))
+	groups: O(n)
+*/
