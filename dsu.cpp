@@ -1,3 +1,7 @@
+#include<iostream>
+#include<vector>
+#include<algprithm>
+using namespace std;
 struct dsu{
 	public:
 		dsu() : _n(0) {}
