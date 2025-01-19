@@ -1,1 +1,1 @@
-kyproのためのlibrary
+田舎党
