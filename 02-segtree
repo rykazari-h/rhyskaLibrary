@@ -11,7 +11,7 @@ how to use/*
 	単一取得(S)
 		: get(i)
 	右半開区間和(S)
-		: prod(l.r)
+		: prod(l,r)
 	[0,n).sum(S)
 		: aLL_prod()
 	二分探索(int)
