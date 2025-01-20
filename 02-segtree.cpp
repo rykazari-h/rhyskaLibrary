@@ -26,7 +26,7 @@ template<class S,S(*op)(S,S),S(*e)()>struct segtree{
     explicit segtree(int n):segtree(vector<S>(n,e())){}
     explicit segtree(const vector<S>&v):_n(int(v.size())) {
 	    size=(int)bit_ceil((unsigned int)(_n));
-      log=cnt0((unsigned int)size);
+      lo=cnt0((unsigned int)size);
       d=vector<S>(2*size,e());
       for(int i=0;i<_n;i++)d[size + i] = v[i];
       for(int i=size-1;i>=1;i--)update(i);
@@ -34,7 +34,7 @@ template<class S,S(*op)(S,S),S(*e)()>struct segtree{
     void set(int p,S x){
       p+=size;
       d[p]=x;
-      for(int i=1;i<=log;i++)update(p >> i);
+      for(int i=1;i<=lo;i++)update(p >> i);
     }
     S get(int p)const{
       return d[p+size];
@@ -101,7 +101,7 @@ template<class S,S(*op)(S,S),S(*e)()>struct segtree{
         return 0;
     }
 private:
-		int _n,size,log;
+		int _n,size,lo;
 		vector<S>d;
 		void update(int k){d[k]=op(d[2*k],d[2*k+1]);}
 };
