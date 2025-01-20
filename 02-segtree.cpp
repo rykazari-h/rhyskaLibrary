@@ -7,7 +7,7 @@ using namespace std;
 #if __cplusplus >= 202002L
 using std::bit_ceil;
 #else
-unsgined int bit_ceil(unsigned int n){
+unsigned int bit_ceil(unsigned int n){
 	unsigned int x=1;
 	while(x<n)x*=2;
 	return x;
