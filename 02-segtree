@@ -1,0 +1,17 @@
+what have to include-> <algorithm> <vector>
+how to use/*
+	宣言(void)
+		: segtree<S,op,e> seg(S or vec<S>)
+        <>の中は型、二項演算、単位元
+        引数がSなら初期値e(),vecならvec
+	結合(int)
+		: merge(a,b)
+	親(int)
+		: root(i)
+	同一グループかどうか(bool)
+		: same(a,b)
+	グループの頂点数(int)
+		: size(i)
+	連結成分ごとの木(vec<vec<int>>)
+		: groups()
+*/
