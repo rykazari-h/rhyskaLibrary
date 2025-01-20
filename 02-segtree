@@ -4,7 +4,7 @@ how to use/*
 	宣言(void)
 		: segtree<S,op,e> seg(S or vec<S>)
         <>の中は型、二項演算、単位元
-        e()で初期化 or vecで初期化\\n
+        e()で初期化 or vecで初期化
 	代入(void)
 		: set(i,x)
 			[i]にxを代入
