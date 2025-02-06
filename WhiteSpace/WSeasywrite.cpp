@@ -2,7 +2,7 @@
     使い方
     {
         "これ用のコードを入力するとそれに対応する\
-        Whitespaceのコードを出力する。
+        Whitespace(ver2)のコードを出力する。
     }
     文法について
     {
@@ -90,12 +90,14 @@ void Set(){
 string trans(string x) {
 	if (x.find(":")!=string::npos) {
 		vector<string> spldata = split(x, ':');
+		if(!cmd.count(spldata[0]))return "Not exist";
 		string res = cmd[spldata[0]];
 		int give = stoi(spldata[1]);
 		string plus = maketwo(give);
 		return res + plus + N;
 	}
 	else{
+		if(!cmd.count(x))return "Not exist";
 		return cmd[x];
 	}
 }
