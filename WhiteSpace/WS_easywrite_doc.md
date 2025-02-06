@@ -24,4 +24,4 @@
 | | **njump**(takes param): Jump to a label if the top of the stack is negative (NTT) |
 | | **end**: End a subroutine and transfer control back to the caller (NTN) |
 | | **exit**: End the program (NNN) |
-| **Int literal** | **Decimal-number**: ex)114514,-810|
+| **Int Literal** | **Decimal-number**: ex)114514,-810|
