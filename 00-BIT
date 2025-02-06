@@ -4,7 +4,7 @@ how to use/*
 		: BIT<int> bit(n);
 	追加(void)
 		: add(i,x)
-	右半開区間和(int [l,r).sum)
+	右半開区間和(int)
 		: sum(l,r)
 */
 amouont of calculate/*
