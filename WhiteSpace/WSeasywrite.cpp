@@ -64,10 +64,15 @@ void Set(){
 	//Arithmetic
 	{
 		cmd["add"]= T+S+S+S;
+		cmd["+"]= T+S+S+S;
 		cmd["sub"]= T+S+S+T;
+		cmd["-"]= T+S+S+T;
 		cmd["mul"]= T+S+S+N;
+		cmd["*"]= T+S+S+N;
 		cmd["div"]= T+S+T+S;
+		cmd["/"]= T+S+T+S;
 		cmd["mod"]= T+S+T+T;
+		cmd["%"]= T+S+T+T;
 	}
 	//Stack Manipulation
 	{
