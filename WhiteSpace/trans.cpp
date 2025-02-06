@@ -102,7 +102,7 @@ string trans(string x) {
 
 int main() {
 //If DBG
-S= "s"; T= "t";
+//S= "s"; T= "t";
 //N= "n\n";
 //N= "l";
 	Set();
