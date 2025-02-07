@@ -19,14 +19,15 @@ using namespace std;
 
 string S= " ", T= "\t", N= "\n";
 string maketwo(int x){
-	string res= (x<0 ? T: S);
+	string sign = (x<0 ? T: S);
+	string res;
 	x= abs(x);
 	if (x == 0)res+= S;
 	while (x) {
 		res= res + (x&1 ? T: S);
 		x/= 2;
 	}
-	return res;
+	return sign+res;
 }
 
 vector<string> split(const string &s, char div= ';') {
@@ -52,14 +53,14 @@ void Set(){
 	//StdIn/Out
 	{
 		cmd["geti"]= T+N+T+T;
-		cmd["gets"]= T+N+T+S;
+		cmd["getc"]= T+N+T+S;
 		cmd["puti"]= T+N+S+T;
-		cmd["puts"]= T+N+S+S;
+		cmd["putc"]= T+N+S+S;
 	}
 	//Heap Acces
 	{
-		cmd["store"]= T+T+S;
-		cmd["take"] = T+T+T;
+		cmd["stor"]= T+T+S;
+		cmd["retr"] = T+T+T;
 	}
 	//Arithmetic
 	{
@@ -77,7 +78,7 @@ void Set(){
 	//Stack Manipulation
 	{
 		cmd["push"]= S+S;
-		cmd["copy"]= S+N+S;
+		cmd["dup"]= S+N+S;
 		cmd["swap"]= S+N+T;
 		cmd["pop"] = S+N+N;
 	}
@@ -97,7 +98,8 @@ string trans(string x) {
 		vector<string> spldata = split(x, ':');
 		if(!cmd.count(spldata[0]))return "Not exist";
 		string res = cmd[spldata[0]];
-		int give = stoi(spldata[1]);
+		string num=spldata[1];
+		int give = (num.size()>1&&num[0]=='0'&&num[1]=='b'?stoi(num.substr(2,num.size-2),nullptr,2):stoi(num));
 		string plus = maketwo(give);
 		return res + plus + N;
 	}
@@ -114,7 +116,7 @@ int main() {
 //N= "l";
 	Set();
 	string s;
-	while (cin>>s) {
+	while (cin >> s) {
 		vector<string> data = split(s);
 		for(const string &x: data)cout << trans(x);
 	}
