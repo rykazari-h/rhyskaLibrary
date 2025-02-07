@@ -24,7 +24,7 @@ string maketwo(int x){
 	x= abs(x);
 	if (x == 0)res+= S;
 	while (x) {
-		res= res + (x&1 ? T: S);
+		res= (x&1 ? T: S) + res;
 		x/= 2;
 	}
 	return sign+res;
