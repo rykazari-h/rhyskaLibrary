@@ -18,6 +18,7 @@
 using namespace std;
 
 string S= " ", T= "\t", N= "\n";
+bool DBG=false;
 string maketwo(int x){
 	string sign = (x<0 ? T: S);
 	string res;
@@ -96,28 +97,28 @@ void Set(){
 string trans(string x) {
 	if (x.find(":")!=string::npos) {
 		vector<string> spldata = split(x, ':');
-		if(!cmd.count(spldata[0]))return "Not exist";
+		if(!cmd.count(spldata[0]))return "NotExist";
 		string res = cmd[spldata[0]];
 		string num=spldata[1];
-		int give = (num.size()>1&&num[0]=='0'&&num[1]=='b'?stoi(num.substr(2,num.size-2),nullptr,2):stoi(num));
+		int give = (num.size()>1&&num[0]=='0'&&num[1]=='b'?stoi(num.substr(2,num.size()-2),nullptr,2):stoi(num));
 		string plus = maketwo(give);
 		return res + plus + N;
 	}
 	else{
-		if(!cmd.count(x))return "Not exist";
+		if(!cmd.count(x))return "NotExist";
 		return cmd[x];
 	}
 }
 
 int main() {
-//If DBG
-//S= "s"; T= "t";
-//N= "n\n";
-//N= "l";
+if(DBG){
+	S= "S"; T= "T";
+	N= "L";
+}
 	Set();
 	string s;
 	while (cin >> s) {
 		vector<string> data = split(s);
-		for(const string &x: data)cout << trans(x);
+		for(const string &x: data)cout << trans(x)<<(DBG?"\n":"");
 	}
 }
