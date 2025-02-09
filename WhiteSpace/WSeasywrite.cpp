@@ -119,6 +119,6 @@ if(DBG){
 	string s;
 	while (cin >> s) {
 		vector<string> data = split(s);
-		for(const string &x: data)cout << (x[0]=='#'?"":trans(x)) << (DBG?"\n":"");
+		for(const string &x: data)cout << (x[0]=='#'?"":trans(x)) << (DBG ? "\n" : "");
 	}
 }
