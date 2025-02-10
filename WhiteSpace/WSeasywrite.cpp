@@ -1,15 +1,15 @@
 /*
-    使い方
-    {
-        "これ用のコードを入力するとそれに対応する\
-        Whitespace(ver2)のコードを出力する。
-    }
-    文法について
-    {
-	    "一つのコマンドは空白を含まないStringliteralである必要がある。
-	    "コマンド間には";"もしくは空白が必要。
-	    "引数を持つ場合は":"で区切り、整数(32bit)を入力する。
-    }
+	使い方
+	{
+		"これ用のコードを入力するとそれに対応する\
+		Whitespace(ver2)のコードを出力する。
+	}
+	文法について
+	{
+		"一つのコマンドは空白を含まないStringliteralである必要がある。
+		"コマンド間には";"もしくは空白が必要。
+		"引数を持つ場合は":"で区切り、整数(32bit)を入力する。
+	}
 */
 #include <vector>
 #include <string>
@@ -17,6 +17,7 @@
 #include <iostream>
 using namespace std;
 
+int rownumber=0;
 string S= " ", T= "\t", N= "\n";
 bool DBG=false;
 string maketwo(int x){
@@ -97,7 +98,7 @@ void Set(){
 string trans(string x) {
 	if (x.find(":")!=string::npos) {
 		vector<string> spldata = split(x, ':');
-		if(!cmd.count(spldata[0]))return "NotExist";
+		if(!cmd.count(spldata[0]))return "NotExist:"+x+":"+to_string(rownumber);
 		string res = cmd[spldata[0]];
 		string num=spldata[1];
 		int give = (num.size()>1&&num[0]=='0'&&num[1]=='b'?stoi(num.substr(2,num.size()-2),nullptr,2):stoi(num));
@@ -105,7 +106,7 @@ string trans(string x) {
 		return res + plus + N;
 	}
 	else{
-		if(!cmd.count(x))return "NotExist";
+		if(!cmd.count(x))return "NotExist:"+x+":"+to_string(rownumber);
 		return cmd[x];
 	}
 }
@@ -117,7 +118,8 @@ if(DBG){
 }
 	Set();
 	string s;
-	while (cin >> s) {
+	while (getline(cin,s)) {
+		rownumber++;
 		vector<string> data = split(s);
 		for(const string &x: data)cout << (x[0]=='#'?"":trans(x)) << (DBG ? "\n" : "");
 	}
