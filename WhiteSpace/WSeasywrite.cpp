@@ -117,10 +117,15 @@ if(DBG){
 	N= "L";
 }
 	Set();
-	string s;
-	while (getline(cin,s)) {
+	string x;
+	while (getline(cin,x)) {
 		rownumber++;
+		string s;
+		for(const char&c:x){
+			if(c=='#')break;
+			s+=c;
+		}
 		vector<string> data = split(s);
-		for(const string &x: data)cout << (x[0]=='#'?"":trans(x)) << (DBG ? "\n" : "");
+		for(const string &x: data)cout << trans(x) << (DBG ? "\n" : "");
 	}
 }
