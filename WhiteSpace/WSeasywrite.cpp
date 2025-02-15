@@ -20,6 +20,7 @@ using namespace std;
 int rownumber=0;
 string S= " ", T= "\t", N= "\n";
 bool DBG=false;
+bool AllowCopy=false;
 string maketwo(int x){
 	string sign = (x<0 ? T: S);
 	string res;
@@ -36,7 +37,7 @@ vector<string> split(const string &s, char div= ';') {
 	vector<string> res;
 	string item;
 	for (char ch: s) {
-		if (ch == div) {
+		if (ch == div){
 			if (item.size())
 				res.push_back(item);
 			item.clear();
@@ -111,11 +112,17 @@ string trans(string x) {
 	}
 }
 
-int main() {
-if(DBG){
-	S= "S"; T= "T";
-	N= "L";
+string cut(string x){
+	while(x.back()==' ')x.pop_back();
+	return x;
 }
+
+int main() {
+	if(AllowCopy)cout<<".";
+	if(DBG){
+		S= "S"; T= "T";
+		N= "L";
+	}
 	Set();
 	string x;
 	while (getline(cin,x)) {
@@ -126,6 +133,7 @@ if(DBG){
 			s+=c;
 		}
 		vector<string> data = split(s);
-		for(const string &x: data)cout << trans(x) << (DBG ? "\n" : "");
+		for(const string &x: data)cout << trans(cut(x)) << (DBG ? "\n" : "");
 	}
+	if(AllowCopy)cout<<".";
 }
