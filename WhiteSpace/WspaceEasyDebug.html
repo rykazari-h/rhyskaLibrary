@@ -192,7 +192,7 @@
             } else if (cmd === "putc") {
                 stdout += String.fromCharCode(stack.pop());
             } else if (cmd === "puti") {
-                stdout += stack.pop() + " ";
+                stdout += stack.pop();
             } else if (cmd === "getc") {
                 let inputBox = document.getElementById("stdinInput");
                 let input = inputBox.value;
