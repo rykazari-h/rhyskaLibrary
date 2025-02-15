@@ -211,7 +211,7 @@
                     inputBox.value = inputLines.slice(1).join("\n");
                 }
             } else if (cmd === "exit") {
-                pc = "-1";
+                pc = 1 << 30;
                 return;
             }
 
