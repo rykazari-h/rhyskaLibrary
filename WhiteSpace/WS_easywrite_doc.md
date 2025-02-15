@@ -1,5 +1,9 @@
-# Command Table
-
+# WS_easywrite_doc
+これらのツールはあくまでWhitespaceのコーディングの補助のためのものです。<br>
+詳しいことは本家サイト（閉鎖中）のアーカイブ、もしくはWikiから。<br>
+[The original](http://compsoc.dur.ac.uk/whitespace/tutorial.php)<br>[Archive](https://web.archive.org/web/20150618184706/http://compsoc.dur.ac.uk/whitespace/tutorial.php)<br>
+[Wikipedia(en)](http://compsoc.dur.ac.uk/whitespace/tutorial.php](https://en.wikipedia.org/wiki/Whitespace_(programming_language)))
+## Command Table
 | Category | Command & Description |
 |----------|----------------------|
 | **StdIn/Out** | **geti**: Read a number and place it in the location given by the top of the stack (TNTT) |
