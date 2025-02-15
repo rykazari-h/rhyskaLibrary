@@ -18,9 +18,13 @@
 using namespace std;
 
 int rownumber=0;
+
 string S= " ", T= "\t", N= "\n";
+
 bool DBG=false;
+//ソースコードのコピーを許可するか？
 bool AllowCopy=false;
+
 string maketwo(int x){
 	string sign = (x<0 ? T: S);
 	string res;
