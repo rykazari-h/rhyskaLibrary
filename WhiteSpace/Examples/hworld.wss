@@ -1,5 +1,5 @@
 #result -> "Hello, world of spaces!"
-#単純にすべての文字をスタックに積み、順に出力すれば良いです。
+#単純にすべての文字をスタックに積み、順に出力すれば良い
 #---push to the stack ( ascii )---#
 push:10
 push:33
