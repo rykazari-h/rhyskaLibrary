@@ -5,7 +5,7 @@
 [Wikipedia(en)](http://compsoc.dur.ac.uk/whitespace/tutorial.php](https://en.wikipedia.org/wiki/Whitespace_(programming_language)))<br>
 仕様でわからないことがあっても、easy_debugのscriptやインタプリタを見たら大体わかります。<br>
 ## なんとなくで解けるAtCoderの問題
-AtcoderにはWhitespaceが実装されています。
+AtCoderにはWhitespaceが実装されています。
 1. [ABC081A-Placing Marbles](https://atcoder.jp/contests/abc081/tasks/abc081_a) -入力と四則演算ができれば解けます。
 2. [ABC214A-New Generation ABC](https://atcoder.jp/contests/abc214/tasks/abc214_a) -フロー制御が必要です。
 3. [ABC204A-Rock-paper-scissors](https://atcoder.jp/contests/abc204/tasks/abc204_a) -入力が少し難しいです。
