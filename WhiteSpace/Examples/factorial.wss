@@ -1,0 +1,43 @@
+#再帰関数を用いてinput!を求める
+#"Enter a number: "
+push:69;putc
+push:110;putc
+push:116;putc
+push:101;putc
+push:114;putc
+push:32;putc
+push:97;putc
+push:32;putc
+push:110;putc
+push:117;putc
+push:109;putc
+push:98;putc
+push:101;putc
+push:114;putc
+push:58;putc
+push:32;putc
+#----------------#
+push:1
+push:0;dup;;geti;retr
+#stack -> [1, input]
+call:0
+#stack ->[res, 0]
+retr;puti
+push:33;putc
+push:32;putc
+push:61;putc
+push:32;putc
+puti
+push:10;putc
+exit
+mark:0 #param -> [a, b], res -> [a*b, b-1]
+#base---
+dup;ujump:1
+#------
+dup;push:1;sub;push:1;swap;stor
+mul
+push:1
+retr
+jump:0
+mark:1
+end
