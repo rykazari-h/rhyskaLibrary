@@ -3,10 +3,14 @@
 詳しいことは本家サイト（閉鎖中）のアーカイブ、もしくはWikiから。<br>
 [The original](http://compsoc.dur.ac.uk/whitespace/tutorial.php)<br>[Archive](https://web.archive.org/web/20150618184706/http://compsoc.dur.ac.uk/whitespace/tutorial.php)<br>
 [Wikipedia(en)](http://compsoc.dur.ac.uk/whitespace/tutorial.php](https://en.wikipedia.org/wiki/Whitespace_(programming_language)))<br>
-仕様でわからないことがあっても、easy_debugのscriptを見たら大体わかります。<br>
+仕様でわからないことがあっても、easy_debugのscriptやインタプリタを見たら大体わかります。<br>
 ## なんとなくで解けるAtCoderの問題
 AtcoderにはWhitespaceが実装されています。
-
+1. [ABC081A-Placing Marbles](https://atcoder.jp/contests/abc081/tasks/abc081_a) -入力と四則演算ができれば解けます。
+2. [ABC214A-New Generation ABC](https://atcoder.jp/contests/abc214/tasks/abc214_a) -フロー制御が必要です。
+3. [ABC204A-Rock-paper-scissors](https://atcoder.jp/contests/abc204/tasks/abc204_a) -入力が少し難しいです。
+4. [ABC083B-Some Sums](https://atcoder.jp/contests/abc083/tasks/abc083_b) -関数を使えると楽です。
+5. [ABC085C-Otoshidama](https://atcoder.jp/contests/abc085/tasks/abc085_c) -AtCoderのWSは速いので多重ループで解けます。
 ## Command Table
 | Category | Command & Description |
 |----------|----------------------|
