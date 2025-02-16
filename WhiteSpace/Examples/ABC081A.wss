@@ -1,0 +1,8 @@
+#入力 % 9 を出力
+push:0;dup;geti;retr #[0]に入力し、取り出す
+push:9
+mod
+puti
+push:10
+putc
+exit
