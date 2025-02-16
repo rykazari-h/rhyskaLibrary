@@ -1,0 +1,67 @@
+#"Please enter your name: "と出力した後、"Hello {input}\n"と出力すれば良い。
+#---Please~~~---#
+push:32
+push:58
+push:101
+push:109
+push:97
+push:110
+push:32
+push:114
+push:117
+push:111
+push:121
+push:32
+push:114
+push:101
+push:116
+push:110
+push:101
+push:32
+push:101
+push:115
+push:97
+push:101
+push:108
+push:80
+push:-24;mark:0;swap;putc;push:1;add;dup;njump:0
+#---END---#
+#stack -> [0]
+#heap[0]に入力し、文字列は1~に格納すれば良い
+#何文字入力されたかを監視する変数iを用意すれば簡単
+mark:1
+push:0;dup
+getc;retr #heap[0]に入力し、取り出す
+push:10;sub;ujump:2 #\nを読み込んだ時点で終了する
+push:1;add #i+=1
+dup;push:0;retr;stor #heap[i]に格納
+jump:1 #再び文字を読み込む
+mark:2
+#stack -> [i]
+#heap[0]にiを保管する
+dup;push:0;swap;stor
+#---"Hello "と出力---#
+push:72;putc
+push:101;putc
+push:108;putc
+push:108;putc
+push:111;putc
+push:32;putc
+dup;ujump:6#i==0なら入力がないので終了する
+#---END---#
+#スタック上に文字を展開する
+mark:3
+dup;retr;swap #stack ->[chars,i]
+push:1;sub #i-=1
+dup;ujump:4
+jump:3
+mark:4 #LoopEnd
+#stack -> [0]
+#i*(-1)
+retr;push:-1;mul
+mark:5
+swap;putc;push:1;add
+dup;njump:5 #LoopEnd
+mark:6 #改行して終了
+push:10;putc
+exit
