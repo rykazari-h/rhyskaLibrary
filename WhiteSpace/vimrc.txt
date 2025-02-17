@@ -1,0 +1,16 @@
+"これくらいで多分書きやすい
+autocmd BufRead,BufNewFile *.wss set filetype=wss
+"comment
+autocmd BufRead,BufNewFile *.wss syntax match wssComment "#.*$"
+autocmd BufRead,BufNewFile *.wss highlight wssComment ctermfg=LightGreen guifg=LightGreen
+"mark
+autocmd BufRead,BufNewFile *.wss syntax match wssMark "\<mark\>"
+autocmd BufRead,BufNewFile *.wss highlight wssMark ctermfg=214 guifg=Orange
+"number
+autocmd BufRead,BufNewFile *.wss syntax match wssNumber "\<[0-9]\+\>"
+autocmd BufRead,BufNewFile *.wss highlight wssNumber ctermfg=160 guifg=Red
+"jump
+autocmd BufRead,BufNewFile *.wss syntax match wssJump "\<\(jump\|ujump\|njump\)\>"
+autocmd BufRead,BufNewFile *.wss highlight wssJump ctermfg=81 guifg=#00BFFF
+"indent
+autocmd FileType wss setlocal autoindent smartindent
