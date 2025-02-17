@@ -6,6 +6,7 @@
 	}
 	文法について
 	{
+		"一つのコマンドは空白を含まないStringliteralである必要がある。
 		"コマンド間には";"もしくは空白が必要。
 		"引数を持つ場合は":"で区切り、整数(32bit)を入力する。
 	}
@@ -122,9 +123,9 @@ if(DBG){
 		string s;
 		for(const char&c:x){
 			if(c=='#')break;
-			if(c!=' ')s+=c;
+			if(c!=' ' && c!='\t')s+=c;
 		}
 		vector<string> data = split(s);
-		for(const string &x: data)if(x != "")cout << trans(x) << (DBG ? "\n" : "");
+		for(const string &x: data)if(x!="")cout << trans(x) << (DBG ? "\n" : "");
 	}
 }
