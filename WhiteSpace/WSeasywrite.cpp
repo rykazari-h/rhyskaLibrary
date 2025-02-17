@@ -6,7 +6,6 @@
 	}
 	文法について
 	{
-		"一つのコマンドは空白を含まないStringliteralである必要がある。
 		"コマンド間には";"もしくは空白が必要。
 		"引数を持つ場合は":"で区切り、整数(32bit)を入力する。
 	}
@@ -18,13 +17,8 @@
 using namespace std;
 
 int rownumber=0;
-
 string S= " ", T= "\t", N= "\n";
-
 bool DBG=false;
-//ソースコードのコピーを許可するか？
-bool AllowCopy=false;
-
 string maketwo(int x){
 	string sign = (x<0 ? T: S);
 	string res;
@@ -116,17 +110,11 @@ string trans(string x) {
 	}
 }
 
-string cut(string x){
-	while(x.back()==' ')x.pop_back();
-	return x;
-}
-
 int main() {
-	if(AllowCopy)cout<<".";
-	if(DBG){
-		S= "S"; T= "T";
-		N= "L";
-	}
+if(DBG){
+	S= "S"; T= "T";
+	N= "L";
+}
 	Set();
 	string x;
 	while (getline(cin,x)) {
@@ -134,10 +122,9 @@ int main() {
 		string s;
 		for(const char&c:x){
 			if(c=='#')break;
-			s+=c;
+			if(c!=' ')s+=c;
 		}
 		vector<string> data = split(s);
-		for(const string &x: data)cout << trans(cut(x)) << (DBG ? "\n" : "");
+		for(const string &x: data)if(x != "")cout << trans(x) << (DBG ? "\n" : "");
 	}
-	if(AllowCopy)cout<<".";
 }
