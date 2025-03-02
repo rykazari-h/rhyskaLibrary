@@ -1,7 +1,3 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
 struct dsu{
 	public:
 		dsu() : _n(0) {}
