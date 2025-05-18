@@ -35,7 +35,7 @@ public:
   std::vector<std::vector<int>> groups(){
     std::vector<std::vector<int>> res(n);
     for(int i=0;i<n;i++)res[root(i)].push_back(i);
-    res.erase(remove_if(res.begin(),res.end(),
+    res.erase(std::remove_if(res.begin(),res.end(),
       [&](const std::vector<int>&v){return v.empty();}),res.end());
     return res;
   }
