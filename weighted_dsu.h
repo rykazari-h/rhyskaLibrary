@@ -2,9 +2,10 @@
 #include <vector>
 template<class T>class weighted_dsu{
 public:
-  explicit weighted_dsu(int _n,T _e=0):n(_n),parent(_n,-1),distance(_n,_e){}
+  explicit weighted_dsu(int _n,T _e=0):n(_n),parent(_n,-1),potential(_n,_e){}
 
   //新規に結合できたときtrueを返します
+	//辺は(b)-(a)=wとなるように貼られます
   int merge(int a,int b,T w=0){
     w+=diff(b,a);
     a=root(a),b=root(b);
@@ -13,18 +14,18 @@ public:
     if(parent[a]>parent[b])std::swap(a,b),w=-w;
     parent[a]+=parent[b];
     parent[b]=a;
-    distance[b]=w;
+    potential[b]=w;
     return 1;
   }
 
   //連結ならtrueを返します
   int same(int a,int b){return root(a)==root(b);}
 
-  //rootを返します
+  //rootを返します&ポテンシャルの累積をとります
   int root(int a){
     if(parent[a]<0)return a;
     int r=root(parent[a]);
-    distance[a]+=distance[parent[a]];
+    potential[a]+=potential[parent[a]];
     return parent[a]=r;
   }
 
@@ -43,7 +44,7 @@ public:
 	//ノードのポテンシャルを返します
 	T weight(int a){
       root(a);
-      return distance[a];
+      return potential[a];
 	}
 
 	// 差分を返します
@@ -55,5 +56,5 @@ private:
   int n;
   // 0-indexed
   std::vector<int>parent;
-  std::vector<T>distance;
+  std::vector<T>potential;
 };
