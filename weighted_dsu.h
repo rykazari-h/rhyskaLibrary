@@ -4,13 +4,13 @@ template<class T>class weighted_dsu{
 public:
   explicit weighted_dsu(int _n,T _e=0):n(_n),parent(_n,-1),potential(_n,_e){}
 
-  //新規に結合できたときtrueを返します
-	//辺は(b)-(a)=wとなるように貼られます
+  //新規に併合できたときtrueを返します
+	//a->bの重みがwとなるように併合します
   int merge(int a,int b,T w=0){
-    w+=diff(b,a);
+    w+=weight(a)-weight(b);
     a=root(a),b=root(b);
     if(a==b)return 0;
-    //aにbを結合します(union by size)
+    //aにbを併合します(union by size)
     if(parent[a]>parent[b])std::swap(a,b),w=-w;
     parent[a]+=parent[b];
     parent[b]=a;
