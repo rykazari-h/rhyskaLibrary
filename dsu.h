@@ -4,11 +4,11 @@ class dsu{
 public:
   explicit dsu(int _n):n(_n),parent(_n,-1){}
 
-  //新規に結合できた時trueを返します
+  //新規に併合できた時trueを返します
   int merge(int a,int b){
     a=root(a),b=root(b);
     if(a==b)return 0;
-    //aにbを結合します(union by size)
+    //aにbを併合します(union by size)
     if(parent[a]>parent[b])std::swap(a,b);
     parent[a]+=parent[b];
     parent[b]=a;
