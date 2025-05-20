@@ -17,10 +17,11 @@ public:
 		if(!did)init();
 		return std::upper_bound(d.begin(),d.end(),x)-d.begin()-1;
 	}
-	std::vector<int> press(const std::vector<T> &v){
+	template<class S>
+	std::vector<int> press(S x,S end){
 		if(!did)init();
 		std::vector<int>res;
-		for(const T &x:v)res.push_back(*this(x));
+		for(;x!=end;x++)res.push_back((*this)(*x));
 		return res;
 	}
 
