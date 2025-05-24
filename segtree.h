@@ -58,7 +58,7 @@ public:
 	//fが単調のときmul[l,r)がtrueとなる最小のlを返します
 	//そうでないとき0,もしくはlを1へらした時fがtrueからfalseとなるlの値のうちいずれか一つを返します
 	template<class F>
-	int find_left(F f,int r=sz)const{
+	int find_left(F f,int r)const{
 		if(r==0)return 0;
 		r+=n;
 		T x=base;
