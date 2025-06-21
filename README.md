@@ -9,3 +9,4 @@
 |binary indexed tree|[ftree.h](ftree.h)|bit|
 |segment tree|[segtree.h](segtree.h)|segment tree(非再帰)|
 |畳み込み|[conv.h](conv.h)|nttによる畳み込み|
+|素因数分解|[prime.h](prime.h)|あの人の篩による実装|
