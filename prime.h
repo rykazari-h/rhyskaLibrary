@@ -17,6 +17,9 @@ struct eratos{
 		for(long long i=2;i<=n;i++)if(sieve[i])table.push_back(i);
 		size=table.size();
 	}
+	bool isprime(long long a)const{
+		return sieve[a];
+	}
 	std::vector<long long>rangetable(long long l=2,long long r=1<<20)const{
 		std::vector<long long>res;
 		for(long long x:table)if(l<=x&&x<=r)res.push_back(x);
