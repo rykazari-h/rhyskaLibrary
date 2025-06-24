@@ -48,7 +48,7 @@ template<class T>using lpq=priority_queue<T>;
 #define CHR(...) char __VA_ARGS__;in(__VA_ARGS__)
 #define VEC(T,a,s) V<T>a(s);in(a)
 #define VVEC(T,a,h,w) V<V<T>>a(h,V<T>(w));in(a)
-#define VV(T,a,h,w,v) V<V<T>>a(h,V<T>(w,v))
+#define VV(T,a,h,...) V<V<T>>a(h,V<T>(__VA_ARGS__))
 namespace io_helper{
 	template<class T>void scan(T&a){cin>>a;}
 	template<class S,class T>void scan(pair<S,T>&p){scan(p.first);scan(p.second);}
