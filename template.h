@@ -1,9 +1,13 @@
 #ifdef RHYSKA_LOCAL
 #include"all.h"
-#define dbg(a) {out("line",__LINE__,':',#a,'=',a);}
+#define dbg(a) {out<' '>("line",__LINE__,':',#a,'=',a);}
+#define TIME_START auto __tstart=chrono::high_resolution_clock::now();
+#define TIME_END out<' '>("time :",(chrono::duration<ld>(chrono::high_resolution_clock::now()-__tstart).count())*1000,"ms");
 #else
 #include<bits/stdc++.h>
 #define dbg(a) 0
+#define TIME_START 0
+#define TIME_END 0
 #endif
 using
 namespace
@@ -26,6 +30,7 @@ template<class T>using lpq=priority_queue<T>;
 #define rrep(...) CH5(__VA_ARGS__,rrep3,rrep2,rrep1,rep)(__VA_ARGS__)
 #define YES {cout<<"Yes\n";return;}
 #define NO {cout<<"No\n";return;}
+#define drop(...) {out(__VA_ARGS__);return;}
 #define Yn(a) cout<<((a)?"Yes\n":"No\n")
 #define unless(a) if(!(a))
 #define All(a) begin(a),end(a)
@@ -42,7 +47,8 @@ template<class T>using lpq=priority_queue<T>;
 #define STR(...) string __VA_ARGS__;in(__VA_ARGS__)
 #define CHR(...) char __VA_ARGS__;in(__VA_ARGS__)
 #define VEC(T,a,s) V<T>a(s);in(a)
-#define VV(T,a,h,w) V<V<T>>a(h,V<T>(w));in(a)
+#define VVEC(T,a,h,w) V<V<T>>a(h,V<T>(w));in(a)
+#define VV(T,a,h,w,v) V<V<T>>a(h,V<T>(w,v))
 namespace io_helper{
 	template<class T>void scan(T&a){cin>>a;}
 	template<class S,class T>void scan(pair<S,T>&p){scan(p.first);scan(p.second);}
@@ -54,9 +60,9 @@ namespace io_helper{
 }
 void in(){}
 template<class S,class... B>void in(S&s,B&... b){io_helper::scan(s);in(b...);}
-template<char c=' '>void out(){io_helper::print('\n');}
-template<char c=' ',class T>void out(const T&a){io_helper::print(a);io_helper::print('\n');}
-template<char c=' ',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
+template<char c='\n'>void out(){io_helper::print('\n');}
+template<char c='\n',class T>void out(const T&a){io_helper::print(a);io_helper::print('\n');}
+template<char c='\n',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
 template<class S,class T>inline bool chmin(S&a,T b){return(a>b?a=b,1:0);}
 template<class S,class T>inline bool chmax(S&a,T b){return(a<b?a=b,1:0);}
 template<class... T>constexpr auto min(T... a){return min(initializer_list<common_type_t<T...>>{a...});}
