@@ -1,8 +1,8 @@
 #ifdef RHYSKA_LOCAL
 #include"all.h"
 #define dbg(a) {out<' '>("line",__LINE__,':',#a,'=',a);}
-#define TIME_START auto __tstart=chrono::high_resolution_clock::now()
-#define TIME_END out<' '>("time :",(chrono::duration<ld>(chrono::high_resolution_clock::now()-__tstart).count())*1000,"ms")
+#define TIME Timer __timer
+#define TIME_END __timer.show()
 #else
 #include<bits/stdc++.h>
 #define dbg(a) 0
@@ -75,4 +75,3 @@ void _main();int main(){cin.tie(0);ios::sync_with_stdio(0);cout<<fixed<<setpreci
 _main();}
 using pp=pair<ll,ll>;
 void _main(){
-
