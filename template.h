@@ -6,7 +6,7 @@
 #else
 #include<bits/stdc++.h>
 #define dbg(a) 0
-#define TIME_START 0
+#define TIME 0
 #define TIME_END 0
 #endif
 using
