@@ -24,7 +24,7 @@ $abs_path"
 			\#include\<*\>) 
 				# ./libから
 				inc_path=$(echo "$line" | sed -n 's/#include<\([^>]*\)>/\1/p')
-				real_path="./lib/$inc_path"
+				real_path="./lib/src/$inc_path"
 				if [ -f "$real_path" ]; then
 					expand "$real_path"
 				else
