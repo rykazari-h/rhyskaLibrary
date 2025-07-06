@@ -1,5 +1,6 @@
+#pragma once
 #include<vector>
-struct eratos{
+struct prime{
 	std::vector<bool>sieve;
 	std::vector<long long>bfactor;
 	std::vector<long long>table;

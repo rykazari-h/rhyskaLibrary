@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 template<class T>struct ftree{
 public:
