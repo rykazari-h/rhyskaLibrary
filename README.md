@@ -3,10 +3,12 @@
 ## 実装されているもの
 |機能|コード|説明|
 |:--|:--:|:--|
-|unionfind|[dsu.h](dsu.h)|unionfind|
-|ポテンシャル付きunionfind|[weighted_dsu.h](weighted_dsu.h)|unionfindに重みをつける|
-|座標圧縮|[cc.h](cc.h)|座標圧縮する|
-|binary indexed tree|[ftree.h](ftree.h)|bit|
-|segment tree|[segtree.h](segtree.h)|segment tree(非再帰)|
-|畳み込み|[conv.h](conv.h)|nttによる畳み込み|
-|素因数分解|[prime.h](prime.h)|あの人の篩による実装|
+|all.h|[src/all.h](all.h)|時短|
+|template.h|[src/template.h](template.h)|テンプレ|
+|unionfind|[src/dsu.h](dsu.h)|unionfind|
+|ポテンシャル付きunionfind|[src/weighted_dsu.h](weighted_dsu.h)|重みがついた|
+|座標圧縮|[src/cc.h](cc.h)|座標圧縮する|
+|binary indexed tree|[src/ftree.h](ftree.h)|bit|
+|segment tree|[src/segtree.h](segtree.h)|segment tree(非再帰)|
+|畳み込み|[src/conv.h](conv.h)|ntt(15(2^27)+1)|
+|素因数分解|[src/prime.h](prime.h)|エラトステネスの篩|
