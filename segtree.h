@@ -1,12 +1,13 @@
+#pragma once
 #include<vector>
 #include<algorithm>
 
-template<class T,auto mul,T base>class segtree{
+template<class T,auto mul,auto base>class segtree{
 public:
-	explicit segtree(int n=0):segtree(std::vector<T> (n,base)){}
+	explicit segtree(int n=0):segtree(std::vector<T> (n,base())){}
 	explicit segtree(const std::vector<T> &v):n(1),sz(v.size()){
 		for(;n<sz;n<<=1);
-		d=std::vector<T>(n<<1,base);
+		d=std::vector<T>(n<<1,base());
 		for(int i=0;i<sz;i++)d[i+n]=v[i];
 		for(int i=n-1;i;i--)d[i]=mul(d[i<<1],d[i<<1|1]);
 	}
@@ -23,7 +24,7 @@ public:
 	//mul[l,r)を取得します
 	T operator()(int l,int r)const{
 		if(l==0&&r==sz)return get_all();
-		T x=base,y=base;
+		T x=base(),y=base();
 		for(l+=n,r+=n;l<r;l>>=1,r>>=1){
 			if(l&1)x=mul(x,d[l++]);
 			if(r&1)y=mul(d[--r],y);
@@ -42,7 +43,7 @@ public:
 	int find_right(F f,int l=0)const{
 		if(l==sz)return sz;
 		l+=n;
-		T x=base;
+		T x=base();
 		for(;;){
 			for(;!(l&1);l>>=1);
 			if(!f(mul(x,d[l]))){
@@ -61,7 +62,7 @@ public:
 	int find_left(F f,int r)const{
 		if(r==0)return 0;
 		r+=n;
-		T x=base;
+		T x=base();
 		for(;;){
 			for(r--;r>1&&(r&1);r>>=1);
 			if(!f(mul(d[r],x))){
