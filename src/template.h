@@ -35,8 +35,8 @@ template<class T>using lpq=priority_queue<T>;
 #define unless(a) if(!(a))
 #define All(a) begin(a),end(a)
 #define rAll(a) (a).rbegin(),(a).rend()
-#define Sort(a,...) sort(All(a),__VA_ARGS__)
-#define rSort(a,...) sort(rAll(a),__VA_ARGS__)
+#define Sort(a) sort(All(a))
+#define rSort(a) sort(rAll(a))
 #define Rev(a) reverse(All(a))
 #define Uniq(a) Sort(a),a.erase(unique(All(a)),end(a))
 #define eb emplace_back
