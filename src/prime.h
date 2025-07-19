@@ -21,6 +21,12 @@ class prime{
 				bfactor[i]=i*2+1;
 				for(int p=2*i*(i+1),k=2*i+1,sz=flags.size();p<sz;p+=k)flags[p]=0,bfactor[p]=i*2+1;
 			}
+			for(int i=0,sz=x/2;i<sz;i++)if(!bfactor[i])bfactor[i]=i*2+1;
+		}
+		bool operator[](int x){
+			if(x==2)return 1;
+			if(x&1)return flags[(x-1)/2];
+			return 0;
 		}
 		std::vector<std::pair<int,int>> factorize(int x){
 			std::vector<std::pair<int,int>> res;
@@ -29,10 +35,12 @@ class prime{
 				while(!(x&1)&&x>1)cnt++,x>>=1;
 				if(cnt)res.emplace_back(2,cnt);
 			}
+			int pidx=(x-1)/2;
 			while(x>1){
-				int p=bfactor[(x-1)/2],e=0;
-				while(bfactor[(x-1)/2]==p)x/=p,e++;
+				int p=bfactor[pidx],e=0;
+				while(x%p==0)x/=p,e++;
 				res.emplace_back(p,e);
+				pidx=(x-1)/2;
 			}
 			return res;
 		}
