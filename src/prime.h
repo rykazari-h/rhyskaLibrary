@@ -19,7 +19,7 @@ class prime{
 			const int b_x=static_cast<int>(std::ceil(std::sqrt(x)+0.1))/2;
 			for(int i=1;i<b_x;i++)if(flags[i]){
 				bfactor[i]=i*2+1;
-				for(int p=2*i*(i*1),k=2*i+1,sz=flags.size();p<sz;p+=k)flags[p]=0,bfactor[p]=i*2+1;
+				for(int p=2*i*(i+1),k=2*i+1,sz=flags.size();p<sz;p+=k)flags[p]=0,bfactor[p]=i*2+1;
 			}
 		}
 		std::vector<std::pair<int,int>> factorize(int x){
@@ -45,4 +45,3 @@ class prime{
 			return res;
 		}
 };
-#include<fast_prime.h>

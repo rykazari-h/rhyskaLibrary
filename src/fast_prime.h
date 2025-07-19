@@ -106,8 +106,8 @@ struct fast_prime{
 		u64 count(const u64 x){
 			if(x<2)return 0;
 			if(x<3)return 1;
-			if(x<4)return 2;
-			if(x<6)return 3;
+			if(x<5)return 2;
+			if(x<7)return 3;
 			u64 res=3;
 			for(u8 f:flags)res+=popcnt(f);
 			return res;
