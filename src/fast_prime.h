@@ -24,7 +24,7 @@ struct fast_prime{
 		void initFlags(const i64 x,const i64 size){
 			flags.clear();
 			flags.resize(size,255);
-			int8_t r=x%30;
+			u8 r=x%30;
 			if(r){
 				if(r==1)flags.back()=0;
 				else if(r<=7)flags.back()=1;
