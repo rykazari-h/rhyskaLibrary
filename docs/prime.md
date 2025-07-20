@@ -22,7 +22,7 @@ bool p[int x]
 std::vector<std::pair<int,int>> p.factorize(int x)
 ```
 * {素因数,指数}のペアの配列を返す
-* O(log x
+* O(log x)
 ## divisors
 ```cpp
 std::vector<int> p.divisors(int x)
