@@ -11,3 +11,4 @@
 |binary indexed tree|[ftree.h](src/ftree.h)|_|
 |segment tree|[segtree.h](src/segtree.h)|_|
 |素因数分解|[prime.h](src/prime.h)|[prime.md](docs/primd.md)|
+|素因数分解(高速)|[fast_prime.h](src/fast_prime.h)|[fast_prime.md](docs/fast_primd.md)|
