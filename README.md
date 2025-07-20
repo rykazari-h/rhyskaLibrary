@@ -2,7 +2,7 @@
 主に競プロで使うためのもの
 ## 実装されているもの
 |機能|コード|ドキュメント|
-|:--|:--|:--|
+|:--|:--:|:--:|
 |all.h|[all.h](src/all.h)|_|
 |template.h|[template.h](src/template.h)|_|
 |unionfind|[dsu.h](src/dsu.h)|[dsu.md](docs/dsu.md)|
