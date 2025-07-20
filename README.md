@@ -10,4 +10,4 @@
 |座標圧縮|[cc.h](src/cc.h)|_|
 |binary indexed tree|[ftree.h](src/ftree.h)|_|
 |segment tree|[segtree.h](src/segtree.h)|_|
-|素因数分解|[prime.h](src/prime.h)|_|
+|素因数分解|[prime.h](src/prime.h)|[prime.md](docs/primd.md)|
