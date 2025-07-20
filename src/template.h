@@ -60,6 +60,12 @@ namespace io_helper{
 }
 void in(){}
 template<class S,class... B>void in(S&s,B&... b){io_helper::scan(s);in(b...);}
+void put(){}
+template<class T>void put(const T&a){io_helper::print(a);}
+template<class S,class... B>void put(const S&s,const B&... b){io_helper::print(s);put(b...);}
+void putl(){io_helper::print('\n');}
+template<class T>void putl(const T&a){io_helper::print(a);io_helper::print('\n');}
+template<class S,class... B>void putl(const S&s,const B&... b){io_helper::print(s);putl(b...);}
 template<char c='\n'>void out(){}
 template<char c='\n',class T>void out(const T&a){io_helper::print(a);}
 template<char c='\n',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
