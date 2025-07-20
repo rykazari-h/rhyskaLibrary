@@ -65,7 +65,7 @@ template<char c='\n',class T>void out(const T&a){io_helper::print(a);}
 template<char c='\n',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
 template<char c='\n'>void outl(){io_helper::print('\n');}
 template<char c='\n',class T>void outl(const T&a){io_helper::print(a);io_helper::print('\n');}
-template<char c='\n',class S,class... B>void outl(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
+template<char c='\n',class S,class... B>void outl(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);outl<c>(b...);}
 template<class S,class T>inline bool chmin(S&a,T b){return(a>b?a=b,1:0);}
 template<class S,class T>inline bool chmax(S&a,T b){return(a<b?a=b,1:0);}
 template<class T> string LZ(T s,int l){string res=to_string(s);Rev(res);while((int)res.size()<l){res+='0';}Rev(res);return res;}
