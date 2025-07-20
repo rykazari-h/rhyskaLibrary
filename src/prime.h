@@ -21,7 +21,8 @@ class prime{
 				bfactor[i]=i*2+1;
 				for(int p=2*i*(i+1),k=2*i+1,sz=flags.size();p<sz;p+=k)flags[p]=0,bfactor[p]=i*2+1;
 			}
-			for(int i=0,sz=x/2;i<sz;i++)if(!bfactor[i])bfactor[i]=i*2+1;
+			//もったいないねー
+			for(int i=b_x,sz=x/2;i<sz;i++)if(!bfactor[i])bfactor[i]=i*2+1;
 		}
 		bool operator[](int x){
 			if(x==2)return 1;
@@ -29,6 +30,8 @@ class prime{
 			return 0;
 		}
 		std::vector<std::pair<int,int>> factorize(int x){
+			if(x==0)return {{0,0}};
+			if(x==1)return {{1,1}};
 			std::vector<std::pair<int,int>> res;
 			{
 				int cnt=0;
