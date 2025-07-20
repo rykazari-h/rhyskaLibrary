@@ -10,5 +10,4 @@
 |座標圧縮|[cc.h](src/cc.h)|座標圧縮する|
 |binary indexed tree|[ftree.h](src/ftree.h)|bit|
 |segment tree|[segtree.h](src/segtree.h)|segment tree(非再帰)|
-|畳み込み|[conv.h](src/conv.h)|ntt(15(2^27)+1)|
 |素因数分解|[prime.h](src/prime.h)|エラトステネスの篩|
