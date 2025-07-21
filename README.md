@@ -9,6 +9,6 @@
 |ポテンシャル付きunionfind|[weighted_dsu.h](src/weighted_dsu.h)|_|
 |座標圧縮|[cc.h](src/cc.h)|_|
 |binary indexed tree|[ftree.h](src/ftree.h)|_|
-|segment tree|[segtree.h](src/segtree.h)|_|
+|segment tree|[segtree.h](src/segtree.h)|[segtree.md](docs/segtree.md)|
 |素因数分解|[prime.h](src/prime.h)|[prime.md](docs/prime.md)|
 |素因数分解(高速)|[fast_prime.h](src/fast_prime.h)|[fast_prime.md](docs/fast_prime.md)|
