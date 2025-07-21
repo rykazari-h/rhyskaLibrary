@@ -20,12 +20,12 @@ template<class T>using gpq=priority_queue<T,V<T>,greater<T>>;
 template<class T>using lpq=priority_queue<T>;
 #define CH5(a,b,c,d,e,...) e
 #define rep4(i,a,b,s) for(ll i=(a),i##REPEND=(ll)(b),i##REPSTEP=(ll)(s);i<i##REPEND;i+=i##REPSTEP)
-#define rep3(i,a,b) for(ll i=(a),i##REPEND=(ll)(b);i<i##REPEND;i++)
+#define rep3(i,a,b) for(ll i=(a),i##REPEND=(ll)(b);i<i##REPEND;++i)
 #define rep2(i,b) rep3(i,0,b)
 #define rep1(b) rep3(REPCNT_##__COUNTER__,0,b)
 #define rep(...) CH5(__VA_ARGS__,rep4,rep3,rep2,rep1)(__VA_ARGS__)
 #define rrep3(i,a,b,s) for(ll i=(a),i##REPEND=(ll)(b),i##REPSTEP=(ll)(s);i>=i##REPEND;i-=i##REPSTEP)
-#define rrep2(i,a,b) for(ll i=(a),i##REPEND=(ll)(b);i>=i##REPEND;i--)
+#define rrep2(i,a,b) for(ll i=(a),i##REPEND=(ll)(b);i>=i##REPEND;--i)
 #define rrep1(i,b) rrep2(i,b,0)
 #define rrep(...) CH5(__VA_ARGS__,rrep3,rrep2,rrep1,rep)(__VA_ARGS__)
 #define YES {cout<<"Yes\n";return;}

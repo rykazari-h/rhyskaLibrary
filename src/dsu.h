@@ -25,14 +25,14 @@ public:
 	int size(int a){return -parent[root(a)];}
 	int size(){
 		std::vector<bool>count(n,0);
-		for(int i=0;i<n;i++)count[root(i)]=1;
+		for(int i=0;i<n;++i)count[root(i)]=1;
 		int res=0;
-		for(int i=0;i<n;i++)res+=count[i];
+		for(int i=0;i<n;++i)res+=count[i];
 		return res;
 	}
 	std::vector<std::vector<int>> groups(){
 		std::vector<std::vector<int>> res(n);
-		for(int i=0;i<n;i++)res[root(i)].push_back(i);
+		for(int i=0;i<n;++i)res[root(i)].push_back(i);
 		res.erase(std::remove_if(res.begin(),res.end(),
 					[&](const std::vector<int>&v){return v.empty();}),res.end());
 		return res;

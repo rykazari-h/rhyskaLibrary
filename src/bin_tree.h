@@ -3,7 +3,7 @@
 template<class T>class bin_tree{
 public:
 	bin_tree(int _n=0):n(_n),d(_n+1){}
-	void add(int i,T x){for(i++;i<=n;i+=i&-i)d[i]+=x;}
+	void add(int i,T x){for(++i;i<=n;i+=i&-i)d[i]+=x;}
 	T sum(int l, int r){
 		T s=0;
 		for(;l<r;r-=r&-r)s+=d[r];

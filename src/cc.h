@@ -19,7 +19,7 @@ public:
 	std::vector<int> press(S x,S end){
 		if(!did)init();
 		std::vector<int>res;
-		for(;x!=end;x++)res.push_back((*this)(*x));
+		for(;x!=end;++x)res.push_back((*this)(*x));
 		return res;
 	}
 	std::vector<int> press(const std::vector<T>&v){
