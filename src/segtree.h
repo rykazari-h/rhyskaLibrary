@@ -1,27 +1,17 @@
 #pragma once
 #include<vector>
 #include<algorithm>
-
 template<class T,auto mul,auto base>class segtree{
 public:
-	explicit segtree(int n=0):segtree(std::vector<T> (n,base())){}
-	explicit segtree(const std::vector<T> &v):n(1),sz(v.size()){
+	segtree(int n=0):segtree(std::vector<T> (n,base())){}
+	segtree(const std::vector<T> &v):n(1),sz(v.size()){
 		for(;n<sz;n<<=1);
 		d=std::vector<T>(n<<1,base());
 		for(int i=0;i<sz;i++)d[i+n]=v[i];
 		for(int i=n-1;i;i--)d[i]=mul(d[i<<1],d[i<<1|1]);
 	}
-
-	//tにxを代入します
-	void set(int t,T x){
-		for(d[t+=n]=x;t>>=1;)d[t]=mul(d[t<<1],d[t<<1|1]);
-	}
-
-	//tの値を取得します
-	T operator[](int t)const{
-		return d[t+n];
-	}
-	//mul[l,r)を取得します
+	void set(int t,T x){for(d[t+=n]=x;t>>=1;)d[t]=mul(d[t<<1],d[t<<1|1]);}
+	T operator[](int t)const{return d[t+n];}
 	T operator()(int l,int r)const{
 		if(l==0&&r==sz)return get_all();
 		T x=base(),y=base();
@@ -31,16 +21,8 @@ public:
 		}
 		return mul(x,y);
 	}
-	//全要素の積を取得します
-	T get_all()const{
-		return d[1];
-	}
-
-	//l以上のインデックスのうち、
-	//fが単調のときmul[l,r)がtrueとなる最大のrを返します
-	//そうでないときN,もしくはrを1増やした時fがtrueからfalseとなるrの値のうちいずれか一つを返します
-	template<class F>
-	int find_right(F f,int l=0)const{
+	T get_all()const{return d[1];}
+	template<class F>int right_bound(F f,int l=0)const{
 		if(l==sz)return sz;
 		l+=n;
 		T x=base();
@@ -54,12 +36,7 @@ public:
 			if((l&-l)==l)return sz;
 		}
 	}
-
-	//r以下のインデックスのうち、
-	//fが単調のときmul[l,r)がtrueとなる最小のlを返します
-	//そうでないとき0,もしくはlを1へらした時fがtrueからfalseとなるlの値のうちいずれか一つを返します
-	template<class F>
-	int find_left(F f,int r)const{
+	template<class F>int left_bound(F f,int r)const{
 		if(r==0)return 0;
 		r+=n;
 		T x=base();
@@ -74,10 +51,7 @@ public:
 		}
 	}
 private:
-	//2ベキの仮要素数
 	int n;
-	//要素数(N)
 	int sz;
-	//1-indexed
 	std::vector<T>d;
 };
