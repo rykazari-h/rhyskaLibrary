@@ -5,15 +5,12 @@ template<class T=int>class cc{
 public:
 	cc():did(0){}
 	explicit cc(std::vector<T> &v):did(0),d(v){}
-	explicit cc(T *x,T *end):did(0){push(x,end);}
+	template<class S>
+	explicit cc(S x,S end):did(0){push(x,end);}
 	void clear(){did=0;d.clear();}
-
-	//要素の追加
 	void push(T x){d.push_back(x),did=0;}
 	void push(const std::vector<T> &v){for(const T &x:v)push(x);}
-	void push(T *x,T *end){for(;x!=end;x++)push(*x);}
-
-	//実座標->index
+	template<class S>void push(S x,S end){for(;x!=end;++x)push(*x);}
 	int operator()(T x){
 		if(!did)init();
 		return std::upper_bound(d.begin(),d.end(),x)-d.begin()-1;
@@ -25,14 +22,17 @@ public:
 		for(;x!=end;x++)res.push_back((*this)(*x));
 		return res;
 	}
-
-	//index->実座標
+	std::vector<int> press(const std::vector<T>&v){
+		if(!did)init();
+		std::vector<int>res;
+		res.reserve(v.size());
+		for(auto&&x:v)res.push_back((*this)(x));
+		return res;
+	}
 	T operator[](int x){
 		if(!did)init();
 		return d[x];
 	}
-
-	//set(array).size
 	int size(){
 		if(!did)init();
 		return d.size();
