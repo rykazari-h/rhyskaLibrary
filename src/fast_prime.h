@@ -114,4 +114,15 @@ public:
 		for(u8 f:flags)res+=popcnt(f);
 		return res;
 	}
+	std::vector<u64> primelist(){
+		if(x_<2)return {};
+		if(x_<3)return {2};
+		if(x_<5)return {2,3};
+		if(x_<7)return {2,3,5};
+		std::vector<u64> res={2,3,5};
+		for(i64 i=0,sz=flags.size();i<sz;++i)
+			for(int j=0;j<8;++j)
+				if(flags[i]&(1<<j))res.push_back(i*30+Res30[j]);
+		return res;
+	}
 };
