@@ -28,6 +28,13 @@ int uf.size(int u)
 ```
 * 連結成分の要素数を返す
 * ならしO(α(n))
+## size
+```cpp
+int uf.size()
+```
+* 連結成分の個数を返す
+* groups().size()に等しい
+* O(n)
 ## groups
 ```cpp
 std::vector<std::vector<int>> uf.groups()
