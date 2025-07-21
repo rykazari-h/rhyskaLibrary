@@ -21,7 +21,7 @@ Tp s(int l, int r)
 ```
 * [l, r)の和を返す
 * O(logn)
-## get_all
+## sum
 ```cpp
 Tp s.sum(int i)
 ```
