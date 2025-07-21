@@ -7,7 +7,7 @@
 |template.h|[template.h](src/template.h)|_|
 |unionfind|[dsu.h](src/dsu.h)|[dsu.md](docs/dsu.md)|
 |ポテンシャル付きunionfind|[weighted_dsu.h](src/weighted_dsu.h)|_|
-|座標圧縮|[cc.h](src/cc.h)|_|
+|座標圧縮|[cc.h](src/cc.h)|[cc.md](docs/cc.md)|
 |binary indexed tree|[bin_tree.h](src/bin_tree.h)|[bin_tree.md](docs/bin_tree.md)|
 |segment tree|[segtree.h](src/segtree.h)|[segtree.md](docs/segtree.md)|
 |素因数分解|[prime.h](src/prime.h)|[prime.md](docs/prime.md)|
