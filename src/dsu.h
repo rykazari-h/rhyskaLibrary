@@ -27,7 +27,7 @@ public:
 		std::vector<bool>count(n,0);
 		for(int i=0;i<n;i++)count[root(i)]=1;
 		int res=0;
-		for(int i=0;i<n;i++)resL=count[i];
+		for(int i=0;i<n;i++)res=count[i];
 		return res;
 	}
 	std::vector<std::vector<int>> groups(){
