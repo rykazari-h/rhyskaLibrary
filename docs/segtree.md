@@ -11,7 +11,7 @@ segtree<Tp, mul, base> s(std::vector<Tp> v)
 * O(n)
 ## set
 ```cpp
-void s.set(int n, Tp x)
+void s.set(int t, Tp x)
 ```
 * s[t]にxを代入する
 * O(logn)
