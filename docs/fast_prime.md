@@ -26,4 +26,10 @@ int p.count()
 ```
 * 篩った範囲の素数の個数を返す
 * O(n)
-
+## primelist
+```cpp
+std::vector<uint64_t> p.primelist()
+```
+* 篩った範囲の素数を列挙する
+* 返す配列は昇順であることが保証される
+* O(n)
