@@ -66,9 +66,9 @@ template<class S,class... B>void put(const S&s,const B&... b){io_helper::print(s
 void putl(){io_helper::print('\n');}
 template<class T>void putl(const T&a){io_helper::print(a);io_helper::print('\n');}
 template<class S,class... B>void putl(const S&s,const B&... b){io_helper::print(s);putl(b...);}
-template<char c='\n'>void out(){}
-template<char c='\n',class T>void out(const T&a){io_helper::print(a);}
-template<char c='\n',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
+template<char c=' '>void out(){}
+template<char c=' ',class T>void out(const T&a){io_helper::print(a);}
+template<char c=' ',class S,class... B>void out(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);out<c>(b...);}
 template<char c='\n'>void outl(){io_helper::print('\n');}
 template<char c='\n',class T>void outl(const T&a){io_helper::print(a);io_helper::print('\n');}
 template<char c='\n',class S,class... B>void outl(const S&s,const B&... b){io_helper::print(s);io_helper::print(c);outl<c>(b...);}
