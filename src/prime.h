@@ -51,4 +51,14 @@ public:
 		}
 		return res;
 	}
+	int count(){
+		int res=0;
+		for(int i=1,sz=bfactor.size();i<sz;++i)res+=bfactor[i]==i*2+1;
+		return res;
+	}
+	std::vector<int> primelist(){
+		std::vector<int> res;
+		for(int i=1,sz=bfactor.size();i<sz;++i)if(bfactor[i]==i*2+1)res.push_back(i*2+1);
+		return res;
+	}
 };
