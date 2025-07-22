@@ -25,7 +25,7 @@ int p.count()
 * O(n)
 ## primelist
 ```cpp
-std::vector<uint64_t> p.primelist()
+std::vector<int> p.primelist()
 ```
 * 篩った範囲の素数を列挙する
 * 返す配列は昇順であることが保証される
