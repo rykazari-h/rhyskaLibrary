@@ -11,5 +11,5 @@
 |座標圧縮|[cc.h](src/cc.h)|[cc.md](docs/cc.md)|
 |binary indexed tree|[bin_tree.h](src/bin_tree.h)|[bin_tree.md](docs/bin_tree.md)|
 |segment tree|[segtree.h](src/segtree.h)|[segtree.md](docs/segtree.md)|
-|素因数分解|[prime.h](src/prime.h)|[prime.md](docs/prime.md)|
-|素因数分解(高速)|[fast_prime.h](src/fast_prime.h)|[fast_prime.md](docs/fast_prime.md)|
+|素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/prime.md)|
+|素因数分解(高速)|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/fast_prime.md)|
