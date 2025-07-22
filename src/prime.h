@@ -9,13 +9,14 @@ public:
 	prime(const int x){build(x);}
 	void build(int x){
 		++x;
+		int x_i=x/2;
 		bfactor.clear();
-		bfactor.resize(x/2,0);
-		for(int i=1,sz=x/2;i<sz;++i)bfactor[i]=i*2+1;
+		bfactor.resize(x_i,0);
+		for(int i=1;i<x_i;++i)bfactor[i]=i*2+1;
 		bfactor[0]=1;
 		const int b_x=static_cast<int>(std::ceil(std::sqrt(x)+0.1))/2;
 		for(int i=1;i<b_x;++i)if(bfactor[i]==i*2+1){
-			for(int p=2*i*(i+1),k=2*i+1,sz=x/2;p<sz;p+=k)bfactor[p]=i*2+1;
+			for(int p=2*i*(i+1),k=2*i+1;p<x_i;p+=k)bfactor[p]=i*2+1;
 		}
 	}
 	bool operator[](int x){
