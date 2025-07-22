@@ -1,6 +1,6 @@
 #ifdef RHYSKA_LOCAL
 #include<all.h>
-#define dbg(a) {out<' '>("line",__LINE__,':',#a,'=',a);}
+#define dbg(a) {outl<' '>("line",__LINE__,':',#a,'=',a);}
 #define TIME Timer __timer
 #define TIME_END __timer.show()
 #else
