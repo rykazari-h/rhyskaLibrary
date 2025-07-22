@@ -5,7 +5,7 @@ namespace math。
 ```cpp
 i64 modinv(i64 a, i64 m)
 ```
-* mod mにおけるaの逆源を返す
+* mod mにおけるaの逆元を返す
 * assert a⊥m
 * O(log(min(a, m)))
 ## modpow
