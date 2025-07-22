@@ -103,7 +103,7 @@ public:
 	bool operator[](const u64 x){
 		if(x==2||x==3||x==5)return true;
 		if(x<2||!(x&1)||x%3==0||x%5==0)return false;
-		return static_cast<bool>(flags[x/30]&find_idx(x%30));
+		return (flags[x/30]&find_idx(x%30))!=0;
 	}
 	u64 count(){
 		if(x_<2)return 0;
