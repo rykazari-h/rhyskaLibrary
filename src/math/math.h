@@ -14,7 +14,7 @@ namespace math{
 	}
 	long long modpow(long long a,long long n,long long m=998244353){
 		long long res=1;
-		for(a%=m;n;n>>=1,a=a*a%mod)if(n&1)res=res*a%m;
+		for(a%=m;n;n>>=1,a=a*a%m)if(n&1)res=res*a%m;
 		return res;
 	}
 	long long gcd(long long a,long long b){
