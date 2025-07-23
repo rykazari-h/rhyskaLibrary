@@ -4,13 +4,13 @@
 prime p(int n)
 ```
 * build(n)を呼ぶ
-* O(n)
+* O(n loglogn)
 ## build
 ```cpp
 void p.build(int n)
 ```
 * n以下の自然数を篩う
-* O(n)
+* O(n loglogn)
 ## operator[]
 ```cpp
 bool p[int x]
