@@ -4,13 +4,13 @@ template<auto P_>class mint{
 	using S=decltype(P_);
 	using T=std::conditional_t<std::is_same_v<S,int>,unsigned,unsigned long long>;
 	using U=std::conditional_t<std::is_same_v<S,int>,unsigned long long,__uint128_t>;
-	static constexpr T P=P_,P2=P_<<1,R=-uinv(P_),R2=-(U)P_%P_;
-	T v;
 	static constexpr T uinv(T x){
 		T y=x;
 		for(int i=0;i<6;++i)y*=2-x*y;
 		return y;
 	}
+	static constexpr T P=P_,P2=P_<<1,R=-uinv(P_),R2=-(U)P_%P_;
+	T v;
 	static constexpr T reduce(U x){return (x+(T)x*R*(U)P)>>(sizeof(T)*8);}
 	constexpr mint(T x,int):v(x){}
 	public:
@@ -34,10 +34,10 @@ template<auto P_>class mint{
 	}
 	constexpr mint& operator*=(const mint&x){v=reduce((U)v*x.v);return *this;}
 	constexpr mint& operator/=(const mint&x){return *this*=x.inv();}
-	constexpr mint& operator++(){v==P2-1?v=0:v++;return *this;}
-	constexpr mint operator++(int){mint x=*this;v==P2-1?v=0:v++;return x;}
-	constexpr mint& operator--(){v?v--:v=P2-1;return *this;}
-	constexpr mint operator--(int){mint x=*this;v?v--:v=P2-1;return x;}
+	constexpr mint& operator++(){return *this+=1;}
+	constexpr mint operator++(int){mint x=*this;++(*this);return x;}
+	constexpr mint& operator--(){return *this-=1;}
+	constexpr mint operator--(int){mint x=*this;--(*this);return x;}
 	constexpr mint operator-()const{return mint(v?P2-v:0,0);}
 	friend constexpr mint operator+(mint x,const mint&y) {return x+=y;}
 	friend constexpr mint operator-(mint x,const mint&y) {return x-=y;}
