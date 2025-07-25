@@ -15,15 +15,15 @@ $abs_path"
 
 	while IFS= read -r line; do
 		case "$line" in
-			\#include\<bits/*\>|\
-\#include\<atcoder/*\>|\
-\#include\<all.h\>)
+			\#include[\ \	]*\<bits/*\>|\
+\#include[\ \	]*\<atcoder/*\>|\
+\#include[\ \	]*\<all.h\>)
 				# bits/ と atcoder/ はスルー
 				echo "$line"
 				;;
-			\#include\<*\>) 
+			\#include[\ \	]*\<*\>) 
 				# ./libから
-				inc_path=$(echo "$line" | sed -n 's/#include<\([^>]*\)>/\1/p')
+				inc_path=$(echo "$line" | sed -n 's/#include[[:space:]]*<\([^>]*\)>/\1/p')
 				real_path="./lib/src/$inc_path"
 				if [ -f "$real_path" ]; then
 					expand "$real_path"
@@ -31,7 +31,7 @@ $abs_path"
 					echo "$line"
 				fi
 				;;
-			\#pragma\ once)
+			\#pragma[\ \	]*once)
 				# #pragma once は出力しない
 				;;
 			*)
