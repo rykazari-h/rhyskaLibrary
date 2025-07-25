@@ -9,7 +9,7 @@ namespace math{
 			std::swap(a,b);std::swap(x,y);
 			y-=q*x;
 		}
-		x=(x%m+m)%m;
+		if(x<0)x+=m;
 		return x;
 	}
 	long long modpow(long long a,long long n,long long m=998244353){
