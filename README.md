@@ -14,3 +14,4 @@
 |素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/prime.md)|
 |素因数分解(高速)|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/fast_prime.md)|
 |math utility|[math.h](src/math/math.h)|[math.md](docs/math.md)|
+|modint|[mint.h](src/mint.h)|[mint.md](docs/mint.md)|
