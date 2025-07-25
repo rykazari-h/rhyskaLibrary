@@ -20,6 +20,7 @@ template<auto P_>class mint{
 	static constexpr S mod(){return P_;}
 	static constexpr T umod(){return P;}
 	constexpr S val()const{T x=reduce(v);return x<P?x:x-P;}
+	T& raw(){return v;}
 	template<class D>constexpr operator D()const{return val();}
 	constexpr mint& operator=(const mint&x){v=x.v;return *this;}
 	constexpr mint& operator+=(const mint&x){
