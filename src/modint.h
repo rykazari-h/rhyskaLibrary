@@ -62,9 +62,10 @@ template<auto P_>class modint{
 	}
 	template<class D>constexpr modint mpow(D y)const{
 		modint x=*this,z=1;
-		for(;y;){
+		for(;;){
 			if(y&1)z*=x;
 			if(y>>=1)x*=x;
+			else break;
 		}
 		return z;
 	}
