@@ -80,7 +80,7 @@ template<class T> string LZ(T s,int l){string res=to_string(s);Rev(res);while((i
 template<class T=ll>T geti(){T s;cin>>s;return s;}
 string gets(){return geti<string>();}
 void _main();int main(){cin.tie(0);ios::sync_with_stdio(0);cout<<fixed<<setprecision(12);
-//rep(geti())
-_main();}
+_main();
+}
 using pp=pair<ll,ll>;
 void _main(){
