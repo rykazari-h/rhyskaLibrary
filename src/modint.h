@@ -1,3 +1,4 @@
+#pragma once
 template<auto P_>class modint{
 	using S=decltype(P_);using U=std::conditional_t<std::is_same_v<S,int>,unsigned,unsigned long long>;using D=std::conditional_t<std::is_same_v<S,int>,unsigned long long,__uint128_t>;
 	inline constexpr static U uinv(U x){U y=x;for(int i=6;i--;)y*=2-x*y;return y;}
