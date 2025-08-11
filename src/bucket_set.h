@@ -52,7 +52,7 @@ template<class T>class bucket_set{
 			difference_type dist=0;
 			iterator a=*this;
 			int sign=1;
-			if(a<b)std::swap(a.in_idx,b.in_idx),std::swap(a.out_idx,b.out_idx),sign=-1;
+			if(a<b)a.swap(b),sign=-1;
 			while(a.out_idx>b.out_idx)dist+=bucket[b.out_idx++].size()-b.in_idx,b.in_idx=0;
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
@@ -74,6 +74,7 @@ template<class T>class bucket_set{
 		}
 		bool operator!=(const iterator&b)const{return!(*this==b);}
 		bool operator<(const iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
+		void swap(iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
 	struct const_iterator{
 		using iterator_category=std::random_access_iterator_tag;
@@ -105,7 +106,7 @@ template<class T>class bucket_set{
 			difference_type dist=0;
 			const_iterator a=*this;
 			int sign=1;
-			if(a<b)std::swap(a.in_idx,b.in_idx),std::swap(a.out_idx,b.out_idx),sign=-1;
+			if(a<b)a.swap(b),sign=-1;
 			while(a.out_idx>b.out_idx)dist+=bucket[b.out_idx++].size()-b.in_idx,b.in_idx=0;
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
@@ -127,6 +128,7 @@ template<class T>class bucket_set{
 		}
 		bool operator!=(const const_iterator&b)const{return!(*this==b);}
 		bool operator<(const const_iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
+		void swap(const_iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
 	iterator begin(){
 		if(list_.empty())return end();
