@@ -1,4 +1,5 @@
 //Original code by tatyam:https://github.com/tatyam-prime/SortedSet
+#pragma once
 #include<vector>
 #include<algorithm>
 #include<cmath>
@@ -168,7 +169,6 @@ template<class T>class bucket_set{
 
 	bool empty()const{return !size_;}
 	int size()const{return size_;}
-	std::vector<std::vector<T>>&bucket(){return list_;}
 
 	void clear(){size_=0;list_.clear();}
 	bool insert(T x){
