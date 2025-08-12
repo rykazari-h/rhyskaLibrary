@@ -194,8 +194,8 @@ template<class T>class bucket_set{
 		return true;
 	}
 	bool toggle(const T&x){
-		if(this->insert(x))return true;
-		this->erase(x);
+		if(insert(x))return true;
+		erase(x);
 		return false;
 	}
 	T pop(int i=-1){
