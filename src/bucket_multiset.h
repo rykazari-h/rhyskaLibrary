@@ -179,9 +179,8 @@ template<class T>class bucket_multiset{
 			b->erase(b->begin()+mid,b->end());
 			list_.insert(list_.begin()+bi+1,std::move(nb));
 		}
-		return;
 	}
-	template<class... U>bool emplace(U&&... x){return insert(T(std::forward<U>(x)...));}
+	template<class... U>void emplace(U&&... x){insert(T(std::forward<U>(x)...));}
 	bool erase(const T&x){
 		if(!size_)return false;
 		auto[b,bi,i]=_position(x);
@@ -215,7 +214,7 @@ template<class T>class bucket_multiset{
 		for(auto& a:b.list_)all.insert(all.end(),a.begin(),a.end());
 		*this=std::move(bucket_multiset(all));
 	}
-	bool count(const T&x){return index_right(x)-index(x);}
+	int count(const T&x){return index_right(x)-index(x);}
 	bool find(const T&x){
 		if(!size_)return false;
 		auto[b,_,i]=_position(x);
