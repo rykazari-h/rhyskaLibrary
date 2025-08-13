@@ -1,5 +1,5 @@
-//Original code by tatyam:https://github.com/tatyam-prime/SortedSet
 #pragma once
+//Original code by tatyam:https://github.com/tatyam-prime/SortedSet
 #include<vector>
 #include<algorithm>
 #include<cmath>
@@ -58,7 +58,7 @@ template<class T>class bucket_set{
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
 		}
-		iterator&operator++(){return ++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
+		iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
 		iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
 		iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
 		iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
@@ -103,7 +103,7 @@ template<class T>class bucket_set{
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
 		}
-		const_iterator&operator++(){return ++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
+		const_iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
 		const_iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
 		const_iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
 		const_iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
@@ -137,7 +137,7 @@ template<class T>class bucket_set{
 		for(int i=0;i<s;i++)list_[i].assign(z.begin()+n*i/s,z.begin()+n*(i+1)/s);
 	}
 	bucket_set&operator=(const bucket_set&b){list_=b.list_,size_=b.size_;return*this;}
-	bucket_set&operator=(bucket_set&&b){list_=std::move(b.list_),size_=b.size_;return *this;}
+	bucket_set&operator=(bucket_set&&b){list_=std::move(b.list_),size_=b.size_;return*this;}
 	bool empty()const{return!size_;}
 	int size()const{return size_;}
 	void clear(){size_=0;list_.clear();}
