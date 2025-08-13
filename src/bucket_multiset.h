@@ -6,8 +6,7 @@
 #include<tuple>
 template<class T>class bucket_multiset{
 	static constexpr int kRatio=16,kBound=24;
-	std::vector<std::vector<T>> list_;
-	int size_;
+	std::vector<std::vector<T>> list_;int size_;
 	std::tuple<std::vector<T>*,int,int> _position(const T&x){
 		int sz=list_.size();
 		for(int i=0;i<sz;i++)if(x<=list_[i].back())
@@ -23,15 +22,16 @@ template<class T>class bucket_multiset{
 	}
 	public:
 	std::vector<std::vector<T>>&a(){return list_;}
+	const std::vector<std::vector<T>>&a()const{return list_;}
 	struct iterator{
 		using iterator_category=std::random_access_iterator_tag;
 		using value_type=T;
 		using difference_type=std::ptrdiff_t;
 		using pointer=T*;
 		using reference=T&;
-		int out_idx,in_idx;
-		std::vector<std::vector<T>>& bucket;
+		int out_idx,in_idx;std::vector<std::vector<T>>& bucket;
 		iterator()=default;
+		iterator(const iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
 		iterator(int a,int b,bucket_multiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
 		reference operator*()const{return bucket[out_idx][in_idx];}
 		pointer operator->()const{return&bucket[out_idx][in_idx];}
@@ -48,7 +48,7 @@ template<class T>class bucket_multiset{
 			}
 			return it;
 		}
-		iterator operator-(int n)const{return *this+(-n);}
+		iterator operator-(int n)const{return*this+(-n);}
 		difference_type operator-(iterator b)const{
 			difference_type dist=0;
 			iterator a=*this;
@@ -58,22 +58,13 @@ template<class T>class bucket_multiset{
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
 		}
-		iterator&operator++(){
-			++in_idx;
-			if(in_idx>=(int)bucket[out_idx].size())out_idx++,in_idx=0;
-			return*this;
-		}
+		iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
 		iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
-		iterator&operator--(){
-			if(in_idx==0)--out_idx,in_idx=bucket[out_idx].size()-1;
-			else --in_idx;
-			return*this;
-		}
+		iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
 		iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
-		bool operator==(const iterator&b)const{
-			return in_idx==b.in_idx&&out_idx==b.out_idx;
-		}
+		bool operator==(const iterator&b)const{return in_idx==b.in_idx&&out_idx==b.out_idx;}
 		bool operator!=(const iterator&b)const{return!(*this==b);}
+		iterator&operator=(const iterator&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
 		bool operator<(const iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
 		void swap(iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
@@ -83,9 +74,9 @@ template<class T>class bucket_multiset{
 		using difference_type=std::ptrdiff_t;
 		using pointer=const T*;
 		using reference=const T&;
-		int out_idx,in_idx;
-		const std::vector<std::vector<T>>&bucket;
+		int out_idx,in_idx;const std::vector<std::vector<T>>&bucket;
 		const_iterator()=default;
+		const_iterator(const const_iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
 		const_iterator(int a,int b,const bucket_multiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
 		reference operator*()const{return bucket[out_idx][in_idx];}
 		pointer operator->()const{return&bucket[out_idx][in_idx];}
@@ -102,7 +93,7 @@ template<class T>class bucket_multiset{
 			}
 			return it;
 		}
-		const_iterator operator-(int n)const{return *this+(-n);}
+		const_iterator operator-(int n)const{return*this+(-n);}
 		difference_type operator-(const_iterator b)const{
 			difference_type dist=0;
 			const_iterator a=*this;
@@ -112,41 +103,22 @@ template<class T>class bucket_multiset{
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
 		}
-		const_iterator&operator++(){
-			++in_idx;
-			if(in_idx>=(int)bucket[out_idx].size())out_idx++,in_idx=0;
-			return*this;
-		}
+		const_iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
 		const_iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
-		const_iterator&operator--(){
-			if(in_idx==0)--out_idx,in_idx=bucket[out_idx].size()-1;
-			else --in_idx;
-			return*this;
-		}
+		const_iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
 		const_iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
-		bool operator==(const const_iterator&b)const{
-			return in_idx==b.in_idx&&out_idx==b.out_idx;
-		}
+		bool operator==(const const_iterator&b)const{return in_idx==b.in_idx&&out_idx==b.out_idx;}
 		bool operator!=(const const_iterator&b)const{return!(*this==b);}
+		const_iterator&operator=(const const_iterator&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
 		bool operator<(const const_iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
 		void swap(const_iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
-	iterator begin(){
-		if(list_.empty())return end();
-		return iterator(0,0,this);
-	}
-	iterator end(){
-		return iterator(list_.size(),0,this);
-	}
+	iterator begin(){return list_.empty()?end():iterator(0,0,this);}
+	iterator end(){return iterator(list_.size(),0,this);}
 	const_iterator begin()const{return cbegin();}
 	const_iterator end()const{return cend();}
-	const_iterator cbegin()const{
-		if(list_.empty())return cend();
-		return const_iterator(0,0,this);
-	}
-	const_iterator cend()const{
-		return const_iterator(list_.size(),0,this);
-	}
+	const_iterator cbegin()const{return list_.empty()?cend():const_iterator(0,0,this);}
+	const_iterator cend()const{return const_iterator(list_.size(),0,this);}
 	using reverse_iterator=std::reverse_iterator<iterator>;
 	using const_reverse_iterator=std::reverse_iterator<const_iterator>;
 	reverse_iterator rbegin(){return reverse_iterator(end());}
@@ -164,7 +136,7 @@ template<class T>class bucket_multiset{
 		for(int i=0;i<s;i++)list_[i].assign(z.begin()+n*i/s,z.begin()+n*(i+1)/s);
 	}
 	bucket_multiset&operator=(const bucket_multiset&b){list_=b.list_,size_=b.size_;return*this;}
-	bucket_multiset&operator=(bucket_multiset&&b){list_=std::move(b.list_),size_=b.size_;return *this;}
+	bucket_multiset&operator=(bucket_multiset&&b){list_=std::move(b.list_),size_=b.size_;return*this;}
 	bool empty()const{return !size_;}
 	int size()const{return size_;}
 	void clear(){size_=0;list_.clear();}
@@ -203,10 +175,7 @@ template<class T>class bucket_multiset{
 		}
 		return list_.back().back();
 	}
-	void swap(bucket_multiset&b){
-		std::swap(list_,b.list_);
-		std::swap(size_,b.size_);
-	}
+	void swap(bucket_multiset&b){std::swap(list_,b.list_);std::swap(size_,b.size_);}
 	void merge(const bucket_multiset&b){
 		std::vector<T> all;
 		all.reserve(size_+b.size_);
