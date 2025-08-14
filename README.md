@@ -5,20 +5,20 @@
 ### data
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
-|unionfind|[dsu.h](src/data/dsu.h)|[dsu.md](docs/dsu.md)|
-|ポテンシャル付きunionfind|[weighted_dsu.h](src/data/weighted_dsu.h)|[weighted_dsu.md](docs/weighted_dsu.md)|
-|binary indexed tree|[bin_tree.h](src/data/bin_tree.h)|[bin_tree.md](docs/bin_tree.md)|
-|segment tree|[segtree.h](src/data/segtree.h)|[segtree.md](docs/segtree.md)|
-|平方分割set|[kthset.h](src/data/kthset.h)|[kthset.md](docs/kthset.md)|
-|平方分割multiset|[kthmultiset.h](src/data/kthmultiset.h)|[kthmultiset.md](docs/kthmultiset.md)|
-|modint|[montgomerymint.h](src/data/montgomerymint.h)|[montgomerymint.md](docs/montgomerymint.md)|
+|unionfind|[dsu.h](src/data/dsu.h)|[dsu.md](docs/data/dsu.md)|
+|ポテンシャル付きunionfind|[weighted_dsu.h](src/data/weighted_dsu.h)|[weighted_dsu.md](docs/data/weighted_dsu.md)|
+|binary indexed tree|[bin_tree.h](src/data/bin_tree.h)|[bin_tree.md](docs/data/bin_tree.md)|
+|segment tree|[segtree.h](src/data/segtree.h)|[segtree.md](docs/data/segtree.md)|
+|平方分割set|[kthset.h](src/data/kthset.h)|[kthset.md](docs/data/kthset.md)|
+|平方分割multiset|[kthmultiset.h](src/data/kthmultiset.h)|[kthmultiset.md](docs/data/kthmultiset.md)|
+|modint|[montgomerymint.h](src/data/montgomerymint.h)|[montgomerymint.md](docs/data/montgomerymint.md)|
 |多倍長整数|[Integer.h](src/data/Integer.h)|実装中...|
 ### math
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
-|素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/prime.md)|
-|素因数分解(高速)|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/fast_prime.md)|
-|math utility|[math.h](src/math/math.h)|[math.md](docs/math.md)|
+|素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/math/prime.md)|
+|素因数分解(高速)|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/math/fast_prime.md)|
+|math utility|[math.h](src/math/math.h)|[math.md](docs/math/math.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
