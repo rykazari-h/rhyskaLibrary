@@ -16,3 +16,4 @@
 |math utility|[math.h](src/math/math.h)|[math.md](docs/math.md)|
 |modint|[montgomerymint.h](src/montgomerymint.h)|[montgomerymint.md](docs/montgomerymint.md)|
 |bucket_set|[bucket_set.h](src/bucket_set.h)|[bucket_set.md](docs/bucket_set.md)|
+|bucket_multiset|[bucket_multiset.h](src/bucket_multiset.h)|[bucket_multiset.md](docs/bucket_multiset.md)|
