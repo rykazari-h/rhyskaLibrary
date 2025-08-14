@@ -4,7 +4,7 @@
 #include<algorithm>
 #include<cmath>
 #include<tuple>
-template<class T>class bucket_multiset{
+template<class T>class kthmultiset{
 	static constexpr int kRatio=16,kBound=24;
 	std::vector<std::vector<T>> list_;int size_;
 	std::tuple<std::vector<T>*,int,int> _position(const T&x){
@@ -32,7 +32,7 @@ template<class T>class bucket_multiset{
 		int out_idx,in_idx;std::vector<std::vector<T>>& bucket;
 		iterator()=default;
 		iterator(const iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
-		iterator(int a,int b,bucket_multiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
+		iterator(int a,int b,kthmultiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
 		reference operator*()const{return bucket[out_idx][in_idx];}
 		pointer operator->()const{return&bucket[out_idx][in_idx];}
 		iterator operator+(int n)const{
@@ -77,7 +77,7 @@ template<class T>class bucket_multiset{
 		int out_idx,in_idx;const std::vector<std::vector<T>>&bucket;
 		const_iterator()=default;
 		const_iterator(const const_iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
-		const_iterator(int a,int b,const bucket_multiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
+		const_iterator(int a,int b,const kthmultiset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
 		reference operator*()const{return bucket[out_idx][in_idx];}
 		pointer operator->()const{return&bucket[out_idx][in_idx];}
 		const_iterator operator+(int n)const{
@@ -127,16 +127,16 @@ template<class T>class bucket_multiset{
 	const_reverse_iterator rend()const{return const_reverse_iterator(begin());}
 	const_reverse_iterator crbegin()const{return const_reverse_iterator(cend());}
 	const_reverse_iterator crend()const{return const_reverse_iterator(cbegin());}
-	bucket_multiset():size_(0){}
-	bucket_multiset(std::vector<T> z){
+	kthmultiset():size_(0){}
+	kthmultiset(std::vector<T> z){
 		if(!std::is_sorted(z.begin(),z.end()))std::sort(z.begin(),z.end());
 		int n=size_=z.size();
 		int s=std::ceil(std::sqrt((double)n/kRatio));
 		list_.resize(s);
 		for(int i=0;i<s;i++)list_[i].assign(z.begin()+n*i/s,z.begin()+n*(i+1)/s);
 	}
-	bucket_multiset&operator=(const bucket_multiset&b){list_=b.list_,size_=b.size_;return*this;}
-	bucket_multiset&operator=(bucket_multiset&&b){list_=std::move(b.list_),size_=b.size_;return*this;}
+	kthmultiset&operator=(const kthmultiset&b){list_=b.list_,size_=b.size_;return*this;}
+	kthmultiset&operator=(kthmultiset&&b){list_=std::move(b.list_),size_=b.size_;return*this;}
 	bool empty()const{return !size_;}
 	int size()const{return size_;}
 	void clear(){size_=0;list_.clear();}
@@ -187,13 +187,13 @@ template<class T>class bucket_multiset{
 		}
 		return list_.back().back();
 	}
-	void swap(bucket_multiset&b){std::swap(list_,b.list_);std::swap(size_,b.size_);}
-	void merge(const bucket_multiset&b){
+	void swap(kthmultiset&b){std::swap(list_,b.list_);std::swap(size_,b.size_);}
+	void merge(const kthmultiset&b){
 		std::vector<T> all;
 		all.reserve(size_+b.size_);
 		for(auto& a:list_)all.insert(all.end(),a.begin(),a.end());
 		for(auto& a:b.list_)all.insert(all.end(),a.begin(),a.end());
-		*this=std::move(bucket_multiset(all));
+		*this=std::move(kthmultiset(all));
 	}
 	int count(const T&x){return index_right(x)-index(x);}
 	bool find(const T&x){
@@ -243,11 +243,11 @@ template<class T>class bucket_multiset{
 		}
 		return res;
 	}
-	friend bool operator==(const bucket_multiset&a,const bucket_multiset&b){return a.size_==b.size_&&a.list_==b.list_;}
-	friend bool operator!=(const bucket_multiset&a,const bucket_multiset&b){return!(a==b);}
-	friend bool operator<(const bucket_multiset&a,const bucket_multiset&b){return a.list_<b.list_;}
-	friend bool operator<=(const bucket_multiset&a,const bucket_multiset&b){return a==b||a<b;}
-	friend bool operator>(const bucket_multiset&a,const bucket_multiset&b){return b<a;}
-	friend bool operator>=(const bucket_multiset&a,const bucket_multiset&b){return b<=a;}
-	friend void swap(bucket_multiset&a,bucket_multiset&b){a.swap(b);}
+	friend bool operator==(const kthmultiset&a,const kthmultiset&b){return a.size_==b.size_&&a.list_==b.list_;}
+	friend bool operator!=(const kthmultiset&a,const kthmultiset&b){return!(a==b);}
+	friend bool operator<(const kthmultiset&a,const kthmultiset&b){return a.list_<b.list_;}
+	friend bool operator<=(const kthmultiset&a,const kthmultiset&b){return a==b||a<b;}
+	friend bool operator>(const kthmultiset&a,const kthmultiset&b){return b<a;}
+	friend bool operator>=(const kthmultiset&a,const kthmultiset&b){return b<=a;}
+	friend void swap(kthmultiset&a,kthmultiset&b){a.swap(b);}
 };
