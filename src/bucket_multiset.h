@@ -160,6 +160,18 @@ template<class T>class bucket_multiset{
 		_pop(b,bi,i);
 		return true;
 	}
+	bool erase_all(const T&x){
+		if(!size_)return false;
+		auto[b,bi,i]=_position(x);
+		if(i==(int)b->size()||(*b)[i]!=x)return false;
+		for(;;){
+			size-=std::count(list_[bi].begin(),list_[bi].end(),x);
+			list_[bi].erase(std::remove(list_[bi].begin()+i,list_[bi].end(),x),list_[bi].end());
+			if(list_[bi].empty())list_.erase(list_.begin()+bi);else bi++;
+			if(bi==(int)list_.size()||list_[bi].front()!=x)break;
+		}
+		return true;
+	}
 	T pop(int i=-1){
 		if(i>=0){
 			for(int b=0,n=list_.size();b<n;b++){
