@@ -23,96 +23,57 @@ template<class T>class kthset{
 	public:
 	std::vector<std::vector<T>>&a(){return list_;}
 	const std::vector<std::vector<T>>&a()const{return list_;}
-	struct iterator{
+	template<bool IsConst>struct iterator_base{
 		using iterator_category=std::random_access_iterator_tag;
-		using value_type=T;
+		using value_type=std::conditional_t<IsConst,const T,T>;
 		using difference_type=std::ptrdiff_t;
-		using pointer=T*;
-		using reference=T&;
-		int out_idx,in_idx;std::vector<std::vector<T>>& bucket;
-		iterator()=default;
-		iterator(const iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
-		iterator(int a,int b,kthset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
+		using pointer=std::conditional_t<IsConst,const T*,T*>;
+		using reference=std::conditional_t<IsConst,const T&,T&>;
+		int out_idx,in_idx;std::conditional_t<IsConst,const std::vector<std::vector<T>>&,std::vector<std::vector<T>>&> bucket;
+		iterator_base()=default;
+		iterator_base(const iterator_base&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
+		iterator_base(int a,int b,kthset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
 		reference operator*()const{return bucket[out_idx][in_idx];}
 		pointer operator->()const{return&bucket[out_idx][in_idx];}
-		iterator operator+(int n)const{
-			iterator it=*this;
+		iterator_base&operator+=(int n){
 			if(n>=0){
-				while((int)bucket[it.out_idx].size()-1-it.in_idx<n)n-=bucket[it.out_idx++].size()-it.in_idx,it.in_idx=0;
-				it.in_idx+=n;
+				while((int)bucket[out_idx].size()-1-in_idx<n)n-=bucket[out_idx++].size()-in_idx,in_idx=0;
+				in_idx+=n;
 			}
 			else{
 				n=-n;
-				while(it.in_idx<n)n-=in_idx+1,it.in_idx=bucket[--it.out_idx].size()-1;
-				it.in_idx-=n;
+				while(in_idx<n)n-=in_idx+1,in_idx=bucket[--out_idx].size()-1;
+				in_idx-=n;
 			}
-			return it;
+			return*this;
 		}
-		iterator operator-(int n)const{return*this+(-n);}
-		difference_type operator-(iterator b)const{
+		iterator_base operator+(int n)const{return iterator_base(*this)+=n;}
+		iterator_base&operator-=(int n){return*this+=(-n);}
+		iterator_base operator-(int n)const{return*this+(-n);}
+		difference_type operator-(iterator_base b)const{
 			difference_type dist=0;
-			iterator a=*this;
+			iterator_base a=*this;
 			int sign=1;
 			if(a<b)a.swap(b),sign=-1;
 			while(a.out_idx>b.out_idx)dist+=bucket[b.out_idx++].size()-b.in_idx,b.in_idx=0;
 			dist+=a.in_idx-b.in_idx;
 			return dist*sign;
 		}
-		iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
-		iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
-		iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
-		iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
-		bool operator==(const iterator&b)const{return in_idx==b.in_idx&&out_idx==b.out_idx;}
-		bool operator!=(const iterator&b)const{return!(*this==b);}
-		iterator&operator=(const iterator&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
-		bool operator<(const iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
-		void swap(iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
+		iterator_base&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
+		iterator_base operator++(int){auto tmp=*this;++(*this);return tmp;}
+		iterator_base&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
+		iterator_base operator--(int){auto tmp=*this;--(*this);return tmp;}
+		bool operator==(const iterator_base&b)const{return in_idx==b.in_idx&&out_idx==b.out_idx;}
+		bool operator!=(const iterator_base&b)const{return!(*this==b);}
+		bool operator<(const iterator_base&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
+		bool operator<=(const iterator_base&b)const{return*this<b||*this==b;}
+		bool operator>(const iterator_base&b)const{return!*this<=b;}
+		bool operator>=(const iterator_base&b)const{return!*this<b;}
+		iterator_base&operator=(const iterator_base&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
+		void swap(iterator_base&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
-	struct const_iterator{
-		using iterator_category=std::random_access_iterator_tag;
-		using value_type=const T;
-		using difference_type=std::ptrdiff_t;
-		using pointer=const T*;
-		using reference=const T&;
-		int out_idx,in_idx;const std::vector<std::vector<T>>&bucket;
-		const_iterator()=default;
-		const_iterator(const const_iterator&b):out_idx(b.out_idx),in_idx(b.in_idx),bucket(b.bucket){}
-		const_iterator(int a,int b,const kthset*ptr):out_idx(a),in_idx(b),bucket(ptr->a()){}
-		reference operator*()const{return bucket[out_idx][in_idx];}
-		pointer operator->()const{return&bucket[out_idx][in_idx];}
-		const_iterator operator+(int n)const{
-			const_iterator it=*this;
-			if(n>=0){
-				while(bucket[it.out_idx].size()-1-it.in_idx<n)n-=bucket[it.out_idx++].size()-it.in_idx,it.in_idx=0;
-				it.in_idx+=n;
-			}
-			else{
-				n=-n;
-				while(it.in_idx<n)n-=it.in_idx+1,it.in_idx=bucket[--it.out_idx].size()-1;
-				it.in_idx-=n;
-			}
-			return it;
-		}
-		const_iterator operator-(int n)const{return*this+(-n);}
-		difference_type operator-(const_iterator b)const{
-			difference_type dist=0;
-			const_iterator a=*this;
-			int sign=1;
-			if(a<b)a.swap(b),sign=-1;
-			while(a.out_idx>b.out_idx)dist+=bucket[b.out_idx++].size()-b.in_idx,b.in_idx=0;
-			dist+=a.in_idx-b.in_idx;
-			return dist*sign;
-		}
-		const_iterator&operator++(){return++in_idx>=(int)bucket[out_idx].size()?out_idx++,in_idx=0,*this:*this;}
-		const_iterator operator++(int){auto tmp=*this;++(*this);return tmp;}
-		const_iterator&operator--(){in_idx==0?--out_idx,in_idx=bucket[out_idx].size()-1:--in_idx;return*this;}
-		const_iterator operator--(int){auto tmp=*this;--(*this);return tmp;}
-		bool operator==(const const_iterator&b)const{return in_idx==b.in_idx&&out_idx==b.out_idx;}
-		bool operator!=(const const_iterator&b)const{return!(*this==b);}
-		const_iterator&operator=(const const_iterator&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
-		bool operator<(const const_iterator&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
-		void swap(const_iterator&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
-	};
+	using iterator=iterator_base<false>;
+	using const_iterator=iterator_base<true>;
 	iterator begin(){return list_.empty()?end():iterator(0,0,this);}
 	iterator end(){return iterator(list_.size(),0,this);}
 	const_iterator begin()const{return cbegin();}
@@ -219,11 +180,11 @@ template<class T>class kthset{
 			return iterator(i,(int)(std::upper_bound(list_[i].begin(),list_[i].end(),x)-list_[i].begin()),this);
 		return end();
 	}
-	friend bool operator==(const kthset&a,const kthset&b){return a.size_==b.size_&&a.list_==b.list_;}
-	friend bool operator!=(const kthset&a,const kthset&b){return!(a==b);}
-	friend bool operator<(const kthset&a,const kthset&b){return a.list_<b.list_;}
-	friend bool operator<=(const kthset&a,const kthset&b){return a==b||a<b;}
-	friend bool operator>(const kthset&a,const kthset&b){return b<a;}
-	friend bool operator>=(const kthset&a,const kthset&b){return b<=a;}
+	bool operator==(const kthset&b){return this->size_==b.size_&&this->list_==b.list_;}
+	bool operator!=(const kthset&b){return!(*this==b);}
+	bool operator<(const kthset&b){return this->list_<b.list_;}
+	bool operator<=(const kthset&b){return*this==b||*this<b;}
+	bool operator>(const kthset&b){return b<*this;}
+	bool operator>=(const kthset&b){return b<=*this;}
 	friend void swap(kthset&a,kthset&b){a.swap(b);}
 };
