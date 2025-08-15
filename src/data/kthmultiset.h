@@ -204,11 +204,11 @@ template<class T>class kthmultiset{
 		}
 		return res;
 	}
-	friend bool operator==(const kthmultiset&a,const kthmultiset&b){return a.size_==b.size_&&a.list_==b.list_;}
-	friend bool operator!=(const kthmultiset&a,const kthmultiset&b){return!(a==b);}
-	friend bool operator<(const kthmultiset&a,const kthmultiset&b){return a.list_<b.list_;}
-	friend bool operator<=(const kthmultiset&a,const kthmultiset&b){return a==b||a<b;}
-	friend bool operator>(const kthmultiset&a,const kthmultiset&b){return b<a;}
-	friend bool operator>=(const kthmultiset&a,const kthmultiset&b){return b<=a;}
+	bool operator==(const kthmultiset&b){return this->size_==b.size_&&this->list_==b.list_;}
+	bool operator!=(const kthmultiset&b){return!(*this==b);}
+	bool operator<(const kthmultiset&b){return this->list_<b.list_;}
+	bool operator<=(const kthmultiset&b){return*this==b||*this<b;}
+	bool operator>(const kthmultiset&b){return b<*this;}
+	bool operator>=(const kthmultiset&b){return b<=*this;}
 	friend void swap(kthmultiset&a,kthmultiset&b){a.swap(b);}
 };
