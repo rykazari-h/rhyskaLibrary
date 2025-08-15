@@ -67,8 +67,8 @@ template<class T>class kthset{
 		bool operator!=(const iterator_base&b)const{return!(*this==b);}
 		bool operator<(const iterator_base&b)const{return out_idx<b.out_idx||(out_idx==b.out_idx&&in_idx<b.in_idx);}
 		bool operator<=(const iterator_base&b)const{return*this<b||*this==b;}
-		bool operator>(const iterator_base&b)const{return!*this<=b;}
-		bool operator>=(const iterator_base&b)const{return!*this<b;}
+		bool operator>(const iterator_base&b)const{return b<*this;}
+		bool operator>=(const iterator_base&b)const{return b<=*this;}
 		iterator_base&operator=(const iterator_base&b){in_idx=b.in_idx,out_idx=b.out_idx;return*this;}
 		void swap(iterator_base&b){std::swap(in_idx,b.in_idx);std::swap(out_idx,b.out_idx);}
 	};
