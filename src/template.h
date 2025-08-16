@@ -9,12 +9,8 @@
 #define TIME
 #define TIME_END
 #endif
-using
-namespace
-std;
-using ll=long long;
-using ld=long double;
-using ull=unsigned long long;
+using namespace std;
+using ll=long long;using ld=long double;using ull=unsigned long long;
 template<class T>using V=vector<T>;
 template<class T>using gpq=priority_queue<T,V<T>,greater<T>>;
 template<class T>using lpq=priority_queue<T>;
@@ -30,9 +26,9 @@ template<class T>using lpq=priority_queue<T>;
 #define rrep(...) CH5(__VA_ARGS__,rrep3,rrep2,rrep1,rep)(__VA_ARGS__)
 #define YES {cout<<"Yes\n";return;}
 #define NO {cout<<"No\n";return;}
-#define drop(...) {out(__VA_ARGS__);return;}
-#define Yn(a) cout<<((a)?"Yes\n":"No\n")
+#define drop(...) {outl(__VA_ARGS__);return;}
 #define unless(a) if(!(a))
+#define ever (;;)
 #define All(a) begin(a),end(a)
 #define rAll(a) (a).rbegin(),(a).rend()
 #define Sort(a) sort(All(a))
