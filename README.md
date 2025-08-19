@@ -17,7 +17,7 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/math/prime.md)|
-|素因数分解(高速)|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/math/fast_prime.md)|
+|素数列挙|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/math/fast_prime.md)|
 |math utility|[math.h](src/math/math.h)|[math.md](docs/math/math.md)|
 ### etc
 |機能|コード|ドキュメント|
