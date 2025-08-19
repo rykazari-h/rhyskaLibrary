@@ -97,6 +97,11 @@ template<class T>class kthset{
 		list_.resize(s);
 		for(int i=0;i<s;i++)list_[i].assign(z.begin()+n*i/s,z.begin()+n*(i+1)/s);
 	}
+	std::vector<T> list(){
+		std::vector<T> res;res.reserve(size_);
+		for(auto&a:list_)res.insert(res.end(),a.begin(),a.end());
+		return res;
+	}
 	kthset&operator=(const kthset&b){list_=b.list_,size_=b.size_;return*this;}
 	kthset&operator=(kthset&&b){list_=std::move(b.list_),size_=b.size_;return*this;}
 	bool empty()const{return!size_;}
