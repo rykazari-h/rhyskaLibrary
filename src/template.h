@@ -72,6 +72,7 @@ template<class S,class T>inline bool chmin(S&a,T b){return(a>b?a=b,1:0);}
 template<class S,class T>inline bool chmax(S&a,T b){return(a<b?a=b,1:0);}
 template<class... T>constexpr auto min(T... a){return min(initializer_list<common_type_t<T...>>{a...});}
 template<class... T>constexpr auto max(T... a){return max(initializer_list<common_type_t<T...>>{a...});}
+template<class T>constexpr T sum(const V<T>&s){T a;for(auto&&x:s)a+=x;return a;}
 template<class T> string LZ(T s,int l){string res=to_string(s);Rev(res);while((int)res.size()<l){res+='0';}Rev(res);return res;}
 template<class T=ll>T geti(){T s;cin>>s;return s;}
 string gets(){return geti<string>();}
