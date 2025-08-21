@@ -37,6 +37,10 @@ public:
 		if(!did)init();
 		return d.size();
 	}
+	std::vector<T> list(){
+		if(!did)init();
+		return d;
+	}
 private:
 	void init(){
 		std::sort(d.begin(),d.end());
