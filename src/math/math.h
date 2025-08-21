@@ -1,5 +1,13 @@
 #pragma once
+#include<cmath>
 namespace math{
+	long long isqrt(long long n){
+		if(n<=0)return 0;
+		long long x=std::sqrt(n);
+		while((x+1)*(x+1)<=n)x++;
+		while(x*x>n)x--;
+		return x;
+	}
 	constexpr long long modpow(long long a,long long n,long long m=998244353){
 		long long res=1;
 		for(a%=m;n;n>>=1,a=a*a%m)if(n&1)res=res*a%m;
