@@ -11,7 +11,7 @@
 |segment tree|[segtree.h](src/data/segtree.h)|[segtree.md](docs/data/segtree.md)|
 |平方分割set|[kthset.h](src/data/kthset.h)|[kthset.md](docs/data/kthset.md)|
 |平方分割multiset|[kthmultiset.h](src/data/kthmultiset.h)|[kthmultiset.md](docs/data/kthmultiset.md)|
-|modint|[montgomerymint.h](src/data/montgomerymint.h)|[montgomerymint.md](docs/data/montgomerymint.md)|
+|modint|[modint.h](src/data/modint.h)|[modint.md](docs/data/modint.md)|
 |多倍長整数|[Integer.h](src/data/Integer.h)|実装中...|
 ### math
 |機能|コード|ドキュメント|

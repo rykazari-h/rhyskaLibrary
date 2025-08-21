@@ -3,8 +3,8 @@ S : modの型
 T : 内部の型(unsigned)
 ## constructor
 ```cpp
-montgomerymint<mod> x()
-montgomerymint<mod> x(U x_)
+modint<mod> x()
+modint<mod> x(U x_)
 ```
 * O(1)
 ## utility
