@@ -10,6 +10,9 @@ public:
 		for(int i=0;i<sz;++i)d[i+n]=v[i];
 		for(int i=n-1;i;--i)d[i]=mul(d[i<<1],d[i<<1|1]);
 	}
+	void swap(segtree&b){std::swap(n,b.n);std::swap(sz,b.sz);std::swap(d,n.d);}
+	segtree&operator=(segtree&&b){n=b.n;sz=b.sz;d=std::move(b.d);return*this;}
+	segtree&operator=(const segtree&b){n=b.n;sz=b.sz;d=n.d;return*this;}
 	void set(int t,T x){for(d[t+=n]=x;t>>=1;)d[t]=mul(d[t<<1],d[t<<1|1]);}
 	T operator[](int t)const{return d[t+n];}
 	T operator()(int l,int r)const{
