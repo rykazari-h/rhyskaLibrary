@@ -1,7 +1,7 @@
 #pragma once
 #include<cmath>
 namespace math{
-	long long isqrt(long long n){
+	constexpr long long isqrt(long long n){
 		if(n<=0)return 0;
 		long long x=std::sqrt(n);
 		while((x+1)*(x+1)<=n)x++;
