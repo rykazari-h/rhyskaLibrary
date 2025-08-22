@@ -1,3 +1,4 @@
+#define _GLIBCXX_DEBUG
 #include<bits/stdc++.h>
 struct Timer{
 	std::chrono::high_resolution_clock::time_point st;
