@@ -23,6 +23,7 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |座標圧縮|[cc.h](src/algo/cc.h)|[cc.md](docs/algo/cc.md)|
+|線分交差判定|[intersect.h](src/algo/intersect.h)|[intersect.md](docs/algo/intersect.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
