@@ -19,9 +19,12 @@
 |素因数分解|[prime.h](src/math/prime.h)|[prime.md](docs/math/prime.md)|
 |素数列挙|[fast_prime.h](src/math/fast_prime.h)|[fast_prime.md](docs/math/fast_prime.md)|
 |math utility|[math.h](src/math/math.h)|[math.md](docs/math/math.md)|
+### algorithm
+|機能|コード|ドキュメント|
+|:--|:--:|:--:|
+|座標圧縮|[cc.h](src/algo/cc.h)|[cc.md](docs/algo/cc.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |all.h|[all.h](src/all.h)|_|
 |template.h|[template.h](src/template.h)|_|
-|座標圧縮|[cc.h](src/cc.h)|[cc.md](docs/cc.md)|
