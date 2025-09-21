@@ -49,6 +49,7 @@ public:
 			int n=res.size();
 			for(int i=0;i<n;++i)for(int j=0,v=1;j<p.second;++j)v*=p.first,res.push_back(res[i]*v);
 		}
+		if(res.size()==2&&res[0]==res[1]&&res[0]==1)return {1};
 		return res;
 	}
 	int count(){
