@@ -36,14 +36,6 @@ template<class T>using lpq=priority_queue<T>;
 #define Rev(a) reverse(All(a))
 #define Uniq(a) Sort(a),a.erase(unique(All(a)),end(a))
 #define eb emplace_back
-#define INT(...) int __VA_ARGS__;in(__VA_ARGS__)
-#define LL(...) ll __VA_ARGS__;in(__VA_ARGS__)
-#define ULL(...) ull __VA_ARGS__;in(__VA_ARGS__)
-#define LD(...) ld __VA_ARGS__;in(__VA_ARGS__)
-#define STR(...) string __VA_ARGS__;in(__VA_ARGS__)
-#define CHR(...) char __VA_ARGS__;in(__VA_ARGS__)
-#define VEC(T,a,s) V<T>a(s);in(a)
-#define VVEC(T,a,h,w) V<V<T>>a(h,V<T>(w));in(a)
 #define VV(T,a,h,...) V<V<T>>a(h,V<T>(__VA_ARGS__))
 namespace io_helper{
 	template<class T>void scan(T&a){cin>>a;}
