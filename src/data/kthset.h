@@ -5,7 +5,7 @@
 #include<cmath>
 #include<tuple>
 template<class T>class kthset{
-	static constexpr int kRatio=16,kBound=24;
+	static constexpr int kRatio=2,kBound=20;
 	std::vector<std::vector<T>> list_;int size_;
 	std::tuple<std::vector<T>*,int,int> _position(const T&x){
 		int sz=list_.size();
