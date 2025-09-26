@@ -16,7 +16,6 @@ public:
 	void set(int t,T x){for(d[t+=n]=x;t>>=1;)d[t]=mul(d[t<<1],d[t<<1|1]);}
 	T operator[](int t)const{return d[t+n];}
 	T operator()(int l,int r)const{
-		if(l==0&&r==sz)return get_all();
 		T x=base(),y=base();
 		for(l+=n,r+=n;l<r;l>>=1,r>>=1){
 			if(l&1)x=mul(x,d[l++]);
@@ -24,7 +23,6 @@ public:
 		}
 		return mul(x,y);
 	}
-	T get_all()const{return d[1];}
 	template<class F>int right_bound(F f,int l=0)const{
 		if(l==sz)return sz;
 		l+=n;
