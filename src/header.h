@@ -1,6 +1,6 @@
 #ifdef RHYSKA_LOCAL
 #include<all.h>
-#define dbg(a) {outl<' '>("line",__LINE__,':',#a,'=',a);}
+#define dbg(a) outl<' '>("line",__LINE__,':',#a,'=',a)
 #define TIME Timer __timer
 #define TIME_END __timer.show()
 #else
@@ -66,5 +66,7 @@ template<class... T>constexpr auto min(T... a){return min(initializer_list<commo
 template<class... T>constexpr auto max(T... a){return max(initializer_list<common_type_t<T...>>{a...});}
 template<class T>constexpr T sum(const V<T>&s){T a{};for(auto&&x:s)a+=x;return a;}
 template<class T> string LZ(T s,int l){string res=to_string(s);Rev(res);while((int)res.size()<l){res+='0';}Rev(res);return res;}
+template<class T> V<T> vgen(int n,T g){return V<T>(n,g);}
+template<class... B>auto vgen(int n,B...v){auto g=vgen(v);return V<decltype(g)>(n,move(g));}
 template<class T=ll>T geti(){T s;cin>>s;return s;}
 string gets(){return geti<string>();}
