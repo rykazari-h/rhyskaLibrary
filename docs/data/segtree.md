@@ -26,12 +26,6 @@ Tp s(int l, int r)
 ```
 * [l, r)の積を返す
 * O(logn)
-## get_all
-```cpp
-Tp s.get_all()
-```
-* 全要素の積を返す
-* O(1)
 ## right_bound
 ```cpp
 int s.right_bound(F f, int l)
