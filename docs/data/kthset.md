@@ -1,4 +1,5 @@
 # bucket_set
+[Code](../../src/data/kthset.h)
 ## このクラスについて
 ランダムアクセスが可能であるset。参考はtatyam氏の[SortedSet](https://github.com/tatyam-prime/SortedSet/tree/main)  
 std::setで使える機能はだいたい使える。また、変更を伴う操作はbool値を返す。  

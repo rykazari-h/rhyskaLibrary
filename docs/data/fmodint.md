@@ -1,4 +1,5 @@
 # barrett-reduction modint
+[Code](../../src/data/fmodint.h)
 乗算はbarret-reductionで実装されています。
 ## constructor
 ```cpp

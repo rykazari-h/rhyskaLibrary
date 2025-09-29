@@ -1,4 +1,5 @@
 # Weighted dsu
+[Code](../../src/data/weighted_dsu.h)
 ## constructor
 ```cpp
 weighted_dsu<Tp> uf(int n, Tp e=0)

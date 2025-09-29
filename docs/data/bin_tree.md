@@ -1,4 +1,5 @@
 # Binary indexed tree
+[Code](../../src/data/bin_tree.h)
 ## constructor
 ```cpp
 bin_tree<Tp> s(int n)

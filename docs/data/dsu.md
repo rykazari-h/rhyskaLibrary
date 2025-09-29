@@ -1,4 +1,5 @@
 # Disjoint set union
+[Code](../../src/data/dsu.h)
 ## constructor
 ```cpp
 dsu uf(int n)
