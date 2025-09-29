@@ -1,5 +1,5 @@
 # math
-[Code](../../src/dmath/math.h)  
+[Code](../../src/math/math.h)  
 数学っぽいもの。
 namespace math。
 ## modinv
