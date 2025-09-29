@@ -1,4 +1,5 @@
 # Coordinate compression
+[Code](../../src/algo/cc.h)
 ## constructor
 ```cpp
 cc c(std::vector<Tp> v)

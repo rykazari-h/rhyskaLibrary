@@ -1,4 +1,5 @@
 # intersect
+[Code](../../src/algo/intersect.h)
 線分の交差判定
 ```cpp
 using P = pair<int, int>;
