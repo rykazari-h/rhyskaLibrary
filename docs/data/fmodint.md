@@ -2,8 +2,8 @@
 乗算はbarret-reductionで実装されています。
 ## constructor
 ```cpp
-fmodint x()
-fmodint<id=-1> x(unsigned x_)
+fmodint<id> x()
+fmodint<id> x(unsigned x_)
 ```
 * idをつけることで、複数modを同時に使うことができる。
 ## utility
