@@ -1,4 +1,5 @@
 # Prime
+[Code](../../src/math/prime.h)
 ## constructor
 ```cpp
 prime p(int n)
