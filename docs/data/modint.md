@@ -1,5 +1,5 @@
 # montgomerymodint
-任意modは[こっち](docs/data/fmodint.md)
+任意modは[こっち](fmodint.md)  
 S : modの型  
 T : 内部の型(unsigned)
 ## constructor
