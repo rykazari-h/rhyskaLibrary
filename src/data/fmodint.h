@@ -1,5 +1,5 @@
 #pragma once
-class fmodint{
+template<int id>class fmodint{
 	public:
 	unsigned v;
 	inline static unsigned P;
