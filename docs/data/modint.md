@@ -1,5 +1,5 @@
 # montgomerymodint
-[Code](../../src/data/modint.h)
+[Code](../../src/data/modint.h)  
 任意modは[こっち](fmodint.md)  
 S : modの型  
 T : 内部の型(unsigned)
