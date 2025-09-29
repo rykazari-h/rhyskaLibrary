@@ -1,5 +1,5 @@
 # bucket_multiset
-[Code](../../src/data/kthmultiest.h)
+[Code](../../src/data/kthmultiset.h)
 ## このクラスについて
 ランダムアクセスが可能であるmultiset。参考はtatyam氏の[SortedMultiset](https://github.com/tatyam-prime/SortedSet/tree/main)  
 std::multisetで使える機能はだいたい使える。  
