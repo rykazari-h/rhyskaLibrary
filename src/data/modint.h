@@ -5,8 +5,8 @@ template<auto P_>class modint{
 	inline constexpr static U uinv(U x){U y=x;for(int i=6;i--;)y*=2-x*y;return y;}
 	constexpr static U P=P_,P2=P<<1,R=-uinv(P),R2=-(D)P%P;static_assert(P*R==-1,"uinv() has bugs.");
 	inline constexpr static U reduce(D x){return (x+(U)x*R*(D)P)>>(sizeof(U)*8);}
-	inline constexpr modint(U x,int):v(x){} 
 	public:
+	inline constexpr modint(U x,int):v(x){} 
 	U v;
 	inline constexpr static S mod(){return P;}
 	inline constexpr static U umod(){return (U)P;}
@@ -32,9 +32,9 @@ template<auto P_>class modint{
 	inline constexpr modint operator*(const modint&y){return modint(*this)*=y;}
 	inline constexpr modint operator/(const modint&y){return modint(*this)/=y;}
 	template<class T>inline constexpr friend modint operator+(const T&x,const modint&y){return y+x;}
-	template<class T>inline constexpr friend modint operator-(const T&x,const modint&y){return y-x;}
+	template<class T>inline constexpr friend modint operator-(const T&x,const modint&y){return modint(x)-y;}
 	template<class T>inline constexpr friend modint operator*(const T&x,const modint&y){return y*x;}
-	template<class T>inline constexpr friend modint operator/(const T&x,const modint&y){return y/x;}
+	template<class T>inline constexpr friend modint operator/(const T&x,const modint&y){return modint(x)/y;}
 	template<class T>inline constexpr modint pow(T y)const{modint x=*this,z=1;while(y){if(y&1)z*=x;if(y>>= 1)x*= x;}return z;}
 	template<class T>inline constexpr friend modint pow(const modint&x,T y){return x.pow(y);}
 	inline constexpr modint inv()const{U a=val(),b=P;using T=std::make_signed_t<U>;T x=1,y=0;while(b){U q=a/b,t=a-q*b;a=b;b=t;T t1=x-(T)q*y;x=y;y=t1;}if(x<0)x+=(T)P;return modint((U)x);}
