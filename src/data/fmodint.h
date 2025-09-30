@@ -1,9 +1,9 @@
 #pragma once
 template<int id>class fmodint{
+	public:
 	unsigned v;
 	inline static unsigned P{1};
 	inline static unsigned long long P2{1};
-	public:
 	static void setmod(unsigned S){P=S;P2=-1ull/P+1;}
 	inline static unsigned mod(){return P;}
 	inline constexpr fmodint():v(0){}
