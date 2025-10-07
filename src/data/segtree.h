@@ -4,6 +4,7 @@
 template<class T,auto mul,auto base>class segtree{
 public:
 	segtree(int n=0):segtree(std::vector<T> (n,base())){}
+	segtree(const segtree&b){*this=b;}
 	segtree(const std::vector<T> &v):n(1),sz(v.size()){
 		for(;n<sz;n<<=1);
 		d=std::vector<T>(n<<1,base());
