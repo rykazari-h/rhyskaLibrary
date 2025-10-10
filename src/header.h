@@ -40,9 +40,11 @@ template<class T>using lpq=priority_queue<T>;
 namespace io_helper{
 	template<class T>void scan(T&a){cin>>a;}
 	template<class S,class T>void scan(pair<S,T>&p){scan(p.first);scan(p.second);}
+	template<class... T>void scan(tuple<T...>&t){apply([](auto&...s){(scan(s),...);},t);}
 	template<class T>void scan(V<T>&a){for(auto&&x:a)scan(x);}
 	template<class T>void print(const T&a){cout<<a;}
 	template<class S,class T>void print(const pair<S,T>&p){print(p.first);print(' ');print(p.second);}
+	template<class... T>void print(const tuple<T...>&t){apply([](const auto&...s){bool f=1;((f?(void)(f=0):print(' '),print(s)),...);},t);}
 	template<class T>void print(const V<T>&a){if(a.size()){print(a[0]);for(auto i=a.begin();++i!=a.end();){print(' ');print(*i);}}}
 	template<class T>void print(const V<V<T>>&a){if(a.size()){print(a[0]);for(auto i=a.begin();++i!=a.end();){print('\n');print(*i);}}}
 }
