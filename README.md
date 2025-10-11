@@ -31,4 +31,4 @@
 |:--|:--:|:--:|
 |help|[all.h](src/all.h)|_|
 |template|[template.h](src/template.h)|_|
-|header|[header.h](src/header.h)|[header.md](src/header.md)|
+|header|[header.h](src/header.h)|[header.md](docs/header.md)|
