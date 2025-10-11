@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 INCLUDED_FILES=""
 expand() {
     file="$1"
@@ -23,6 +23,17 @@ $abs_path"
                 tmp="${line#*<}"
                 inc_path="${tmp%%>*}"
                 real_path="./lib/src/$inc_path"
+                if [ -f "$real_path" ]; then
+                    expand "$real_path"
+                else
+                    echo "$line"
+                fi
+                ;;
+            require[[:space:]]* | \
+            require* )
+                tmp="${line#require*\"}"
+                tmp="${tmp%\"}"
+                real_path="./lib/crystal/src/$tmp"
                 if [ -f "$real_path" ]; then
                     expand "$real_path"
                 else
