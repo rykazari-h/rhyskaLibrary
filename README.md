@@ -1,7 +1,7 @@
 # rhyskaLibrary
 主に競プロで使うためのもの  
 ひまつぶしでもある
-## 実装されているもの
+## 実装されているもの-cpp
 ### data
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
@@ -25,8 +25,10 @@
 |:--|:--:|:--:|
 |座標圧縮|[cc.h](src/algo/cc.h)|[cc.md](docs/algo/cc.md)|
 |線分交差判定|[intersect.h](src/algo/intersect.h)|[intersect.md](docs/algo/intersect.md)|
+|lps|[lps.h](src/algo/lps.h)|[lps.md](docs/algo/lps.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
-|all.h|[all.h](src/all.h)|_|
-|template.h|[template.h](src/template.h)|_|
+|help|[all.h](src/all.h)|_|
+|template|[template.h](src/template.h)|_|
+|header|[header.h](src/header.h)|[header.md](src/header.md)|
