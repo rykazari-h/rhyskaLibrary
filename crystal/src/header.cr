@@ -15,3 +15,4 @@ def max(*a);x=a[0];(1...a.size).each{|i|x=max(x,a[i])};x;end
 def min(*a);x=a[0];(1...a.size).each{|i|x=min(x,a[i])};x;end
 def chmax(a : T*,b : T) forall T;a.value<b ? (a.value=b;true) : false;end
 def chmin(a : T*,b : T) forall T;a.value>b ? (a.value=b;true) : false;end
+def copy(obj);case obj;when Array;obj.map{|e|copy(e)};else;obj;end;end
