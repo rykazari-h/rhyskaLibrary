@@ -41,3 +41,4 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |header|[header.cr](crystal/src/header.cr)|[header.md](crystal/docs/header.md)|
+|template|[template.cr](crystal/src/template.cr)|_|
