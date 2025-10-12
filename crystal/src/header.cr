@@ -8,7 +8,7 @@ def putv(a : Tuple(*T)) forall T;return if a.empty?;putv a[0];(1...a.size).each{
 def putv(a);print a;end
 def outl;puts;end
 def outl(a);putv a;puts;end
-def outl(*a);putv a[0];putv " ";outl *a[1..];end
+def outl(*a);putv a[0];(1...a.size).each{|i|puts;putv a[i];};end
 def max(a,b);a<b ? b : a;end
 def min(a,b);a<b ? a : b;end
 def max(*a);x=a[0];(1...a.size).each{|i|x=max(x,a[i])};x;end
