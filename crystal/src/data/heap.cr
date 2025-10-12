@@ -44,6 +44,6 @@ class Gpq(T) < BinaryHeap(T)
 end
 class Lpq(T) < BinaryHeap(T)
 	def initialize
-		super(->(a : T, b : T){ a < b })
+		super(->(a : T, b : T){ a > b })
 	end
 end
