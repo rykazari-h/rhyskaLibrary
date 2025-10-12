@@ -15,6 +15,9 @@ class BinaryHeap(T)
 			n=p
 		end
 	end
+	def top : T?
+		@data.empty? ? nil : @data[0]
+	end
 	def pop : T?
 		return nil if @data.empty?
 		n, res , last = 0, @data[0], @data.pop
