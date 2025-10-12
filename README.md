@@ -36,4 +36,4 @@
 ### data
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
-|heap|[heap.cr](csystal/src/data/heap.cr)|[heap.md](crystal/docs/data/heap.md)|
+|heap|[heap.cr](crystal/src/data/heap.cr)|[heap.md](crystal/docs/data/heap.md)|
