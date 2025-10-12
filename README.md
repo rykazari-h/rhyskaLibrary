@@ -40,4 +40,4 @@
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
-|header|[header.cr](crystal/src/header.h)|[header.md](crystal/docs/header.md)|
+|header|[header.cr](crystal/src/header.cr)|[header.md](crystal/docs/header.md)|
