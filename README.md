@@ -37,3 +37,7 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |heap|[heap.cr](crystal/src/data/heap.cr)|[heap.md](crystal/docs/data/heap.md)|
+### etc
+|機能|コード|ドキュメント|
+|:--|:--:|:--:|
+|header|[header.cr](crystal/src/header.h)|[header.md](crystal/docs/header.md)|
