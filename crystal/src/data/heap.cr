@@ -15,6 +15,9 @@ class BinaryHeap(T)
 			n=p
 		end
 	end
+	def <<(val : T)
+		push(val)
+	end
 	def top : T?
 		@data.empty? ? nil : @data[0]
 	end
