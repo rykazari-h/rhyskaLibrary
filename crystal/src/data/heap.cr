@@ -1,7 +1,7 @@
 class BinaryHeap(T)
 	def initialize(@comp : Proc(T, T, Bool));@data = Array(T).new;end
 	def initialize(@comp : Proc(T, T, Bool), @data : Array(T));end
-	def copy;n = BinaryHeap.new(@comp,@data);n;end
+	def copy;BinaryHeap.new(@comp, @data);end
 	def empty?;@data.empty?;end
 	def size;@data.size;end
 	def a;@data;end
@@ -15,12 +15,8 @@ class BinaryHeap(T)
 			n=p
 		end
 	end
-	def <<(val : T)
-		push(val)
-	end
-	def top : T?
-		@data.empty? ? nil : @data[0]
-	end
+	def <<(val : T);push(val);end
+	def top : T?;@data.empty? ? nil : @data[0];end
 	def pop : T?
 		return nil if @data.empty?
 		n, res , last = 0, @data[0], @data.pop
@@ -37,13 +33,5 @@ class BinaryHeap(T)
 		res
 	end
 end
-class Gpq(T) < BinaryHeap(T)
-	def initialize
-		super(->(a : T, b : T){ a < b })
-	end
-end
-class Lpq(T) < BinaryHeap(T)
-	def initialize
-		super(->(a : T, b : T){ a > b })
-	end
-end
+class Gpq(T) < BinaryHeap(T);def initialize;super(->(a : T, b : T){ a < b });end;end
+class Lpq(T) < BinaryHeap(T);def initialize;super(->(a : T, b : T){ a > b });end;end
