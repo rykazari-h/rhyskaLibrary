@@ -37,8 +37,10 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |heap|[heap.cr](crystal/src/data/heap.cr)|[heap.md](crystal/docs/data/heap.md)|
+|順序付き多重集合|[sortedlist.cr](crystal/src/data/sortedlist.cr)|[sortedlist.md](crystal/docs/data/sortedlist.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |header|[header.cr](crystal/src/header.cr)|[header.md](crystal/docs/header.md)|
+|array|[array.cr](crystal/src/array.cr)|[array.md](crystal/docs/array.md)|
 |template|[template.cr](crystal/src/template.cr)|_|
