@@ -5,7 +5,6 @@
 Lpq(T).new;
 Gpq(T).new;
 BinaryHeap(T).new(Proc(T,T,Bool));
-BinaryHeap(T,Proc(T,T,Bool)).new
 ```
 ## method
 * `copy` ... deep copy
