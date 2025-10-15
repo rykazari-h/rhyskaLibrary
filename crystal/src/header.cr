@@ -13,6 +13,6 @@ def max(a,b);a<b ? b : a;end
 def min(a,b);a<b ? a : b;end
 def max(*a);x=a[0];(1...a.size).each{|i|x=max(x,a[i])};x;end
 def min(*a);x=a[0];(1...a.size).each{|i|x=min(x,a[i])};x;end
-def chmax(a : T*,b : T) forall T;a.value<b ? (a.value=b;true) : false;end
-def chmin(a : T*,b : T) forall T;a.value>b ? (a.value=b;true) : false;end
+macro chmin(a,b);({{a}}>{{b}} ? ({{a}}={{b}};true) : false);end
+macro chmax(a,b);({{a}}<{{b}} ? ({{a}}={{b}};true) : false);end
 macro swap(a,b);{{a}},{{b}}={{b}},{{a}};end
