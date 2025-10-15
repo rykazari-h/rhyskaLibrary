@@ -1,7 +1,7 @@
 class BinaryHeap(T)
 	def initialize(@comp : Proc(T, T, Bool));@data = Array(T).new;end
 	def initialize(@comp : Proc(T, T, Bool), @data : Array(T));end
-	def copy;BinaryHeap.new(@comp, @data);end
+	def clone;BinaryHeap.new(@comp, @data);end
 	def empty?;@data.empty?;end
 	def size;@data.size;end
 	def a;@data;end
