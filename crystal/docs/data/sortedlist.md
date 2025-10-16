@@ -11,7 +11,7 @@ Sortedlist(T).new(z : Array(T));
 * `empty?` empty?
 * `size` size
 * `clear` clear
-* `insert of <<` insert
+* `insert or <<` insert
 * `erase` erase one element
 * `erase_all` erase all element
 * `pop` erase and return maximam element
