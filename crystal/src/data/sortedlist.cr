@@ -5,7 +5,7 @@ class Sortedlist(T)
 	def initialize(@size : Int32, @list : Array(Array(T)));end
 	def initialize(z : Array(T))
 		@size = z.size
-		s = Math.sqrt(@size.to_f/RATIO).ceil.to_i
+		s = Math.sqrt(@size.to_f/ RATIO).ceil.to_i
 		@list = Array(Array(T)).new(s) { [] of T }
 		z.sort!
 		s.times { |i| @list[i] = z[(@size*i// s)...(@size*(i + 1)// s)] }
@@ -111,6 +111,7 @@ class Sortedlist(T)
 		@list[-1][-1]
 	end
 	def a;@list;end
+	def to_a;@list.flatten;end
 	def to_a
 		r=[] of T
 		@list.each{|v|r.concat(v)}

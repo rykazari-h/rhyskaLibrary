@@ -6,7 +6,7 @@ class Sortedset(T)
 	def initialize(@size : Int32, @list : Array(Array(T)));end
 	def initialize(z : Array(T))
 		@size = z.size
-		s = Math.sqrt(@size.to_f/RATIO).ceil.to_i
+		s = Math.sqrt(@size.to_f/ RATIO).ceil.to_i
 		@list = Array(Array(T)).new(s) { [] of T }
 		z.sort!
 		z.unique!
@@ -103,11 +103,7 @@ class Sortedset(T)
 		@list[-1][-1]
 	end
 	def a;@list;end
-	def to_a
-		r=[] of T
-		@list.each{|v|r.concat(v)}
-		r
-	end
+	def to_a;@list.flatten;end
 	def [](i : Tuple(Int32, Int32));@list[i[0]][i[1]];end
 	def []=(i : Tuple(Int32, Int32), x : T);@list[i[0]][i[1]] = x;end
 	def lower_bound(x : T)
