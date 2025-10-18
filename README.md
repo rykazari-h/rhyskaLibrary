@@ -40,6 +40,7 @@
 |unionfind|[dsu.cr](crystal/src/data/dsu.cr)|[dsu.md](crystal/docs/data/dsu.md)|
 |順序付き集合|[sortedset.cr](crystal/src/data/sortedset.cr)|[sortedset.md](crystal/docs/data/sortedset.md)|
 |順序付き多重集合|[sortedlist.cr](crystal/src/data/sortedlist.cr)|[sortedlist.md](crystal/docs/data/sortedlist.md)|
+|連想配列|[map.cr](crystal/src/data/map.cr)|[map.md](crystal/docs/data/map.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
