@@ -1,7 +1,7 @@
 # Sortedset
 ## このクラスについて
 ランダムアクセスが可能であるset。参考はtatyam氏の[SortedSet](https://github.com/tatyam-prime/SortedSet/tree/main)  
-~~ crystalはポインタに関して自由度が低く、機能は制限された。例えば、iteratorは実装されていない。 ~~
+~~ crystalはポインタに関して自由度が低く、機能は制限された。例えば、iteratorは実装されていない。~~  
 いい感じに実装できた。
 ## constructor
 ```crystal
