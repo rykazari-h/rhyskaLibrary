@@ -44,5 +44,5 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |header|[header.cr](crystal/src/header.cr)|[header.md](crystal/docs/header.md)|
-|array|[array.cr](crystal/src/array.cr)|[array.md](crystal/docs/array.md)|
+|array|[array.cr](crystal/src/array_ext.cr)|[array.md](crystal/docs/array.md)|
 |template|[template.cr](crystal/src/template.cr)|_|
