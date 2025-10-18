@@ -5,6 +5,8 @@ c++のstd::map,pythonのdefaultdictを模倣したもの
 ## constructor
 ```crystal
 Map(K,V).new(->{default_value});
+# 例えば
+Map(Int32, Int32).new ->{0}
 ```
 ## method
 * `clone` deepcopy
