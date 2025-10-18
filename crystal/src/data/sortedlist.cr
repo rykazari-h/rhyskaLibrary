@@ -1,4 +1,42 @@
 class Sortedlist(T)
+	struct Iterator(T)
+		def initialize(@outer : Int32, @inner : Int32, @bag : Array(Array(T)));end
+		def v;@bag[@outer][@inner];end
+		def v=(x : T);@bag[@outer][@inner]=x;end
+		def +(n : Int32)
+			outer, inner = @outer, @inner
+			if n >= 0
+				while @bag[outer].size-1-inner < n;n -= @bag[outer].size - inner;inner = 0;outer += 1;end
+				inner += n
+			else
+				n = -n
+				while inner < n;n -= inner+1;inner = @bag[outer-=1].size-1;end
+				inner -= n
+			end
+			Iterator(T).new(outer, inner, @bag)
+		end
+		def -(n : Int32);self + (-n);end
+		def -(b : Iterator(T))
+			dist, sign = 0, 1
+			ain, aout = @inner, @outer
+			bin, bout = b.@inner, b.@outer
+			if aout < bout || (aout == bout && ain < bin)
+				ain, bin = bin, ain
+				aout, bout = bout, aout
+				sign = -1
+			end
+			while aout > bout;dist += @bag[bout].size - bin;bin = 0;bout += 1;end
+			dist += ain - bin
+			dist * sign
+		end
+		include Comparable(Iterator(T))
+		def <=>(other : Iterator(T))
+			cmp = @outer <=> other.@outer
+			cmp != 0 ? cmp : @inner <=> other.@inner
+		end
+	end
+	def head;Iterator(T).new(0, 0, @list);end
+	def tail;Iterator(T).new(@list.size, 0, @list);end
 	RATIO = 8
 	BOUND = 20
 	def initialize;@size = 0;@list = [] of Array(T);end
@@ -117,15 +155,13 @@ class Sortedlist(T)
 		@list.each{|v|r.concat(v)}
 		r
 	end
-	def [](i : Tuple(Int32, Int32));@list[i[0]][i[1]];end
-	def []=(i : Tuple(Int32, Int32), x : T);@list[i[0]][i[1]] = x;end
 	def lower_bound(x : T)
-		@list.size.times { |i| return {i, @list[i].bsearch_index { |v| v >= x }.not_nil!} if !@list[i].empty? && @list[i][-1] >= x }
-		{@list.size, 0}
+		@list.size.times { |i| return Iterator(T).new(i, @list[i].bsearch_index { |v| v >= x }.not_nil!,@list) if !@list[i].empty? && @list[i][-1] >= x }
+		tail
 	end
 	def upper_bound(x : T)
-		@list.size.times { |i| return {i, @list[i].bsearch_index { |v| v > x }.not_nil!} if !@list[i].empty? && @list[i][-1] > x }
-		{@list.size, 0}
+		@list.size.times { |i| return Iterator(T).new(i, @list[i].bsearch_index { |v| v > x }.not_nil!,@list) if !@list[i].empty? && @list[i][-1] > x }
+		tail
 	end
 	def index(x : T)
 		res = 0
