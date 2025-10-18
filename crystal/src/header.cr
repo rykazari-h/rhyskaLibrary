@@ -16,3 +16,4 @@ def min(*a);x=a[0];(1...a.size).each{|i|x=min(x,a[i])};x;end
 macro chmin(a,b);({{a}}>{{b}} ? ({{a}}={{b}};true) : false);end
 macro chmax(a,b);({{a}}<{{b}} ? ({{a}}={{b}};true) : false);end
 macro swap(a,b);{{a}},{{b}}={{b}},{{a}};end
+def assert(cond : Bool, msg = "Assertion failed");raise msg unless cond;end
