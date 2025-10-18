@@ -5,6 +5,7 @@ class BinaryHeap(T)
 	def empty?;@data.empty?;end
 	def size;@data.size;end
 	def a;@data;end
+	def to_a;@data;end
 	def push(val : T)
 		n =	@data.size
 		@data << val
