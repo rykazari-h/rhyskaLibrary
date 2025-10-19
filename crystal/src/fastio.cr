@@ -32,6 +32,24 @@ class Fastwrite
 	def write(s : String);s.each_byte { |b| write_byte b };end
 	def write_int(x : Int);i = 0;n = x < 0 ? -x : x;loop do;@stk[i] = (n % 10).to_u8;i += 1;break if (n //= 10) <= 0;end;write_byte 45 if x < 0;while i > 0;write_byte @stk[i-=1] | 48;end;end
 	def flush;return if @idx == 0;@io.write @buf[0, @idx];@idx = 0;end
+	def putv(x : Array(Array(T))) forall T
+		return if x.empty?
+		putv x[0]
+		(1...x.size).each { |i| write_byte 10;putv x[i] }
+	end
+	def putv(x)
+		case x
+		when Int then write_int x
+		when Char then write_byte x.ord.to_u8
+		when Float then write x.to_s
+		when String then write x
+		else
+			return if x.empty?
+			putv x[0]
+			(1...x.size).each { |i| write_byte 32;putv x[i] }
+		end
+	end
+	def outl(*x)
 end
 fr, fw = Fastread.new, Fastwrite.new
 at_exit{ fw.flush }
