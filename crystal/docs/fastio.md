@@ -1,5 +1,7 @@
 # FastIO
 入力はfrに、出力はfwにまとめれられている  
+速度としては、scnaf,printfと同じほど  
+outlはつよつよな函数になっている
 ```crystal
 # 定義
 fr = Fastread.new
