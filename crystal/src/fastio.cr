@@ -28,11 +28,12 @@ class Fastread
 end
 class Fastwrite
 	BUFS = 1 << 17
-	def initialize(@io = STDOUT);@buf = Bytes.new BUFS;@idx = 0;@stk = StaticArray(UInt8, 20).new(0);end
+	def initialize(@io = STDOUT);@buf = Bytes.new BUFS;@idx = 0;@stk = StaticArray(UInt8, 20).new(0);@precision = 8;end
 	def write_byte(b : UInt8);flush if @idx == BUFS;@buf[@idx] = b;@idx += 1;end
 	def write(s : String);s.each_byte { |b| write_byte b };end
-	def write_int(x : Int);i = 0;n = x < 0 ? -x : x;loop do;@stk[i] = (n % 10).to_u8;i += 1;break if (n //= 10) <= 0#/
-	end;write_byte 45 if x < 0;while i > 0;write_byte @stk[i-=1] | 48;end;end
+	def write_int(x : Int);i = 0;n = x < 0 ? -x : x;loop do;@stk[i] = (n % 10).to_u8;i += 1;break if (n //= 10) <= 0;end;write_byte 45 if x < 0;while i > 0;write_byte @stk[i-=1] | 48;end;end
+	def setprecision(x);@precision = x;end
+	def write_float(x : Float);v = x.to_i64;f = ((x - v).abs * 10i64 ** @precision).round.to_i64;write_int v;write_byte 46;i = 0;loop do;@stk[i] = (f % 10).to_u8;i += 1;break if (f //= 10) <= 0;end;(@precision - i).times { write_byte 48};while i > 0;write_byte @stk[i-=1] | 48;end;end
 	def flush;return if @idx == 0;@io.write @buf[0, @idx];@idx = 0;end
 	def putv(x : Array(Array(T))) forall T
 		return if x.empty?
@@ -43,7 +44,7 @@ class Fastwrite
 		case x
 		when Int then write_int x
 		when Char then write_byte x.ord.to_u8
-		when Float then write x.to_s
+		when Float then write_float x
 		when String then write x
 		when Bool then write_byte x ? 49u8 : 48u8
 		else
@@ -59,5 +60,3 @@ class Fastwrite
 		write endl
 	end
 end
-fr, fw = Fastread.new, Fastwrite.new
-at_exit { fw.flush }
