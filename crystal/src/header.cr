@@ -10,4 +10,3 @@ macro chmin(a,b);({{a}}>{{b}} ? ({{a}}={{b}};true) : false);end
 macro chmax(a,b);({{a}}<{{b}} ? ({{a}}={{b}};true) : false);end
 macro swap(a,b);{{a}},{{b}}={{b}},{{a}};end
 def assert(cond : Bool, msg = "Assertion failed");raise msg unless cond;end
-require "fastio.cr"
