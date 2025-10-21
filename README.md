@@ -46,5 +46,5 @@
 |:--|:--:|:--:|
 |header|[header.cr](crystal/src/header.cr)|[header.md](crystal/docs/header.md)|
 |array|[array.cr](crystal/src/array_ext.cr)|[array.md](crystal/docs/array.md)|
-|入出力|[fastio.cr](crystal/src/fastio.cr)|[fastio.md](crystal/docs/fastio.md)|
+|入出力|[ioset.cr](crystal/src/ioset.cr)|[ioset.md](crystal/docs/ioset.md)|
 |template|[template.cr](crystal/src/template.cr)|_|

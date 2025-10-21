@@ -1,6 +1,7 @@
-class Fastread
-	def initialize(@io : IO = STDIN);@buf = Bytes.new 1 << 17;@size = 0;@idx = 0;end
-	def fill;@size = @io.read @buf;@idx = 0;end
+class IOset
+	BUFS = 1 << 17
+	def initialize;@buf = Bytes.new BUFS;@size = 0;@idx = 0;@obuf = Bytes.new BUFS;@oidx = 0;@stk = StaticArray(UInt8, 20).new(0);@precision = 8;end
+	def fill;@size = STDIN.read @buf;@idx = 0;end
 	def read_byte : UInt8?;fill if @idx >= @size;return nil if @size == 0;b = @buf[@idx];@idx += 1;b;end
 	def trim;loop do;fill if @idx >= @size;return if @size == 0;b = @buf[@idx];if b<=32;@idx += 1;else return;end;end;end
 	def read_line : String;c = read_byte;return "" if !c;s = String.build do |i|;while c && c != 10;i.write_byte c;c = read_byte;end;end;s;end
@@ -25,16 +26,13 @@ class Fastread
 		end
 	end
 	geti_g(geti, Int32);geti_g(geti64, Int64)
-end
-class Fastwrite
-	BUFS = 1 << 17
-	def initialize(@io = STDOUT);@buf = Bytes.new BUFS;@idx = 0;@stk = StaticArray(UInt8, 20).new(0);@precision = 8;end
-	def write_byte(b : UInt8);flush if @idx == BUFS;@buf[@idx] = b;@idx += 1;end
+	# ---output---
+	def write_byte(b : UInt8);flush if @oidx == BUFS;@obuf[@oidx] = b;@oidx += 1;end
 	def write(s : String);s.each_byte { |b| write_byte b };end
 	def write_int(x : Int);i = 0;n = x < 0 ? -x : x;loop do;@stk[i] = (n % 10).to_u8;i += 1;break if (n //= 10) <= 0;end;write_byte 45 if x < 0;while i > 0;write_byte @stk[i-=1] | 48;end;end
 	def setprecision(x);@precision = x;end
 	def write_float(x : Float);v = x.to_i64;f = ((x - v).abs * 10i64 ** @precision).round.to_i64;write_int v;write_byte 46;i = 0;loop do;@stk[i] = (f % 10).to_u8;i += 1;break if (f //= 10) <= 0;end;(@precision - i).times { write_byte 48};while i > 0;write_byte @stk[i-=1] | 48;end;end
-	def flush;return if @idx == 0;@io.write @buf[0, @idx];@idx = 0;end
+	def flush;return if @oidx == 0;STDOUT.write @obuf[0, @oidx];@oidx = 0;end
 	def putv(x : Array(Array(T))) forall T
 		return if x.empty?
 		putv x[0]
@@ -54,9 +52,10 @@ class Fastwrite
 		end
 	end
 	def outl(*x, sep = " ", endl = "\n")
-		return if x.empty?
-		putv x[0]
-		(1...x.size).each { |i|write sep;putv x[i]}
+		if !x.empty?
+			putv x[0]
+			(1...x.size).each { |i|write sep;putv x[i]}
+		end
 		write endl
 	end
 end

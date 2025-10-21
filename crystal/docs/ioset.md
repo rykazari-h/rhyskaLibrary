@@ -1,15 +1,13 @@
-# FastIO
-入力はfrに、出力はfwにまとめれられている  
+# IOset
 速度としては、scnaf,printfと同じほど  
 outlはつよつよな函数になっている
 ```crystal
-# 定義
-fr = Fastread.new
-fw = Fastwrite.new
-at_exit	{ fw.flush }
+# 定義(template.cr内)
+ios = IOset.new
+at_exit	{ ios.flush }
 ```
 ## method
-* `fr.new_byte` 一文字読んで、u8?を返す
+* `fr.read_byte` 一文字読んで、u8?を返す
 * `fr.trim` 空白を除去する
 * `fr.read_line` 改行までを読んで、stringを返す
 * `fr.gets` 空白までを読んで、stringを返す
