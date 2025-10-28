@@ -51,10 +51,11 @@ class IOset
 			(1...x.size).each { |i| write_byte 32;putv x[i] }
 		end
 	end
-	def outl;write_byte 10;end
 	def outl(*x, sep = " ", endl = "\n")
-		putv x[0]
-		(1...x.size).each { |i|write sep;putv x[i]}
+		if f=x.first?
+			putv f
+			(1...x.size).each { |i|write sep;putv x[i]}
+		end
 		write endl
 	end
 end
