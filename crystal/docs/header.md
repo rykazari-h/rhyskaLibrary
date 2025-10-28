@@ -11,5 +11,6 @@ max(*a);min(*a); #crystalは配列に対してしか持ってないので
 chmax(a : T, b : T);chmin();#c++と同じ挙動だぜー。参照使えないから仕方なくマクロ
 swap(a,b);#a,b=b,aに展開される
 assert(cond,msg);#raise msg unless condに展開される
+for(f,m,s);#c/c++のfor(f;m;s)に同じ
 require "fastio.cr"
 ```
