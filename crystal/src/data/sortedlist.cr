@@ -1,6 +1,7 @@
 class Sortedlist(T)
 	struct Iterator(T)
 		def initialize(@outer : Int32, @inner : Int32, @bag : Array(Array(T)));end
+		def pos;{@outer,@inner};end
 		def v;@bag[@outer][@inner];end
 		def v=(x : T);@bag[@outer][@inner]=x;end
 		def +(n : Int32)
