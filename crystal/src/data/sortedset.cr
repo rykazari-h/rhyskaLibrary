@@ -43,7 +43,8 @@ class Sortedset(T)
 	BOUND = 20
 	def initialize;@size = 0;@list = [] of Array(T);end
 	def initialize(@size : Int32, @list : Array(Array(T)));end
-	def initialize(z : Array(T))
+	def initialize(p : Array(T))
+		z=p.clone
 		@size = z.size
 		s = Math.sqrt(@size.to_f/ RATIO).ceil.to_i
 		@list = Array(Array(T)).new(s) { [] of T }
