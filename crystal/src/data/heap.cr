@@ -17,9 +17,12 @@ class BinaryHeap(T)
 		end
 	end
 	def <<(val : T);push(val);end
-	def top : T?;@data.empty? ? nil : @data[0];end
-	def pop : T?
-		return nil if @data.empty?
+	def top : T
+		raise "heap is empty!!" if @data.empty?
+		@data[0]
+	end
+	def pop : T
+		raise "heap is empty!!" if @data.empty?
 		n, res , last = 0, @data[0], @data.pop
 		return res if @data.empty?
 		@data[0]=last
