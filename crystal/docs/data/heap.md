@@ -7,6 +7,7 @@ Gpq(T).new;
 BinaryHeap(T).new(Proc(T,T,Bool));
 ```
 ## method
+* 空のヒープにアクセスしようとした場合、REとなる
 * `copy` ... deep copy
 * `empty?` ... empty?
 * `size` ... data size
