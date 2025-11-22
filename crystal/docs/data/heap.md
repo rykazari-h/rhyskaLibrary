@@ -4,7 +4,8 @@
 ```crystal
 Lpq(T).new;
 Gpq(T).new;
-BinaryHeap(T).new(Proc(T,T,Bool));
+# Procはblockとして渡す
+BinaryHeap(T).new{Proc(T,T,Bool)};
 ```
 ## method
 * 空のヒープにアクセスしようとした場合、REとなる

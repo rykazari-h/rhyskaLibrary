@@ -1,7 +1,7 @@
 class BinaryHeap(T)
-	def initialize(@comp : Proc(T, T, Bool));@data = Array(T).new;end
-	def initialize(@comp : Proc(T, T, Bool), @data : Array(T));end
-	def clone;BinaryHeap.new(@comp, @data);end
+	def initialize(&comp : T, T -> Bool);@comp=comp;@data = Array(T).new;end
+	def initialize(@data : Array(T), &comp : T, T -> Bool);@comp=comp;end
+	def clone;BinaryHeap.new(@data.clone, &@comp);end
 	def empty?;@data.empty?;end
 	def size;@data.size;end
 	def a;@data;end
@@ -37,5 +37,5 @@ class BinaryHeap(T)
 		res
 	end
 end
-class Gpq(T) < BinaryHeap(T);def initialize;super(->(a : T, b : T){ a < b });end;end
-class Lpq(T) < BinaryHeap(T);def initialize;super(->(a : T, b : T){ a > b });end;end
+class Gpq(T) < BinaryHeap(T);def initialize;super { |a, b| a < b };end;end
+class Lpq(T) < BinaryHeap(T);def initialize;super { |a, b| a > b };end;end
