@@ -6,6 +6,7 @@
 ## constructor
 ```crystal
 # Procは、例えば総和を取得したいとき->(a:T,b:T){a+b}とする
+# newに引数を渡さないことも可能。[l,r]は未定義
 Treap(T).new(Proc(T,T,T))
 ```
 ## method
@@ -27,7 +28,6 @@ Treap(T).new(Proc(T,T,T))
 * `to_a` flattenして返す(O(N))
 * `lower_bound`,`upper_bound` Iteratorを返す
 * `index`,`index_rg` intを返す
-* `merge(b)` bをマージする, マージ後のbにアクセスしてはならない
 * `split` [<x],[x<=]に分割する
 * `splitl` [<=x],[x<]に分割する
 * `spliti` [...k],[k..]に分割する

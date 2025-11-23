@@ -49,7 +49,9 @@ class Treap(T)
   def head;Iterator(T).new self, @root, kth(@root, 0), 0;end
   def tail;Iterator(T).new self, @root, nil, size;end
   property root : Node(T)?
+  property f : Proc(T, T, T)
   def initialize(@f : Proc(T, T, T));@root = nil;@rnd = Xorshift32.new(Random.rand(1u32..UInt32::MAX));end
+  def initialize;@f = ->(a : T, b : T){ a };@root = nil;@rnd = Xorshift32.new(Random.rand(1u32..UInt32::MAX));end
   def size;sz @root;end
   def empty?;!@root ? true : false;end
   def clear;@root = nil;end
@@ -159,9 +161,6 @@ class Treap(T)
     l.root = a
     r.root = b
     {l, r}
-  end
-  def merge(other : Treap(T))
-    @root = merge @root, other.root
   end
   def to_a : Array(T)
     Array(T).build(size) do |pt|

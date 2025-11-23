@@ -1,5 +1,5 @@
 require "data/xorshift.cr"
-class Treap(T)
+class TreapSet(T)
   macro nnl(x)
     {{x}}.not_nil!
   end
@@ -31,11 +31,11 @@ class Treap(T)
     end
   end
   struct Iterator(T)
-    property treap : Treap(T)
+    property treap : TreapSet(T)
     property root : Node(T)?
     property node : Node(T)?
     property idx : Int32
-    def initialize(@treap : Treap(T), @root : Node(T)?, @node : Node(T)?, @idx : Int32);end
+    def initialize(@treap : TreapSet(T), @root : Node(T)?, @node : Node(T)?, @idx : Int32);end
     def v;@node.try(&.key).not_nil!;end
     def +(n : Int32)
       k = @idx + n
@@ -49,12 +49,14 @@ class Treap(T)
   def head;Iterator(T).new self, @root, kth(@root, 0), 0;end
   def tail;Iterator(T).new self, @root, nil, size;end
   property root : Node(T)?
+  property f : Proc(T, T, T)
   def initialize(@f : Proc(T, T, T));@root = nil;@rnd = Xorshift32.new(Random.rand(1u32..UInt32::MAX));end
+  def initialize;@f = ->(a : T, b : T){ a }; @root = nil;@rnd = Xorshift32.new(Random.rand(1u32..UInt32::MAX));end
   def size;sz @root;end
   def empty?;!@root ? true : false;end
   def clear;@root = nil;end
   def clone
-    t = Treap.new(@f)
+    t = TreapSet.new(@f)
     t.root = Node.clone_tree @root
     t
   end
@@ -133,32 +135,29 @@ class Treap(T)
     @root = merge a, merge m, b
     res
   end
-  def split(x : T) : {Treap(T), Treap(T)}
+  def split(x : T) : {TreapSet(T), TreapSet(T)}
     a, b = split @root, x
-    l = Treap.new @f
-    r = Treap.new @f
+    l = TreapSet.new @f
+    r = TreapSet.new @f
     l.root = a
     r.root = b
     {l, r}
   end
-  def splitl(x : T) : {Treap(T), Treap(T)}
+  def splitl(x : T) : {TreapSet(T), TreapSet(T)}
     a, b = splitl @root, x
-    l = Treap.new @f
-    r = Treap.new @f
+    l = TreapSet.new @f
+    r = TreapSet.new @f
     l.root = a
     r.root = b
     {l, r}
   end
-  def spliti(k : T) : {Treap(T), Treap(T)}
+  def spliti(k : T) : {TreapSet(T), TreapSet(T)}
     a, b = split_by_index @root, k
-    l = Treap.new @f
-    r = Treap.new @f
+    l = TreapSet.new @f
+    r = TreapSet.new @f
     l.root = a
     r.root = b
     {l, r}
-  end
-  def merge(other : Treap(T))
-    @root = merge @root, other.root
   end
   def to_a : Array(T)
     Array(T).build(size) do |pt|
@@ -256,7 +255,7 @@ class Treap(T)
     end
   end
   private def erase(t : Node(T)?, x : T) : {Node(T)?, Bool}
-    return nil if !t
+    return {nil, false} if !t
     if x == t.try &.key
       {merge(t.try(&.l), t.try(&.r)), true}
     elsif x < t.try &.key

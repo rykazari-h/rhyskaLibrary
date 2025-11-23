@@ -1,7 +1,8 @@
 # map
 ## このクラスについて
 c++のstd::map,pythonのdefaultdictを模倣したもの  
-内部配列はSortedset(Tuple(Key,Value))
+treapを用いて実装されている  
+普通に遅くて困った
 ## constructor
 ```crystal
 Map(K,V).new(->{default_value});
@@ -17,7 +18,7 @@ Map(Int32, Int32).new ->{0}
 * `clear` clear
 * `[]` keyがないとき、keyにdefaule_valueを設定する
 * `erase` erase
-* `count/find/contains` count
+* `count/find` count
 * `lower/upper_bound` iteratorを返す
 * `to_a` 配列にして返す
 * `keys` keyの列挙
