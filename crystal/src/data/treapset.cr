@@ -68,7 +68,7 @@ class TreapSet(T)
   def <<(x : T);insert x;end
   def erase(x : T) : Bool;@root, res = erase @root, x;res;end
   def toggle(x : T) : Bool;erase(x) ? false : insert(x);end
-  def pop(k : Int32) : T
+  def pop(k : Int32 = -1) : T
     k += size if k < 0
     @root, v = erase_by_rank @root, k
     v

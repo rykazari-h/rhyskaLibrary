@@ -71,7 +71,7 @@ class Treap(T)
     _, b = splitl m, x
     @root = merge a, b
   end
-  def pop(k : Int32) : T
+  def pop(k : Int32 = -1) : T
     k += size if k < 0
     @root, v = erase_by_rank @root, k
     v
