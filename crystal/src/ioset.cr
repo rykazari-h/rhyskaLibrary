@@ -1,7 +1,8 @@
 class IOset
 	BUFS = 1 << 17
-	def initialize;@buf = Bytes.new BUFS;@size = 0;@idx = 0;@obuf = Bytes.new BUFS;@oidx = 0;@stk = StaticArray(UInt8, 20).new(0);@precision = 8;end
-	def fill;@size = STDIN.read @buf;@idx = 0;end
+	def initialize;@buf = Bytes.new BUFS;@size = 0;@idx = 0;@eof = false;@obuf = Bytes.new BUFS;@oidx = 0;@stk = StaticArray(UInt8, 20).new(0);@precision = 8;end
+	def fill;@size = STDIN.read @buf;@idx = 0;@eof = true if @size == 0;end
+	def eof?;fill if @size <= @idx;@size == 0;end
 	def read_byte : UInt8?;fill if @idx >= @size;return nil if @size == 0;b = @buf[@idx];@idx += 1;b;end
 	def trim;loop do;fill if @idx >= @size;return if @size == 0;b = @buf[@idx];if b<=32;@idx += 1;else return;end;end;end
 	def getc : Char;c = read_byte;return 0.chr if !c;while c && c <= 32;c = read_byte;end;c ? c.not_nil!.chr : 0.chr;end
