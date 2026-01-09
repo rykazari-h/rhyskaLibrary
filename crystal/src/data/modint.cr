@@ -20,7 +20,7 @@ macro modint_gen(name, mod)
     BITS = {{bits}}
     P = {{mod}}.{{us}}
     P2 = P << 1
-    R = ->{ y = P;6.times{ y &*= 2.{{us}} &- P &* y };&-y }.call
+    R = ->{ y = P;5.times{ y &*= 2.{{us}} &- P &* y };&-y }.call
     R2 = (&-P.{{ds}} % P).{{us}}
     property v : U
     @v = 0.{{us}}
@@ -79,6 +79,9 @@ macro modint_gen(name, mod)
     def inv
       self.class.new modinv val.to_i64, P.to_i64
     end
+  end
+  class IOset
+    def putv(x : {{name}});write_int x.val;end
   end
   struct Int
     def +(other : {{name}});other + self;end
