@@ -36,7 +36,7 @@ macro modint_gen(name, mod)
       x &- P >> BITS - 1 == 0 ? x - P : x
     end
     def initialize;@v = 0;end
-    def initialize(x : Int);@v = self.class.reduce((x % P).{{ds}} * R2);end
+    def initialize(x : Int);@v = self.class.reduce((x.{{us}} % P).{{ds}} * R2);end
     def initialize(x : U, d);@v = x;end
     def initialize(x : self);@v = x.v;end
     def ==(other : self)
