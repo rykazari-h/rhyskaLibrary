@@ -61,7 +61,7 @@ class TreapSet(T)
     t
   end
   def insert(x : T)
-    node = Node(T).new x, @rnd.urandom
+    node = Node(T).new x, @rnd.next_u
     @root, res = insert @root, node
     res
   end

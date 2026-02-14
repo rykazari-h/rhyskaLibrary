@@ -61,7 +61,7 @@ class Treap(T)
     t
   end
   def insert(x : T)
-    node = Node(T).new x, @rnd.urandom
+    node = Node(T).new x, @rnd.next_u
     @root = insert @root, node
   end
   def <<(x : T);insert x;end
