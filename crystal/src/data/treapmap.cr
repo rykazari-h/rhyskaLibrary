@@ -140,7 +140,7 @@ class Map(K, V)
     r.root = b
     {l, r}
   end
-  def spliti(k : K) : {Map(K, V), Map(K, V)}
+  def spliti(k : Int32) : {Map(K, V), Map(K, V)}
     a, b = split_by_index @root, k
     l = Map(K, V).new @f
     r = Map(K, V).new @f
