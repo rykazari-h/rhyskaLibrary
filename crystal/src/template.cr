@@ -1,4 +1,4 @@
 require "header.cr"
 require "ioset.cr"
-ios = IOset.new
+macro ios;IOset;end
 at_exit { ios.flush }
