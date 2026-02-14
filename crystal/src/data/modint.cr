@@ -32,7 +32,7 @@ macro modint_gen(name, mod)
       P
     end
     def val
-      x = self.class.reduce v
+      x = self.class.reduce @v
       x &- P >> BITS - 1 == 0 ? x - P : x
     end
     def to_i;val;end
@@ -44,20 +44,20 @@ macro modint_gen(name, mod)
       val == other.val
     end
     def -
-        v == 0 ? self.class.new(0.{{us}}, 0) : self.class.new(P2 - v, 0)
+        @v == 0 ? self.class.new(0.{{us}}, 0) : self.class.new(P2 - @v, 0)
     end
     def +(other : self)
-      z = self.class.new(v &+ other.v, 0)
+      z = self.class.new(@v &+ other.v, 0)
       z.v -= P2 if (z.v &- P2) >> BITS - 1 == 0
       z
     end
     def -(other : self)
-      z = self.class.new(v &- other.v, 0)
+      z = self.class.new(@v &- other.v, 0)
       z.v &+= P2 if z.v >> BITS - 1 != 0
       z
     end
     def *(other : self)
-      self.class.new(self.class.reduce(v.{{ds}}*other.v), 0)
+      self.class.new(self.class.reduce(@v.{{ds}}*other.v), 0)
     end
     def /(other : self)
       self * other.inv
