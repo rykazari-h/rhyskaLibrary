@@ -65,7 +65,7 @@ class TreapSet(T)
     @root, res = insert @root, node
     res
   end
-  def <<(x : T);insert x;end
+  def <<(x : T);insert x; self;end
   def erase(x : T) : Bool;@root, res = erase @root, x;res;end
   def toggle(x : T) : Bool;erase(x) ? false : insert(x);end
   def pop(k : Int32 = -1) : T

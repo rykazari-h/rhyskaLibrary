@@ -16,7 +16,7 @@ class BinaryHeap(T)
 			n=p
 		end
 	end
-	def <<(val : T);push(val);end
+	def <<(val : T);push(val); self;end
 	def top : T
 		raise "heap is empty!!" if @data.empty?
 		@data[0]

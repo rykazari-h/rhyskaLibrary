@@ -66,7 +66,7 @@ class Sortedlist(T)
 		@list.delete_at(bi) if @list[bi].empty?
 		v
 	end
-	def <<(x : T);insert(x);end
+	def <<(x : T);insert(x); self;end
 	def insert(x : T)
 		(@list = [[x]]; @size = 1; return) if empty?
 		bi, i = _position(x)
