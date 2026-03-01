@@ -1,4 +1,4 @@
-class Primesieve
+class PrimeSieve
   def initialize(x : Int32)
     @bfactor = Array(Int32).new
     build x

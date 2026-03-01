@@ -1,4 +1,4 @@
-class Bit(T)
+class BIT(T)
   @d : Array(T)
   def initialize(@n : Int) : Nil
     @d = Array.new(@n + 1) { T.zero }

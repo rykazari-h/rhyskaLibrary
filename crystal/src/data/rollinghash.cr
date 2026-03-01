@@ -1,4 +1,4 @@
-class Rollinghash
+class RollingHash
   MOD = 0x1fffffffffffffffu64
   @@b : UInt64 = (Random.rand(999) + 1000).to_u64
   @@p : Array(UInt64) = [1u64]

@@ -1,4 +1,4 @@
-class Lca
+class LCA
   getter g : Array(Array(Int32))
   @root = 0
   def initialize(@n : Int32, @root : Int32 = 0)
