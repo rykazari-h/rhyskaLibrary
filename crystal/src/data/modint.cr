@@ -22,6 +22,8 @@ macro modint_gen(name, mod)
     P2 = P << 1
     R = ->{ y = P;5.times{ y &*= 2.{{us}} &- P &* y };&-y }.call
     R2 = (&-P.{{ds}} % P).{{us}}
+    MAX = new(-1)
+    MIN = new(0)
     property v : U
     @v = 0.{{us}}
     @[AlwaysInline]
@@ -40,7 +42,7 @@ macro modint_gen(name, mod)
     end
     def to_i;val;end
     def initialize;@v = 0;end
-    def initialize(x : Int);@v = self.class.reduce((x.{{us}} % P).{{ds}} * R2);end
+    def initialize(x : Int);@v = self.class.reduce((x.to_i128! % P).{{ds}} * R2);end
     def initialize(x : U, d);@v = x;end
     def initialize(x : self);@v = x.v;end
     def ==(other : self)
