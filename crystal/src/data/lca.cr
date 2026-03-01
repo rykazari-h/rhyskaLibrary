@@ -1,8 +1,16 @@
 class Lca
-  property g : Array(Array(Int32))
+  getter g : Array(Array(Int32))
+  @root = 0
   def initialize(@n : Int32, @root : Int32 = 0)
     @k = @n == 1 ? 1 : (@n - 1).bit_length
     @g = Array.new(@n) { [] of Int32 }
+    @dist = Array(Int32).new(@n, 0)
+    @parent = Array(Array(Int32)).new(@k) { Array.new(@n, @root) }
+    @initialized = false
+  end
+  def g=(@g : Array(Array(Int32)))
+    @n = @g.size
+    @k = @n == 1 ? 1 : (@n - 1).bit_length
     @dist = Array(Int32).new(@n, 0)
     @parent = Array(Array(Int32)).new(@k) { Array.new(@n, @root) }
     @initialized = false
