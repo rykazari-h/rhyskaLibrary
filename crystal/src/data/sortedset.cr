@@ -8,16 +8,18 @@ class Sortedset(T)
 		def +(n : Int32)
 			outer, inner = @outer, @inner
 			if n >= 0
-				while @bag[outer].size-1-inner < n;n -= @bag[outer].size - inner;inner = 0;outer += 1;end
+				while outer < @bag.size && @bag[outer].size-inner <= n;n -= @bag[outer].size - inner;inner = 0;outer += 1;end
 				inner += n
+				inner, outer = 0, @bag.size if @bag.size <= outer
 			else
 				n = -n
-				while inner < n;n -= inner+1;inner = @bag[outer-=1].size-1;end
+				while 0 <= outer && inner < n;n -= inner+1;inner = 0 <= (outer -= 1) ? @bag[outer].size - 1 : 0;end
 				inner -= n
+				inner = outer = 0 if outer < 0
 			end
 			Iterator(T).new(outer, inner, @bag)
 		end
-		def -(n : Int32);self + (-n);end
+		def -(n : Int32);self + -n;end
 		def -(b : Iterator(T))
 			dist, sign = 0, 1
 			ain, aout = @inner, @outer
@@ -54,7 +56,7 @@ class Sortedset(T)
 	end
 	def empty?;@size == 0;end
 	def size;@size;end
-	def clear;@size = 0; @list.clear;end
+	def clear : Nil;@size = 0; @list.clear;end
 	def clone;Sortedlist(T).new(@size,@list);end
 	def _position(x : T)
 		sz = @list.size
@@ -87,6 +89,12 @@ class Sortedset(T)
 		return false if empty?
 		bi, i = _position(x)
 		return false if i == @list[bi].size || @list[bi][i] != x
+		_pop(bi, i)
+		return true
+	end
+	def erase(it : Iterator(T))
+		bi, i = it.pos
+		return false if bi == @list.size
 		_pop(bi, i)
 		return true
 	end
