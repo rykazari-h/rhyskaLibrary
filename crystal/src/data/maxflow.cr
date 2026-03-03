@@ -4,7 +4,7 @@ class MaxFlow(T)
     def initialize(@to : Int32 = 0, @cap : T = T.zero, @rev : Int32 = 0); end
   end
   def initialize(@n : Int32)
-    @g  = Array.new(@n) { [] of Edge(T) }
+    @g  = Array(Array(Edge(T))).new(@n) { [] of Edge(T) }
     @dist = [] of Int32
     @tosee = [] of Int32
   end
@@ -44,7 +44,7 @@ class MaxFlow(T)
       if 0 < e.cap && @dist[u] < @dist[e.to]
         if 0 < (d = dfs e.to, t, f < e.cap ? f : e.cap)
           e.cap -= d
-          g[e.to][e.rev].cap += d
+          @g[e.to][e.rev].cap += d
           return d
         end
       end
