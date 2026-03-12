@@ -60,8 +60,8 @@ class Segtree(T)
       r -= 1 if r & 1 != 0
       k >>= 1; r >>= 1; h += 1
     end
-    while (r <<= 1; 0 < (h -= 1))
-      if (r + 1) << h <= @n + @n
+    while (r <<= 1; 0 <= (h -= 1))
+      if r + 1 << h <= @n + @n
         return bsearch.call r if !f.call @op.call x, @d[r]
         x = @op.call x, @d[r]
         r += 1
@@ -90,8 +90,8 @@ class Segtree(T)
       l += 1 if l & 1 != 0
       l >>= 1; k >>= 1; h += 1
     end
-    while (l <<= 1; 0 < (h -= 1))
-      if @n <= (l - 1) << h
+    while (l <<= 1; 0 <= (h -= 1))
+      if @n <= l - 1 << h
         l -= 1
         return bsearch.call l if !f.call @op.call @d[l], x
         x = @op.call @d[l], x
