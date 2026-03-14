@@ -4,7 +4,7 @@ class Sortedlist(T)
 		def pos;{@outer,@inner};end
 		def v;@bag[@outer][@inner];end
 		def v=(x : T);@bag[@outer][@inner]=x;end
-		def +(n : Int32)
+		def +(n : Int)
 			outer, inner = @outer, @inner
 			if n >= 0
 				while outer < @bag.size && @bag[outer].size-inner <= n;n -= @bag[outer].size - inner;inner = 0;outer += 1;end
@@ -18,7 +18,7 @@ class Sortedlist(T)
 			end
 			Iterator(T).new(outer, inner, @bag)
 		end
-		def -(n : Int32);self + -n;end
+		def -(n : Int);self + -n;end
 		def -(b : Iterator(T))
 			dist, sign = 0, 1
 			ain, aout = @inner, @outer
@@ -109,7 +109,7 @@ class Sortedlist(T)
 		end
 		return true
 	end
-	def pop(i : Int32 = -1)
+	def pop(i : Int = -1)
 		if i >= 0
 			@list.size.times do |b|
 				return _pop(b, i) if i < @list[b].size
@@ -130,7 +130,7 @@ class Sortedlist(T)
 		i != @list[bi].size && @list[bi][i] == x
 	end
 	def contains(x : T);find(x);end
-	def [](i : Int32)
+	def [](i : Int)
 		if i >= 0
 			@list.size.times do |b|
 				return @list[b][i] if i < @list[b].size
@@ -144,7 +144,7 @@ class Sortedlist(T)
 		end
 		@list[-1][-1]
 	end
-	def []=(i : Int32, x : T)
+	def []=(i : Int, x : T)
 		if i >= 0
 			@list.size.times do |b|
 				return @list[b][i] = x if i < @list[b].size
