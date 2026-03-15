@@ -119,7 +119,7 @@ class LazySegtree(S, F)
     x = @e.call
     h = 0
     k += @n
-    propagate_p l >> l.trailing_zeros_count
+    propagate_p k >> k.trailing_zeros_count
     propagate_p (r >> r.trailing_zeros_count) - 1
     bsearch = ->(v : Int32) do
       while v < @n
@@ -154,7 +154,7 @@ class LazySegtree(S, F)
     h = 0
     k += @n
     propagate_p l >> l.trailing_zeros_count
-    propagate_p (r >> r.trailing_zeros_count) - 1
+    propagate_p (k >> k.trailing_zeros_count) - 1
     bsearch = ->(v : Int32) do
       while v < @n
         propagate v
