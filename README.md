@@ -62,7 +62,7 @@
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |座圧|[cc.cr](crystal/src/algo/cc.cr)|[cc.md](crystal/docs/algo/cc.md)|
-|上位集合|[cc.cr](crystal/src/algo/shortage.cr)|[cc.md](crystal/docs/algo/shortage.md)|
+|上位集合|[cc.cr](crystal/src/algo/shortage.cr)|[shortage.md](crystal/docs/algo/shortage.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
