@@ -1,4 +1,4 @@
-# array
+# array_ext
 快適にarrayを扱うためのもの
 ```crystal
 # Array#unique

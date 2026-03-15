@@ -9,10 +9,10 @@ BinaryHeap(T).new{Proc(T,T,Bool)};
 ```
 ## method
 * 空のヒープにアクセスしようとした場合、REとなる
-* `copy` ... deep copy
+* `clone` ... deep copy
 * `empty?` ... empty?
 * `size` ... data size
-* `a` ... data container(Array(T))
+* `to_a` ... data container(Array(T))
 * `push or <<` ... add element
 * `pop` ... discard and return top
 * `top` ...top
