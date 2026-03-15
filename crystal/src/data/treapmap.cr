@@ -72,13 +72,13 @@ class Map(K, V)
       end
     end
     val = @f.call
-    node = Node(K, V).new key, @rnd.urandom, val
+    node = Node(K, V).new key, @rnd.next_u, val
     @root, _ = insert @root, node
     val
   end
   def []=(key : K, val : V)
     t = @root
-    node = Node(K, V).new key, @rnd.urandom, val
+    node = Node(K, V).new key, @rnd.next_u, val
     @root, res = set @root, node
     res.val = val if res.val != val
     val
