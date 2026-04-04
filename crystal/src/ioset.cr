@@ -1,6 +1,6 @@
 class IOset
 	BUFS = 1 << 17
-	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@eof = false;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = StaticArray(UInt8, 20).new(0);@@precision = 8
+	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@eof = false;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = uninitialized UInt8[20];@@precision = 8
 	def initialize;end
 	def self.fill;@@size = STDIN.read @@buf;@@idx = 0;@@eof = true if @@size == 0;end
 	def self.eof?;fill if @@size <= @@idx;@@size == 0;end
