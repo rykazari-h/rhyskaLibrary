@@ -1,8 +1,8 @@
 class IOset
 	BUFS = 1 << 17
-	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@eof = false;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = uninitialized UInt8[20];@@precision = 8
+	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = uninitialized UInt8[20];@@precision = 8
 	def initialize;end
-	def self.fill;@@size = STDIN.read @@buf;@@idx = 0;@@eof = true if @@size == 0;end
+	def self.fill;@@size = STDIN.read @@buf;@@idx = 0;end
 	def self.eof?;fill if @@size <= @@idx;@@size == 0;end
 	def self.read_byte : UInt8?;fill if @@idx >= @@size;return nil if @@size == 0;b = @@buf[@@idx];@@idx += 1;b;end
 	def self.trim;loop do;fill if @@idx >= @@size;return if @@size == 0;b = @@buf[@@idx];if b<=32;@@idx += 1;else return;end;end;end
