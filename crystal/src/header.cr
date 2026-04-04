@@ -20,3 +20,13 @@ macro for(f, m, s);begin
 		{{yield}}
 	end
 end;end
+struct Int
+	def each_subset(&)
+		s = self
+		loop do
+			yield s
+			break if s == 0
+			s = s - 1 & self
+		end
+	end
+end
