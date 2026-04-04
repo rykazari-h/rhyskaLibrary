@@ -49,6 +49,7 @@
 |MaxFlow|[maxflow.cr](crystal/src/data/maxflow.cr)|[maxflow.md](crystal/docs/data/maxflow.md)|
 |木ィ木ィ|[trie.cr](crystal/src/data/trie.cr)|[trie.md](crystal/docs/data/trie.md)|
 |modint|[modint.cr](crystal/src/data/modint.cr)|[modint.md](crystal/docs/data/modint.md)|
+|動的modint|[dynamicmodint.cr](crystal/src/data/dynamicmodint.cr)|[dynamicmodint.md](crystal/docs/data/dynamicmodint.md)|
 |ロリハ|[rollinghash.cr](crystal/src/data/rollinghash.cr)|[rollinghash.md](crystal/docs/data/rollinghash.md)|
 |xorshift|[xorshift.cr](crystal/src/data/xorshift.cr)|[xorshift.md](crystal/docs/data/xorshift.md)|
 ### math
@@ -58,11 +59,11 @@
 |偏角比較|[atan2_cmp.cr](crystal/src/math/atan2_cmp.cr)|[atan2_cmp.md](crystal/docs/math/atan2_cmp.md)|
 |NT関数|[math_ext.cr](crystal/src/math/math_ext.cr)|[math_ext.md](crystal/docs/math/math_ext.md)|
 |素数篩|[primesieve.cr](crystal/src/math/primesieve.cr)|[primesieve.md](crystal/docs/math/primesieve.md)|
-### math
+### algo
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
 |座圧|[cc.cr](crystal/src/algo/cc.cr)|[cc.md](crystal/docs/algo/cc.md)|
-|上位集合|[cc.cr](crystal/src/algo/shortage.cr)|[shortage.md](crystal/docs/algo/shortage.md)|
+|上位集合|[shortage.cr](crystal/src/algo/shortage.cr)|[shortage.md](crystal/docs/algo/shortage.md)|
 ### etc
 |機能|コード|ドキュメント|
 |:--|:--:|:--:|
