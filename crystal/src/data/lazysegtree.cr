@@ -46,7 +46,12 @@ class LazySegtree(S, F)
   def clone
     LazySegtree(S).new @n, @e, @d.clone, @op, @mapping, @composition, @lazy.clone, @has_lazy.clone
   end
-  def to_a;@d[@n..];end
+  def to_a
+    1.upto(@n - 1) do |i|
+      propagate i
+    end
+    @d[@n..]
+  end
   def [](k : Int)
     k += @n
     propagate_p k
