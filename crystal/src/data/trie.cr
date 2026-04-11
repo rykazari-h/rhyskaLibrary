@@ -8,8 +8,18 @@ class Trie(T)
     end
   end
   def initialize;@root = Node(T).new;end
-  def insert(s : String);insert s.chars;end
-  def lcp(s : String);lcp s.chars;end
+  # sが存在することを仮定する
+  def erase(s : Array(T)) : Nil
+    node = @root
+    s.each do |c|
+      prev = node
+      node = node.child[c]
+      if (node.count -= 1) == 0
+        prev.child.delete c
+        break # GCパワー
+      end
+    end
+  end
   def insert(s : Array(T)) : Nil
     node = @root
     s.each do |c|
@@ -20,9 +30,9 @@ class Trie(T)
   end
   def lcp(s : Array(T)) : Int32
     node = @root
-    s.size.times do |i|
-      return i if !node.child.has_key?(s[i]) || node.child[s[i]].count == 1
-      node = node.child[s[i]]
+    s.each_with_index do |c, i|
+      return i if !node.child.has_key?(c) || node.child[c].count == 1
+      node = node.child[c]
     end
     s.size
   end
