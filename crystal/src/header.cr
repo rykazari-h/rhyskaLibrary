@@ -25,8 +25,11 @@ struct Int
 		s = self
 		loop do
 			yield s
-			break if s == 0
 			s = s - 1 & self
+			break if s == self
 		end
 	end
+end
+def yn(cond)
+	ios.outl cond ? "Yes" : "No"
 end
