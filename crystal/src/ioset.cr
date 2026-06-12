@@ -1,8 +1,10 @@
 class IOset
 	BUFS = 1 << 17
 	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = uninitialized UInt8[20];@@precision = 8
+	@@in_io = STDIN; @@out_io = STDOUT
+	def self.set_io(input, output);@@in_io = input;@@out_io = output;end
 	def initialize;end
-	def self.fill;@@size = STDIN.read @@buf;@@idx = 0;end
+	def self.fill;@@size = @@in_io.read @@buf;@@idx = 0;end
 	def self.eof?;fill if @@size <= @@idx;@@size == 0;end
 	def self.read_byte : UInt8?;fill if @@idx >= @@size;return nil if @@size == 0;b = @@buf[@@idx];@@idx += 1;b;end
 	def self.trim;loop do;fill if @@idx >= @@size;return if @@size == 0;b = @@buf[@@idx];if b<=32;@@idx += 1;else return;end;end;end
@@ -36,7 +38,7 @@ class IOset
 	def self.write_int(x : Int8 | Int16 | Int32 | Int64 | Int128);i = 0;n = x < 0 ? -x : x;loop do;@@stk[i] = (n % 10).to_u8;i += 1;break if (n //= 10) <= 0;end;write_byte 45 if x < 0;while i > 0;write_byte @@stk[i-=1] | 48;end;end
 	def self.setprecision(x);@@precision = x;end
 	def self.write_float(x : Float);v = x.to_i64;f = ((x - v).abs * 10i64 ** @@precision).round.to_i64;write_int v;write_byte 46;i = 0;loop do;@@stk[i] = (f % 10).to_u8;i += 1;break if (f //= 10) <= 0;end;(@@precision - i).times { write_byte 48};while i > 0;write_byte @@stk[i-=1] | 48;end;end
-	def self.flush;return if @@oidx == 0;STDOUT.write @@obuf[0, @@oidx];@@oidx = 0;end
+	def self.flush;return if @@oidx == 0;@@out_io.write @@obuf[0, @@oidx];@@oidx = 0;end
 	def self.putv(x : Array(Array(T))) forall T
 		return if x.empty?
 		putv x[0]
