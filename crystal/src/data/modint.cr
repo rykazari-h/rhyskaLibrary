@@ -15,8 +15,6 @@ macro modint_gen(name, mod)
   {% end %}
 
   struct {{name}}
-    alias U = {{u_tp}}
-    alias D = {{d_tp}}
     BITS = {{bits}}
     P = {{mod}}.{{us}}
     P2 = P << 1
@@ -24,10 +22,10 @@ macro modint_gen(name, mod)
     R2 = (&-P.{{ds}} % P).{{us}}
     MAX = new(-1)
     MIN = new(0)
-    property v : U
+    property v : {{u_tp}}
     @v = 0.{{us}}
     @[AlwaysInline]
-    def self.reduce(x : D)
+    def self.reduce(x : {{d_tp}})
       ((x &+ (x.{{us}} &* R).{{ds}} * P) >> BITS).{{us}}
     end
     def self.mod
@@ -43,7 +41,7 @@ macro modint_gen(name, mod)
     def to_i;val;end
     def initialize;@v = 0;end
     def initialize(x : Int);@v = self.class.reduce((x.to_i128! % P).{{ds}} * R2);end
-    def initialize(x : U, d);@v = x;end
+    def initialize(x : {{u_tp}}, d);@v = x;end
     def initialize(x : self);@v = x.v;end
     def ==(other : self)
       val == other.val
@@ -53,7 +51,7 @@ macro modint_gen(name, mod)
     end
     def +(other : self)
       z = self.class.new(@v &+ other.v, 0)
-      z.v -= P2 if (z.v &- P2) >> BITS - 1 == 0
+      z.v &-= P2 if z.v &- P2 >> BITS - 1 == 0
       z
     end
     def -(other : self)
@@ -97,3 +95,4 @@ macro modint_gen(name, mod)
     def ==(other : {{name}});other == self;end
   end
 end
+modint_gen(F998244353, 998244353)
