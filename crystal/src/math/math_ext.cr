@@ -64,6 +64,18 @@ def modpow(a : Int64, p : Int64, m : Int64 = 998244353)
   res
 end
 
+# n以下の逆元列挙
+def linear_modinv(n : Int, m : Int64 = 998244353)
+  res = Array.new n + 1, 1i64
+  z = res.to_unsafe
+  2.upto(n) do |k|
+    # q * k + r = 0 <=> q * 1/r = -1/k <=> 1/k = -q * 1/r
+    q = m // k
+    z[k] = -(q * z[m - q * k]) % m
+  end
+  res
+end
+
 # for prime numbers
 # return minimum number g such that i!=j => g^i!=g^j
 def primitive_root(n : Int64) : Int64
