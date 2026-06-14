@@ -1,19 +1,29 @@
 class Segtree(T)
-  def initialize(@n : Int32, @e : Proc(T), @d : Array(T), &@op : T, T -> T);end
-  def initialize(@n : Int32, @e : Proc(T), &@op : T, T -> T);@d = Array(T).new 2 * @n, @e.call;end
-  def initialize(z : Array(T), @e : Proc(T), &@op : T, T -> T)
+  def initialize(@n : Int32, @e : Proc(T), @d : Pointer(T), &@op : T, T -> T);end
+  def initialize(@n : Int32, @e : Proc(T), &@op : T, T -> T) : Nil;@d = Pointer(T).malloc 2 * @n, @e.call;end
+  def initialize(z : Array(T), @e : Proc(T), &@op : T, T -> T) : Nil
     @n = x = z.size
-    @d = Array(T).new(@n, @e.call) + z
+    @d = Pointer(T).malloc 2 * @n, @e.call
+    x.times do |i|
+      @d[i + x] = z.unsafe_fetch(i)
+    end
     while 0 < (x -= 1)
       @d[x] = @op.call @d[x << 1], @d[x << 1 | 1]
     end
   end
   def clone
-    Segtree(T).new @n, @e, @d.clone, &@op
+    d = Pointer(T).malloc 2 * @n
+    (2 * @n).times { |i| d[i] = @d[i].clone }
+    Segtree(T).new @n, @e, d, &@op
   end
-  def to_a;@d[@n..];end
-  def [](k : Int32);@d[k + @n];end
-  def []=(k : Int32, x : T)
+  def dup
+    d = Pointer(T).malloc 2 * @n
+    @d.copy_to(d, 2 * @n)
+    Segtree(T).new @n, @e, d, &@op
+  end
+  def to_a;Slice.new(@d + @n, @n).to_a;end
+  def [](k : Int);@d[k + @n];end
+  def []=(k : Int, x : T)
     @d[k += @n] = x
     while 0 < (k >>= 1)
       @d[k] = @op.call @d[k << 1], @d[k << 1 | 1]
@@ -23,9 +33,6 @@ class Segtree(T)
   def [](range : Range)
     l = range.begin || 0
     r = range.exclusive? ? (range.end || @n) : (range.end || @n - 1) + 1
-    if r <= l || @n <= l || r <= 0
-      return @e.call
-    end
     l += @n; r += @n
     x = y = @e.call
     while l < r
@@ -39,11 +46,11 @@ class Segtree(T)
   def [](l : Int, len : Int)
     self[l...(l + len)]
   end
-  def right_bound(k : Int32, &f : T -> Bool)
+  def right_bound(k : Int, &f : T -> Bool)
     r = @n + @n
     x = @e.call
     h = 0
-    k += @n
+    k = k.to_i + @n
     bsearch = ->(v : Int32) do
       while v < @n
         v <<= 1
@@ -69,11 +76,11 @@ class Segtree(T)
     end
     @n
   end
-  def left_bound(k : Int32, &f : T -> Bool)
+  def left_bound(k : Int, &f : T -> Bool)
     l = @n
     x = @e.call
     h = 0
-    k += @n
+    k = k.to_i + @n
     bsearch = ->(v : Int32) do
       while v < @n
         v = v << 1 | 1
