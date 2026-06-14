@@ -34,6 +34,9 @@ macro modint_gen(name, mod)
     def self.zero
       new 0
     end
+    def zero?
+      val == 0
+    end
     def val
       x = self.class.reduce @v
       x &- P >> BITS - 1 == 0 ? x - P : x
