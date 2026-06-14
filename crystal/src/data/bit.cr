@@ -1,19 +1,18 @@
 class BIT(T)
-  @d : Array(T)
+  @d : Pointer(T)
   def initialize(@n : Int) : Nil
-    @d = Array.new(@n + 1) { T.zero }
+    @d = Pointer(T).malloc @n + 1, T.zero
   end
   def initialize(z : Array(T)) : Nil
     @n = z.size
-    @d = Array.new(@n + 1) { T.zero }
-    1.upto(@n) { |i| @d[i] = z[i - 1] }
+    @d = Pointer(T).malloc @n + 1, T.zero
+    1.upto(@n) { |i| @d[i] = z.unsafe_fetch(i - 1) }
     1.upto(@n) do |i|
       j = i + (i & -i)
       @d[j] += @d[i] if j <= @n
     end
   end
   def add(i : Int, x : T) : Nil
-    return unless 0 <= i < @n
     i += 1
     while i <= @n
       @d[i] += x
@@ -21,7 +20,6 @@ class BIT(T)
     end
   end
   def sum(i : Int)
-    return T.zero if @n <= i
     i += 1
     s = T.zero
     while 0 < i
@@ -32,7 +30,6 @@ class BIT(T)
   end
   def sum(l : Int, len : Int)
     r = l + len
-    return T.zero if @n <= l || r <= 0
     s = T.zero
     while l < r
       s += @d[r]
@@ -51,7 +48,6 @@ class BIT(T)
     sum l, r - l
   end
   def [](i : Int)
-    return T.zero unless 0 <= i < @n
     i += 1; j = 1
     s = @d[i]
     while i & j == 0
@@ -59,5 +55,25 @@ class BIT(T)
       j <<= 1
     end
     s
+  end
+  def lower_bound(x : T)
+    i = 0; k = 1 << @n.bit_length - 1
+    while 0 < k
+      if i + k <= @n && @d[i + k] < x
+        x -= @d[i + k]; i += k
+      end
+      k >>= 1
+    end
+    i
+  end
+  def upper_bound(x : T)
+    i = 0; k = 1 << @n.bit_length - 1
+    while 0 < k
+      if i + k <= @n && @d[i + k] <= x
+        x -= @d[i + k]; i += k
+      end
+      k >>= 1
+    end
+    i
   end
 end
