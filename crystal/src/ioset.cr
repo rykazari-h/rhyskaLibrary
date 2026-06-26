@@ -2,7 +2,7 @@ class IOset
 	BUFS = 1 << 17
 	@@buf = Bytes.new BUFS;@@size = 0;@@idx = 0;@@obuf = Bytes.new BUFS;@@oidx = 0;@@stk = uninitialized UInt8[20];@@precision = 8
 	@@in_io = STDIN; @@out_io = STDOUT
-	def self.set_io(input, output);@@in_io = input;@@out_io = output;end
+	def self.set_io(input = STDIN, output = STDOUT);@@in_io = input;@@out_io = output;end
 	def initialize;end
 	def self.fill;@@size = @@in_io.read @@buf;@@idx = 0;end
 	def self.eof?;fill if @@size <= @@idx;@@size == 0;end
