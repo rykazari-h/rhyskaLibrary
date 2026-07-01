@@ -1,4 +1,5 @@
 require "header.cr"
 require "ioset.cr"
-macro ios;IOset;end
+IOSETi = IOset.new
+@[AlwaysInline]; def ios; IOSETi; end
 at_exit { ios.flush }
