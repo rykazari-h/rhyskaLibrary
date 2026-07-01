@@ -88,7 +88,7 @@ macro modint_gen(name, mod)
     end
   end
   class IOset
-    def self.putv(x : {{name}});write_int x.val;end
+    def putv(x : {{name}});write_int x.val;end
   end
   struct Int
     def +(other : {{name}});other + self;end

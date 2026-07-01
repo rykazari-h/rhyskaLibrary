@@ -63,7 +63,7 @@ struct DynamicModint
 	end
 end
 class IOset
-	def self.putv(x : DynamicModint); write_int x.v; end
+	def putv(x : DynamicModint); write_int x.v; end
 end
 struct Int
 	def +(other : DynamicModint); other + self; end
