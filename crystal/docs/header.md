@@ -13,5 +13,7 @@ chmax(a : T, b : T);chmin();#c++と同じ挙動
 swap(a,b);#a,b=b,aに展開される
 assert(cond,msg);#raise msg unless condに展開される
 for(f,m,s);#c/c++のfor(f;m;s)に同じ
+int.each_subset # subsetを走査
+yn(cond) # Yes or No
 require "ioset.cr"#入出力ライブラリ
 ```
