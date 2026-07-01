@@ -1,4 +1,9 @@
 class Array(T)
+  def reserve(cap : Int)
+    ncap = self.size + cap
+    resize_to_capacity(ncap) if @capacity < ncap
+    self
+  end
   def unique!
     return self if empty?
     fi = 0
@@ -16,6 +21,7 @@ class Array(T)
     z[fi] = val
     fi += 1
     self.delete_at(fi, @size - fi)
+    self
   end
   def unique
     clone.unique!
@@ -46,7 +52,7 @@ class Array(T)
         j = last
         loop do
           j -= 1
-          break unless i.value < j.value
+          break if i.value < j.value
         end
         tmp = i.value
         i.value = j.value
@@ -70,7 +76,7 @@ class Array(T)
         j = last
         loop do
           j -= 1
-          break unless i.value > j.value
+          break if i.value > j.value
         end
         tmp = i.value
         i.value = j.value
