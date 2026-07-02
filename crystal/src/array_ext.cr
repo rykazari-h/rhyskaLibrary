@@ -4,6 +4,18 @@ class Array(T)
     resize_to_capacity(ncap) if @capacity < ncap
     self
   end
+  def resize(n : Int, v : T)
+    raise ArgumentError.new("Negative array size") if n < 0
+    if n < @size
+      self.delete_at n, @size - n
+    else
+      resize_to_capacity(n) if @capacity < n
+      z = @buffer + @size
+      (n - @size).times  { |i| z[i] = v }
+      @size = n
+    end
+    self
+  end
   def unique!
     return self if empty?
     fi = 0
