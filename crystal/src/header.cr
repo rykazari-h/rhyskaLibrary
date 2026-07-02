@@ -13,11 +13,12 @@ macro swap(a,b);{{a}},{{b}}={{b}},{{a}};end
 def assert(cond : Bool, msg = "Assertion failed");raise msg unless cond;end
 macro for(f, m, s);begin
 	{{f}}
-	%f = true
-	loop do
-		if %f;%f = false;else;{{s}};end
-		break unless {{m}}
-		{{yield}}
+	while {{m}}
+		begin
+			{{yield}}
+		ensure
+			{{s}}
+		end
 	end
 end;end
 struct Int
