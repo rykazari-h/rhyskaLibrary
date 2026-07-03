@@ -1,12 +1,14 @@
 # Disjoint set union
-## constructor
-```crystal
-Dsu(T).new(size : Int32)
-```
+dsu
 ## method
-* `merge` マージできたときtrue
-* `size` 連結成分の数 O(1)
-* `size(x)` xの連結成分の大きさ
-* `same` 同じ連結成分に属するか
-* `root` その連結成分の代表
-* `groups` 森 各連結成分について、頂点番号の昇順に並ぶ
+```crystal
+dsu = Dsu.new(n : Int32)
+dsu.reset # 辺を消去する
+dsu.merge(u, v) # u, vに辺をはる
+dsu.root(u) # uが属す連結成分の根
+dsu.same(u, v) # uとvが同じ連結成分に属しているか
+dsu.size(u) # uが属す連結成分の大きさ
+dsu.size # 森の大きさ
+dsu.roots # 根の集合
+dsu.groups # 森。各成分の列は、頂点番号について昇順
+```
