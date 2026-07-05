@@ -1,16 +1,16 @@
 # mappingはarg2に対するarg1による写像
 # compositionはarg2に対するarg1の合成
 class LazySegtree(S, F)
-  def initialize(@n : Int32, @e : Proc(S), @d : Array(S), @op : Proc(S, S, S), @mapping : Proc(F, S, S),
+  def initialize(@n : Int32, @e : S, @d : Array(S), @op : Proc(S, S, S), @mapping : Proc(F, S, S),
   @composition : Proc(F, F, F), @lazy : Array(F), @has_lazy : Array(Bool));end
-  def initialize(@n : Int32, @e : Proc(S), @op : Proc(S, S, S), @mapping : Proc(F, S, S), @composition : Proc(F, F, F))
-    @d = Array(S).new(@n + @n) { @e.call }
+  def initialize(@n : Int32, @e : S, @op : Proc(S, S, S), @mapping : Proc(F, S, S), @composition : Proc(F, F, F))
+    @d = Array(S).new(@n + @n) { @e }
     @lazy = Array(F).build(@n + @n) { @n + @n }
     @has_lazy = Array(Bool).new @n + @n, false
   end
-  def initialize(z : Array(S), @e : Proc(S), @op : Proc(S, S, S), @mapping : Proc(F, S, S), @composition : Proc(F, F, F))
+  def initialize(z : Array(S), @e : S, @op : Proc(S, S, S), @mapping : Proc(F, S, S), @composition : Proc(F, F, F))
     @n = x = z.size
-    @d = Array(S).new(@n) { @e.call } + z
+    @d = Array(S).new(@n) { @e } + z
     @lazy = Array(F).build(@n + @n) { @n + @n }
     @has_lazy = Array(Bool).new @n + @n, false
     while 0 < (x -= 1)
@@ -103,12 +103,12 @@ class LazySegtree(S, F)
     l = range.begin || 0
     r = range.exclusive? ? (range.end || @n) : (range.end || @n - 1) + 1
     if r <= l || @n <= l || r <= 0
-      return @e.call
+      return @e
     end
     l += @n; r += @n
     propagate_p l >> l.trailing_zeros_count
     propagate_p (r >> r.trailing_zeros_count) - 1
-    x = y = @e.call
+    x = y = @e
     while l < r
       x, l = @op.call(x, @d[l]), l + 1 if l & 1 == 1
       y = @op.call(@d[r -= 1], y) if r & 1 == 1
@@ -121,7 +121,7 @@ class LazySegtree(S, F)
   end
   def right_bound(k : Int32, &f : S -> Bool)
     r = @n + @n
-    x = @e.call
+    x = @e
     h = 0
     k += @n
     propagate_p k >> k.trailing_zeros_count
@@ -155,7 +155,7 @@ class LazySegtree(S, F)
   end
   def left_bound(k : Int32, &f : S -> Bool)
     l = @n
-    x = @e.call
+    x = @e
     h = 0
     k += @n
     propagate_p l >> l.trailing_zeros_count

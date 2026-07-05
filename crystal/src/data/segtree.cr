@@ -1,9 +1,9 @@
 class Segtree(T)
-  def initialize(@n : Int32, @e : Proc(T), @d : Pointer(T), &@op : T, T -> T);end
-  def initialize(@n : Int32, @e : Proc(T), &@op : T, T -> T) : Nil;@d = Pointer(T).malloc 2 * @n, @e.call;end
-  def initialize(z : Array(T), @e : Proc(T), &@op : T, T -> T) : Nil
+  def initialize(@n : Int32, @e : T, @d : Pointer(T), &@op : T, T -> T);end
+  def initialize(@n : Int32, @e : T, &@op : T, T -> T) : Nil;@d = Pointer(T).malloc 2 * @n, @e;end
+  def initialize(z : Array(T), @e : T, &@op : T, T -> T) : Nil
     @n = x = z.size
-    @d = Pointer(T).malloc 2 * @n, @e.call
+    @d = Pointer(T).malloc 2 * @n, @e
     x.times do |i|
       @d[i + x] = z.unsafe_fetch(i)
     end
@@ -34,7 +34,7 @@ class Segtree(T)
     l = range.begin || 0
     r = range.exclusive? ? (range.end || @n) : (range.end || @n - 1) + 1
     l += @n; r += @n
-    x = y = @e.call
+    x = y = @e
     while l < r
       x, l = @op.call(x, @d[l]), l + 1 if l & 1 != 0
       y = @op.call(@d[r -= 1], y) if r & 1 != 0
@@ -48,7 +48,7 @@ class Segtree(T)
   end
   def right_bound(k : Int, &f : T -> Bool)
     r = @n + @n
-    x = @e.call
+    x = @e
     h = 0
     k = k.to_i + @n
     bsearch = ->(v : Int32) do
@@ -78,7 +78,7 @@ class Segtree(T)
   end
   def left_bound(k : Int, &f : T -> Bool)
     l = @n
-    x = @e.call
+    x = @e
     h = 0
     k = k.to_i + @n
     bsearch = ->(v : Int32) do
