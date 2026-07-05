@@ -1,19 +1,19 @@
 # BinaryHeap
 二分ヒープ。Gpq(昇順に取り出す),Lpq(降順に取り出す)も同様に定義される。  
-## constructor
-```crystal
-Lpq(T).new;
-Gpq(T).new;
-# Procはblockとして渡す
-BinaryHeap(T).new{Proc(T,T,Bool)};
-```
 ## method
-* 空のヒープにアクセスしようとした場合、REとなる
-* `clone` ... deep copy
-* `empty?` ... empty?
-* `size` ... data size
-* `to_a` ... data container(Array(T))
-* `push or <<` ... add element
-* `pop` ... discard and return top
-* `top` ...top
-* popはO(logN),pushは最悪O(logN)
+```crystal
+pq = Lpq(T).new(z : Array(T) = [] of T)
+pq = Heap(T).new(z : Array(T) = [] of T) { |a, b| a < b } # compがtrueのときaが上に行く
+pq.empty?
+pq.size
+pq.data # 生配列
+pq.to_a # data.dup
+pq.clear
+pq.reserve(cap)
+pq.push(val)
+pq << val
+pq.top
+pq.top?
+pq.pop
+pq.pop?
+```
