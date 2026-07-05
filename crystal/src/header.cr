@@ -31,6 +31,9 @@ struct Int
 		end
 	end
 end
+module Indexable(T)
+	def [](c : Bool); self[c ? 1 : 0]; end
+end
 def yn(cond)
 	ios.outl cond ? "Yes" : "No"
 end
