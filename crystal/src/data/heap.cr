@@ -33,6 +33,13 @@ abstract class BinaryHeap(T)
     end
   end
   def pop?; @data.empty? ? nil : pop; end
+  def update(val : T)
+    raise IndexError.new("heap is empty") if @data.empty?
+    old = @data.unsafe_fetch(0)
+    @data.unsafe_put(0, val)
+    down_heap(0)
+    old
+  end
   private def up_heap(i : Int32) : Nil
     val = @data.unsafe_fetch(i)
     while 0 < i
