@@ -57,7 +57,7 @@ class Sortedset(T)
 	def empty?;@size == 0;end
 	def size;@size;end
 	def clear : Nil;@size = 0; @list.clear;end
-	def clone;Sortedlist(T).new(@size,@list);end
+	def clone;Sortedset(T).new(@size,@list);end
 	def _position(x : T)
 		sz = @list.size
 		sz.times { |i| return {i, @list[i].bsearch_index { |v| v >= x }.not_nil!} if x <= @list[i][-1] }
