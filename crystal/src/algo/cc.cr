@@ -3,7 +3,7 @@ struct CC(T)
     @d = @d.uniq.sort
     @did = true
   end
-  def initialize(@d : Array(T) = Array(T).new, @did : Bool = false); end
+  def initialize(d : Array(T) = Array(T).new, @did : Bool = false); @d = d.dup; end
   def clear; @did = false; @d.clear; end
   def push(x : T); @d << x; @did = false; end
   def push(z : Array(T)); z.each { |x| push x }; end
