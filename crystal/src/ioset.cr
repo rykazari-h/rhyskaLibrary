@@ -8,15 +8,16 @@ class IOset
   BUFS = 1 << 20
   OT = Pointer(UInt32).malloc(10000)
   POW10 = {1i64, 10i64, 100i64, 1000i64, 10000i64, 100000i64, 1000000i64, 10000000i64, 100000000i64, 1000000000i64, 10000000000i64, 100000000000i64, 1000000000000i64, 10000000000000i64, 100000000000000i64 , 1000000000000000i64, 10000000000000000i64}
+  REV = StaticArray(UInt32, 10).new(0u32)
   @buf = Pointer(UInt8).malloc BUFS; @obuf = Pointer(UInt8).malloc BUFS; @precision = 10
   @ptr : UInt8*; @end : UInt8*; @optr : UInt8*; @oend : UInt8*
   @in_io : IO = STDIN; @out_io : IO = STDOUT; @in_fd = 0; @out_fd = 1
   def initialize
     10u32.times { |a| 10.times { |b| 10.times { |c| 10.times { |d| OT[a * 1000 + b * 100 + c * 10 + d] = a + 48 | b + 48 << 8 | c + 48 << 16 | d + 48 << 24 } } } }
-  @ptr = @buf
-  @end = @buf
-  @optr = @obuf
-  @oend = @obuf + BUFS
+    @ptr = @buf
+    @end = @buf
+    @optr = @obuf
+    @oend = @obuf + BUFS
   end
   def set_io(input : IO = STDIN, output : IO = STDOUT) : Nil
     @in_io = input; @out_io = output
@@ -40,51 +41,50 @@ class IOset
     fill if @end <= @ptr; return nil if @ptr == @end; b = @ptr.value; @ptr += 1; b
   end
   def trim : Nil
-    iptr = @ptr; iend = @end
+    iptr = @ptr
     loop do
-      (fill; iptr = @ptr; iend = @end) if iend <= iptr
-      break if iptr == iend || 32 < iptr.value
+      (fill; iptr = @ptr) if @end <= iptr
+      break if iptr == @end || 32 < iptr.value
       iptr += 1
     end
-    @ptr = iptr; @end = iend
+    @ptr = iptr
   end
   def getc : Char
-    iptr = @ptr; iend = @end
+    fill if @end <= @ptr
     c = nil.as(UInt8?)
-    (fill; iptr = @ptr; iend = @end) if iend <= iptr
-    if iptr == iend
+    iptr = @ptr
+    if iptr == @end
       c = nil
     else
       c = iptr.value; iptr += 1
     end
     while c && c <= 32
-      (fill; iptr = @ptr; iend = @end) if iend <= iptr
-      if iptr == iend
+      (fill; iptr = @ptr) if @end <= iptr
+      if iptr == @end
         c = nil
       else
         c = iptr.value; iptr += 1
       end
     end
     raise "End of file reached (IOset.getc)" if !c
-    @ptr = iptr; @end = iend
+    @ptr = iptr
     c.not_nil!.chr
   end
   def read_line : String
     raise "End of file reached (IOset.read_line)" if @end <= @ptr && (fill; @end <= @ptr)
     iptr = @ptr
-    iend = @end
     start = iptr
-    while iptr < iend && iptr.value != 10
+    while iptr < @end && iptr.value != 10
       iptr += 1
     end
-    if iptr < iend
+    if iptr < @end
       len = iptr - start
       @ptr = iptr + 1
       return String.new(start, len)
     end
     @ptr = iptr
     String.build do |io|
-      io.write Slice.new(start, (iend - start).to_i)
+      io.write Slice.new(start, (@end - start).to_i)
       while (b = read_byte) && b != 10
         io.write_byte b
       end
@@ -94,19 +94,18 @@ class IOset
     trim
     raise "End of file reached (IOset.gets)" if @end <= @ptr && (fill; @end <= @ptr)
     iptr = @ptr
-    iend = @end
     start = iptr
-    while iptr < iend && iptr.value > 32
+    while iptr < @end && iptr.value > 32
       iptr += 1
     end
-    if iptr < iend
+    if iptr < @end
       len = iptr - start
       @ptr = iptr
       return String.new(start, len)
     end
     @ptr = iptr
     String.build do |io|
-      io.write Slice.new(start, (iend - start).to_i)
+      io.write Slice.new(start, (@end - start).to_i)
       while (b = read_byte) && b > 32
         io.write_byte b
       end
@@ -115,14 +114,14 @@ class IOset
   macro geti_g(name, type)
     def {{name}} : {{type}}
       trim
-      iptr = @ptr; iend = @end
+      iptr = @ptr
       sign = 1
       if iptr.value == 45
         sign = -1; iptr += 1
-        (fill; iptr = @ptr; iend = @end) if iend <= iptr
+        (fill; iptr = @ptr) if @end <= iptr
       end
       n = {{type}}.zero
-      while iptr + 8 <= iend
+      while iptr + 8 <= @end
         tmp = iptr.as(UInt64*).value
         break if ((tmp &-= 0x3030303030303030_u64) & 0x8080808080808080_u64) != 0
         tmp = (tmp &* 10 &+ (tmp >> 8)) & 0x00ff00ff00ff00ff_u64
@@ -131,13 +130,13 @@ class IOset
         n = n &* 100000000 &+ tmp
         iptr += 8
       end
-      while iptr < iend || (fill; iptr = @ptr; iend = @end; iptr < iend)
+      while iptr < @end || (fill; iptr = @ptr; iptr < @end)
         c = iptr.value &- 48u8
         break if 9u8 < c
         n = n &* 10 &+ c
         iptr += 1
       end
-      @ptr = iptr; @end = iend
+      @ptr = iptr
       n &* sign
     end
   end
@@ -175,10 +174,9 @@ class IOset
         return
       end
       t_idx = 0
-      %rev = uninitialized UInt32[10]
       while 10000 <= n1
         n0 = n1 // 10000
-        %rev[t_idx] = OT[n1 - n0 * 10000]
+        REV[t_idx] = OT[n1 - n0 * 10000]
         n1 = n0
         t_idx += 1
       end
@@ -202,7 +200,7 @@ class IOset
         optr += 1
       end
       while 0 < t_idx
-        optr.as(UInt32*).value = %rev[t_idx -= 1]
+        optr.as(UInt32*).value = REV[t_idx -= 1]
         optr += 4
       end
       @optr = optr
@@ -215,9 +213,9 @@ class IOset
       optr = @optr
       if x < 0
         optr.value = 45u8; optr += 1
-        write_int_core{{bit.id}} (~x).to_u{{bit}} &+ 1, optr
+        write_int_core{{bit.id}} ~x.unsafe_as(UInt{{bit.id}}) &+ 1, optr
       else
-        write_int_core{{bit.id}} x.to_u{{bit}}, optr
+        write_int_core{{bit.id}} x.unsafe_as(UInt{{bit.id}}), optr
       end
     end
     def write_int(x : UInt{{bit.id}}) : Nil
@@ -231,17 +229,18 @@ class IOset
     optr = @optr
     if x < 0
       optr.value = 45u8; optr += 1
-      write_int_core128 (~x).to_u128 &+ 1, optr
+      write_int_core128 ~x.unsafe_as(UInt128) &+ 1, optr
     else
-      write_int_core128 x.to_u128, optr
+      write_int_core128 x.unsafe_as(UInt128), optr
     end
   end
   def write_int(x : UInt128) : Nil
     flush if @optr + 45 > @oend
-    write_int_core128 x.to_u128, @optr
+    write_int_core128 x, @optr
   end
   def write_int(x : BigInt) : Nil; write x.to_s; end
   def setprecision(x) : Nil
+    raise ArgumentError.new("precision shold be greater than 0 and less than 17") if x < 0 || 16 < x
     @precision = {x.to_i, 16}.min
   end
   def write_float(x : Float) : Nil
