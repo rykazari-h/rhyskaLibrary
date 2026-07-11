@@ -1,7 +1,19 @@
 class Array(T)
+  # capacityをcap以上に変更する
   def reserve(cap : Int)
-    ncap = self.size + cap
-    resize_to_capacity(ncap) if @capacity < ncap
+    resize_to_capacity(@offset_to_buffer + cap) if @capacity < @offset_to_buffer + cap
+    self
+  end
+  def unsafe_resize(n : Int)
+    raise ArgumentError.new("Negative array size") if n < 0
+    if n < @size
+      self.delete_at n, @size - n
+    else
+      ncap = @offset_to_buffer + n
+      resize_to_capacity(ncap) if @capacity < ncap
+      z = @buffer + @size
+      @size = n
+    end
     self
   end
   def resize(n : Int, v : T)
@@ -9,7 +21,8 @@ class Array(T)
     if n < @size
       self.delete_at n, @size - n
     else
-      resize_to_capacity(n) if @capacity < n
+      ncap = @offset_to_buffer + n
+      resize_to_capacity(ncap) if @capacity < ncap
       z = @buffer + @size
       (n - @size).times  { |i| z[i] = v }
       @size = n
