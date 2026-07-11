@@ -1,24 +1,24 @@
 module RadixSort
-  def self.sort(arr : Array(T)) : Array(T) forall T
+  extend self
+  def sort(arr : Array(T)) : Array(T) forall T
     sort! arr.dup
   end
-  def self.sort!(arr : Array(T)) : Array(T) forall T
+  def sort!(arr : Array(T)) : Array(T) forall T
     n = arr.size
     return arr if n <= 1
     buf = Array(T).new(n, T.zero)
     # 基数0x100
     {% if T == Int8 %}
-      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x80u32) }
+      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x80u8) }
       sort_internal(n, 1, arr.to_unsafe.as(Pointer(UInt8)), buf.to_unsafe.as(Pointer(UInt8)))
-      arr = buf
-      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x80u32) }
+      n.times { |i| arr.unsafe_put(i, buf.unsafe_fetch(i) ^ 0x80u8) }
     {% elsif T == UInt8 %}
       sort_internal(n, 1, arr.to_unsafe, buf.to_unsafe)
-      arr = buf
+      n.times { |i| arr.unsafe_put(i, buf.unsafe_fetch(i)) }
     {% elsif T == Int16 %}
-      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000u32) }
+      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000u16) }
       sort_internal(n, 2, arr.to_unsafe.as(Pointer(UInt16)), buf.to_unsafe.as(Pointer(UInt16)))
-      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000u32) }
+      n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000u16) }
     {% elsif T == UInt16 %}
       sort_internal(n, 2, arr.to_unsafe, buf.to_unsafe)
     {% elsif T == Int32 %}
@@ -29,7 +29,7 @@ module RadixSort
       sort_internal(n, 4, arr.to_unsafe, buf.to_unsafe)
     {% elsif T == Int64 %}
       n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000000000000000u64) }
-      sort_internal(n, 8, arr.to_unsafe.as(Pointer(UInt64)), buf.to_unsafe.as(Pointer(UInt64))))
+      sort_internal(n, 8, arr.to_unsafe.as(Pointer(UInt64)), buf.to_unsafe.as(Pointer(UInt64)))
       n.times { |i| arr.unsafe_put(i, arr.unsafe_fetch(i) ^ 0x8000000000000000u64) }
     {% elsif T == UInt64 %}
       sort_internal(n, 8, arr.to_unsafe, buf.to_unsafe)
@@ -42,22 +42,22 @@ module RadixSort
     {% end %}
     arr
   end
-  def self.sort_by(arr : Array(T), & : T -> K) forall T, K
+  def sort_by(arr : Array(T), & : T -> K) forall T, K
     n = arr.size
     return arr if n <= 1
-    z = Pointer(K).malloc(n) { |i| yield arr.unsafe_fetch(i) }
+    z = Array(K).new(n) { |i| yield arr.unsafe_fetch(i) }
     buf = Pointer(Int32).malloc(n)
     idx = Pointer(Int32).malloc(n) { |i| i }
     # 基数0x100
     {% if K == Int8 %}
-      n.times { |i| z.unsafe_put(i, z.unsafe_fetch(i) ^ 0x80u32) }
+      n.times { |i| z.unsafe_put(i, z.unsafe_fetch(i) ^ 0x80u8) }
       sort_by_internal(n, idx, 1, z.to_unsafe.as(Pointer(UInt8)), buf)
       idx = buf
     {% elsif K == UInt8 %}
       sort_by_internal(n, idx, 1, z.to_unsafe, buf)
       idx = buf
     {% elsif K == Int16 %}
-      n.times { |i| z.unsafe_put(i, z.unsafe_fetch(i) ^ 0x8000u32) }
+      n.times { |i| z.unsafe_put(i, z.unsafe_fetch(i) ^ 0x8000u16) }
       sort_by_internal(n, idx, 2, z.to_unsafe.as(Pointer(UInt16)), buf)
     {% elsif K == UInt16 %}
       sort_by_internal(n, idx, 2, z.to_unsafe, buf)
@@ -77,12 +77,16 @@ module RadixSort
     {% else %}
       sort_by_internal(n, idx, 16, z.to_unsafe, buf)
     {% end %}
-    Array(T).new(n) { |i| arr[idx[i]] }
+    Array(T).new(n) { |i| arr.unsafe_fetch(idx[i]) }
   end
-  def self.sort_by!(arr : Array(T), &block : T -> K) forall T, K
-    arr = sort_by(arr, &block)
+  def sort_by!(arr : Array(T), &block : T -> K) forall T, K
+    z = sort_by(arr, &block)
+    arr.size.times do |i|
+      arr.unsafe_put(i, z.unsafe_fetch(i))
+    end
+    arr
   end
-  def self.sort_by_internal(n : Int32, z1 : Pointer(Int32), t : Int32, val : Pointer(U), z2 : Pointer(Int32)) forall U
+  def sort_by_internal(n : Int32, z1 : Pointer(Int32), t : Int32, val : Pointer(U), z2 : Pointer(Int32)) : Nil forall U
     count = Pointer(Int32).malloc(256, 0)
     t.times do |pos|
       shift = pos << 3
@@ -107,7 +111,7 @@ module RadixSort
       z2 = tmp
     end
   end
-  def self.sort_internal(n : Int32, t : Int32, z1 : Pointer(U), z2 : Pointer(U)) forall U
+  def sort_internal(n : Int32, t : Int32, z1 : Pointer(U), z2 : Pointer(U))  : Nil forall U
     count = Pointer(Int32).malloc(256, 0)
     t.times do |pos|
       shift = pos << 3
