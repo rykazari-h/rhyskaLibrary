@@ -1,15 +1,11 @@
 # CC
 座圧ライブラリ  
 ```crystal
-# 初期化
-self(T).new d = Array(T)
-# 追加
-instance << x
-instance << [x0, x1...]
-# xが何番目に小さいか
-instance.idx x
-# k番目に小さい座標
-instance[k]
-# 持っている座標の数
-instance.size
+cc = CC(T).new(d = [] of T, did = false) # did = trueならuniqをかけない
+cc.clear # clear
+cc.push(x : T | Array(T)) # selfを返す
+cc << x # pushに同じ
+cc.idx(x) # xのidxを返す。厳密にはlower_bound(x)
+cc[i] # i番目の座標
+cc.size # 要素数
 ```
