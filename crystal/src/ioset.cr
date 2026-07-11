@@ -3,6 +3,10 @@ lib LibIOset
   fun memcpy(dest : Void*, src : Void*, n : UInt64) : Void*
   fun read(fd : Int32, buf : Void*, count : UInt64) : Int64
   fun write(fd : Int32, buf : Void*, count : UInt64) : Int64
+  fun fcntl(fd : Int32, cmd : Int32, ...) : Int32
+  F_GETFL = 3
+  F_SETFL = 4
+  O_NONBLOCK = 0o4000
 end
 class IOset
   BUFS = 1 << 20
@@ -14,6 +18,8 @@ class IOset
   @in_io : IO = STDIN; @out_io : IO = STDOUT; @in_fd = 0; @out_fd = 1
   def initialize
     10u32.times { |a| 10.times { |b| 10.times { |c| 10.times { |d| OT[a * 1000 + b * 100 + c * 10 + d] = a + 48 | b + 48 << 8 | c + 48 << 16 | d + 48 << 24 } } } }
+    force_blocking(0)
+    force_blocking(1)
     @ptr = @buf
     @end = @buf
     @optr = @obuf
@@ -23,6 +29,15 @@ class IOset
     @in_io = input; @out_io = output
     @in_fd = input.is_a?(IO::FileDescriptor) ? input.fd : -1
     @out_fd = output.is_a?(IO::FileDescriptor) ? output.fd : -1
+    force_blocking(@in_fd)
+    force_blocking(@out_fd)
+  end
+  private def force_blocking(fd : Int32) : Nil
+    return if fd < 0
+    flags = LibIOset.fcntl(fd, LibIOset::F_GETFL)
+    if flags >= 0
+      LibIOset.fcntl(fd, LibIOset::F_SETFL, flags & ~LibIOset::O_NONBLOCK)
+    end
   end
   def fill : Nil
     if @in_fd < 0
